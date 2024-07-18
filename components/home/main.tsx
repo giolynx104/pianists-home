@@ -14,8 +14,8 @@ export default function Main() {
           </Button>
         </Stack>
       </Grid>
-      <Grid item xs={6}>
-        <Image src={image} alt="Piano" className="h-lvh" />
+      <Grid item xs={6} className="flex justify-center">
+        <Image src={image} alt="Piano" className="h-lvh w-auto" />
       </Grid>
     </Grid>
   );
