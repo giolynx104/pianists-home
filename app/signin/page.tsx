@@ -18,8 +18,7 @@ import icon from "../favicon.ico";
 import EmailIcon from "@mui/icons-material/Email";
 import PasswordIcon from "@mui/icons-material/Password";
 import pianoImage from "/public/login-background.jpg";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import { signIn } from "@/auth";
+import { SignIn } from "@/components/signin/sign-in";
 import SignInWithGitHubButton from "@/components/signin/sign-in-with-github";
 export default function LoginPage() {
   return (
@@ -40,7 +39,7 @@ export default function LoginPage() {
             <Typography variant="h3" className="text-center">
               Welcome Back!
             </Typography>
-            <SignInWithGitHubButton/>
+            <SignInWithGitHubButton />
             <Divider variant="middle">or</Divider>
             <Typography variant="subtitle2" className="text-center">
               Please enter your details

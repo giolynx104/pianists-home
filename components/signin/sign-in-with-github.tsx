@@ -1,22 +1,23 @@
 "use client";
 
-import { signIn } from "@/auth";
 import { Button } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import signInWithGitHubAction from "./server-signin";
+import { useEffect, useState } from "react";
 
 export default function SignInWithGitHubButton() {
-  const handleSignIn = async () => {
-    try {
-      "use server";
-      await signIn("github");
-    } catch (error) {
-      console.error("Error signing in with GitHub:", error);
+  const [clicked, setClicked] = useState(false);
+
+  useEffect(() => {
+    if (clicked) {
+      signInWithGitHubAction();
+      setClicked(false);
     }
-  };
+  }, [clicked]);
 
   return (
     <Button
-      onClick={handleSignIn}
+      onClick={() => setClicked(true)}
       variant="contained"
       startIcon={<GitHubIcon />}
     >
