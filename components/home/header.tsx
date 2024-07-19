@@ -47,7 +47,7 @@ export default function Header() {
               <AccountCircle />
             </IconButton>
           ) : (
-            <Link href="/login">
+            <Link href="/signin">
               <Button variant="outlined">Đăng nhập</Button>
             </Link>
           )}

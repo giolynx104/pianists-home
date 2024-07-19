@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardMedia,
   Container,
+  Divider,
   InputAdornment,
   Stack,
   TextField,
@@ -17,6 +18,9 @@ import icon from "../favicon.ico";
 import EmailIcon from "@mui/icons-material/Email";
 import PasswordIcon from "@mui/icons-material/Password";
 import pianoImage from "/public/login-background.jpg";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import { signIn } from "@/auth";
+import SignInWithGitHubButton from "@/components/signin/sign-in-with-github";
 export default function LoginPage() {
   return (
     <Container className="flex flex-row justify-center items-center h-screen">
@@ -36,6 +40,8 @@ export default function LoginPage() {
             <Typography variant="h3" className="text-center">
               Welcome Back!
             </Typography>
+            <SignInWithGitHubButton/>
+            <Divider variant="middle">or</Divider>
             <Typography variant="subtitle2" className="text-center">
               Please enter your details
             </Typography>
@@ -67,7 +73,7 @@ export default function LoginPage() {
             src={pianoImage}
             alt="background"
             objectFit="contain"
-            width={450}
+            width={500}
           />
         </CardMedia>
       </Card>
