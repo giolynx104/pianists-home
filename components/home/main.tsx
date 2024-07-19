@@ -3,7 +3,7 @@ import Image from "next/image";
 import image from "/public/playing-piano-background.webp";
 export default function Main() {
   return (
-    <Grid container spacing={5} className="relative w-screen h-screen">
+    <Grid container spacing={5} className="relative">
       <Grid item xs={6} className="flex items-center justify-center">
         <Stack spacing={4} flexDirection="column" className="flex justify-center items-center" >
           <Typography variant="h2" className="text-center">
