@@ -9,6 +9,7 @@ import Main from "@/components/home/main";
 import Footer from "@/components/home/footer";
 import {
   createTheme,
+  Stack,
   Theme,
   ThemeProvider,
   useMediaQuery,
@@ -27,9 +28,11 @@ export default function Home() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header />
-      <Main />
-      <Footer />
+      <Stack spacing={2}>
+        <Header />
+        <Main />
+        <Footer />
+      </Stack>
     </ThemeProvider>
   );
 }

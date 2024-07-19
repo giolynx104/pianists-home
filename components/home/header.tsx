@@ -15,6 +15,7 @@ import { AccountCircle } from "@mui/icons-material";
 import React from "react";
 
 export default function Header() {
+  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -26,15 +27,20 @@ export default function Header() {
   };
 
   return (
-    <AppBar position="static" className="">
+    <AppBar className="">
       <Toolbar className="flex justify-between">
         <Piano className="items-center" />
         <Box>
-          <IconButton onClick={handleMenu}>
-            <AccountCircle />
-          </IconButton>
+          {auth ? (
+            <IconButton onClick={handleMenu}>
+              <AccountCircle />
+            </IconButton>
+          ) : (
+            <Button>Đăng nhập</Button>
+          )}
           <Menu color="inherit" open={Boolean(anchorEl)} anchorEl={anchorEl}>
             <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>Logout</MenuItem>
           </Menu>
           <IconButton>
             <MenuIcon />
