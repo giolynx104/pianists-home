@@ -9,6 +9,7 @@ import {
   MenuItem,
   Stack,
   Toolbar,
+  Typography,
 } from "@mui/material";
 import { Piano } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -36,14 +37,19 @@ export default function Header() {
   return (
     <AppBar>
       <Toolbar className="flex justify-between">
-        <Piano className="items-center" />
+        <Stack spacing={1} direction="row" className="flex items-center">
+          <Piano className="items-center" />
+          <Typography variant="subtitle1">Home of Pianists</Typography>
+        </Stack>
         <Stack spacing={1} direction="row">
           {auth ? (
             <IconButton onClick={handleMenu}>
               <AccountCircle />
             </IconButton>
           ) : (
-            <Link href="/login"><Button variant="outlined">Đăng nhập</Button></Link>
+            <Link href="/login">
+              <Button variant="outlined">Đăng nhập</Button>
+            </Link>
           )}
           <Menu color="inherit" open={Boolean(anchorEl)} anchorEl={anchorEl}>
             <MenuItem onClick={handleClose}>Profile</MenuItem>
