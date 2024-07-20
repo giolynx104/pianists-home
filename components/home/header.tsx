@@ -48,7 +48,7 @@ export default function Header() {
             </IconButton>
           ) : (
             <Link href="/signin">
-              <Button variant="outlined">Đăng nhập</Button>
+              <Button variant="contained">Đăng nhập</Button>
             </Link>
           )}
           <Menu color="inherit" open={Boolean(anchorEl)} anchorEl={anchorEl}>

@@ -18,8 +18,10 @@ import icon from "../favicon.ico";
 import EmailIcon from "@mui/icons-material/Email";
 import PasswordIcon from "@mui/icons-material/Password";
 import pianoImage from "/public/login-background.jpg";
-import { SignIn } from "@/components/signin/sign-in";
-import SignInWithGitHubButton from "@/components/signin/sign-in-with-github";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import SignInWithGithubButton from "@/components/signin/github-sign-in";
+import SignInWithGoogleButton from "@/components/signin/google-sign-in";
+
 export default function LoginPage() {
   return (
     <Container className="flex flex-row justify-center items-center h-screen">
@@ -39,7 +41,10 @@ export default function LoginPage() {
             <Typography variant="h3" className="text-center">
               Welcome Back!
             </Typography>
-            <SignInWithGitHubButton />
+            <Stack spacing={2} direction="column">
+              <SignInWithGoogleButton />
+              <SignInWithGithubButton />
+            </Stack>
             <Divider variant="middle">or</Divider>
             <Typography variant="subtitle2" className="text-center">
               Please enter your details

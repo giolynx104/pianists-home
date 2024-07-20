@@ -16,6 +16,10 @@ import {
 } from "@mui/material";
 import React from "react";
 
+//TODO: Refactor the code for the sign in button
+//TODO: Add Google authentication
+//TODO: Add session management
+
 export default function Home() {
   return (
     <Stack spacing={2}>

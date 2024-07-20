@@ -1,27 +1,34 @@
 "use client";
 
 import { Button } from "@mui/material";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import signInWithGitHubAction from "./server-signin";
+import signInWithProvider from "./oauth-sign-in";
 import { useEffect, useState } from "react";
 
-export default function SignInWithGitHubButton() {
+export default function OAuthSignInButton({
+  startIcon,
+  provider,
+  textContent,
+}: {
+  startIcon: React.ReactNode;
+  provider: string;
+  textContent: string;
+}) {
   const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     if (clicked) {
-      signInWithGitHubAction();
+      signInWithProvider(provider);
       setClicked(false);
     }
-  }, [clicked]);
+  }, [clicked, provider]);
 
   return (
     <Button
       onClick={() => setClicked(true)}
       variant="contained"
-      startIcon={<GitHubIcon />}
+      startIcon={startIcon}
     >
-      Continue with GitHub
+      {textContent}
     </Button>
   );
 }
