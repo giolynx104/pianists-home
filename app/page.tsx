@@ -16,8 +16,6 @@ import {
 } from "@mui/material";
 import React from "react";
 
-//TODO: Add session management
-
 export default function Home() {
   return (
     <Stack spacing={2}>
