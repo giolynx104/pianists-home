@@ -12,6 +12,7 @@ import React from "react";
 import SignOutMenuItem from "./sign-out-menu-item";
 import Logo from "../logo";
 import UserAvatar from "./user-avatar";
+import { AccountCircle } from "@mui/icons-material";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -28,8 +29,9 @@ const Header = () => {
     <AppBar className="fixed">
       <Toolbar className="flex justify-between">
         <Logo />
+        <UserAvatar />
         <IconButton onClick={handleMenu}>
-          <UserAvatar />
+          <AccountCircle />
         </IconButton>
         <Menu color="inherit" open={Boolean(anchorEl)} anchorEl={anchorEl}>
           <MenuItem onClick={handleClose}>Profile</MenuItem>
