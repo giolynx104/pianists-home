@@ -27,6 +27,7 @@ export default function OAuthSignInButton({
       onClick={() => setClicked(true)}
       variant="contained"
       startIcon={startIcon}
+      className="normal-case text-base"
     >
       {textContent}
     </Button>
