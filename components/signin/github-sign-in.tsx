@@ -1,11 +1,11 @@
 import OAuthSignInButton from "./oauth-button";
-import GitHubIcon from '@mui/icons-material/GitHub';
+import { FaGithub } from "react-icons/fa";
 
 export default function SignInWithGithubButton() {
   return (
     <OAuthSignInButton
       provider="github"
-      startIcon={<GitHubIcon />}
+      startIcon={<FaGithub />}
       textContent="Continue with GitHub"
     />
   );

@@ -1,6 +1,5 @@
 "use client";
 
-import { AccountCircle } from "@mui/icons-material";
 import {
   AppBar,
   IconButton,
@@ -11,6 +10,8 @@ import {
 } from "@mui/material";
 import React from "react";
 import SignOutMenuItem from "./sign-out-menu-item";
+import Logo from "../logo";
+import UserAvatar from "./user-avatar";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -24,11 +25,11 @@ const Header = () => {
   };
 
   return (
-    <AppBar>
-      <Toolbar>
-        <Typography variant="h6">Dashboard</Typography>
+    <AppBar className="fixed">
+      <Toolbar className="flex justify-between">
+        <Logo />
         <IconButton onClick={handleMenu}>
-          <AccountCircle />
+          <UserAvatar />
         </IconButton>
         <Menu color="inherit" open={Boolean(anchorEl)} anchorEl={anchorEl}>
           <MenuItem onClick={handleClose}>Profile</MenuItem>

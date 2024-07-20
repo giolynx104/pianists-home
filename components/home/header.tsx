@@ -16,17 +16,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { AccountCircle } from "@mui/icons-material";
 import React from "react";
 import Link from "next/link";
+import Logo from "../logo";
 
 export default function Header() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
   return (
     <AppBar>
       <Toolbar className="flex justify-between">
-        <Stack spacing={1} direction="row" className="flex items-center">
-          <Piano className="items-center" />
-          <Typography variant="subtitle1">Home of Pianists</Typography>
-        </Stack>
+        <Logo />
         <Stack spacing={1} direction="row">
           <Link href="/signin">
             <Button variant="contained">Đăng nhập</Button>

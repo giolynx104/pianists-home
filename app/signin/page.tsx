@@ -16,11 +16,9 @@ import {
 import Image from "next/image";
 import icon from "../favicon.ico";
 import EmailIcon from "@mui/icons-material/Email";
-import PasswordIcon from "@mui/icons-material/Password";
 import pianoImage from "/public/login-background.jpg";
 import SignInWithGithubButton from "@/components/signin/github-sign-in";
 import SignInWithGoogleButton from "@/components/signin/google-sign-in";
-import { Suspense } from "react";
 import KeyIcon from '@mui/icons-material/Key';
 
 export default function LoginPage() {
@@ -70,7 +68,7 @@ export default function LoginPage() {
                   ),
                 }}
               />
-              <Button variant="contained">Sign In</Button>
+              <Button className="normal-case font-bold" variant="contained">Sign In</Button>
             </Stack>
           </CardContent>
           <CardMedia>
