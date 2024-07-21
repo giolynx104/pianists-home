@@ -9,11 +9,11 @@ type Pianist = {
 export const data: Pianist[] = [
   {
     id: 1,
-    name: "Lê Xuân Hải",
+    name: "Đặng Thái Sơn",
     imageKey: "1",
     description:
-      "Nhà soạn nhạc, nghệ sĩ dương cầm, giáo sư dạy dương cầm vĩ đại của dân tộc Việt Nam.",
-    demoLink: "https://www.youtube.com/watch?v=tyMe9Eko4RQ",
+      "Dang Thai Son was propelled to the forefront of the musical world in October 1980, when he was awarded the First Prize and Gold Medal at the Xth International Chopin Piano Competition in Warsaw. It was also the first time that a top international competition was won by an Asian pianist.",
+    demoLink: "https://www.youtube.com/watch?v=ISQ_XKwnftE",
   },
   {
     id: 2,
@@ -30,6 +30,6 @@ type Image = {
 };
 
 export const images: Image = {
-  1: require("@/public/maxresdefault.jpg"),
+  1: require("@/public/dang-thai-son.jpg"),
   2: require("@/public/irina-lankova.jpg"),
 };

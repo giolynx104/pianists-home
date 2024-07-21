@@ -1,15 +1,15 @@
-import Header from "@/components/dashboard/header";
 import UserAvatar from "@/components/dashboard/user-avatar";
-import { Stack } from "@mui/material";
-
-//TODO: Fix hydration issue
+import Header from "@/components/dashboard/header";
+import { Box, Stack } from "@mui/material";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Stack direction="column" spacing={10}>
-      <Header>
-        <UserAvatar />
-      </Header>
+    <Stack direction="column">
+      <Box className="mb-20">
+        <Header>
+          <UserAvatar />
+        </Header>
+      </Box>
       {children}
     </Stack>
   );
