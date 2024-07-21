@@ -1,7 +1,7 @@
 "use client";
 
 import { AppBar, IconButton, Menu, MenuItem, Toolbar } from "@mui/material";
-import React, {  } from "react";
+import React from "react";
 import SignOutMenuItem from "./sign-out-menu-item";
 import Logo from "../logo";
 
