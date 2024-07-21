@@ -107,7 +107,7 @@ export default function Main() {
             animate="animate"
           >
             <Stack spacing={2} direction="row">
-              <Box className="w-1/2">
+              <Box className="w-1/2 flex justify-center items-center">
                 <Card>
                   <CardContent>
                     <Stack
@@ -130,7 +130,7 @@ export default function Main() {
                   </CardContent>
                 </Card>
               </Box>
-              <Box className="w-1/2">
+              <Box className="w-1/2 flex justify-center items-center">
                 <Image
                   objectFit="contained"
                   src={images[artist.imageKey]}
