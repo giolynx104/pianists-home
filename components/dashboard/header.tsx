@@ -21,7 +21,12 @@ const Header = ({ children: userAvatar }: { children: React.ReactNode }) => {
       <Toolbar className="flex justify-between">
         <Logo />
         <IconButton onClick={handleMenu}>{userAvatar}</IconButton>
-        <Menu color="inherit" open={Boolean(anchorEl)} anchorEl={anchorEl}>
+        <Menu
+          color="inherit"
+          onClose={handleClose}
+          open={Boolean(anchorEl)}
+          anchorEl={anchorEl}
+        >
           <MenuItem onClick={handleClose}>Profile</MenuItem>
           <SignOutMenuItem />
         </Menu>
