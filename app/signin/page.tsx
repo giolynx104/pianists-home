@@ -84,11 +84,7 @@ export default function LoginPage() {
           </Grid>
           <Grid item xs={6}>
             <CardMedia>
-              <Image
-                src={pianoImage}
-                alt="background"
-                objectFit="contain"
-              />
+              <Image src={pianoImage} alt="background" objectFit="contain" />
             </CardMedia>
           </Grid>
         </Grid>
