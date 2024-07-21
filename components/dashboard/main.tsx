@@ -18,6 +18,7 @@ import { BsArrowRightCircle } from "react-icons/bs";
 import { data, images } from "@/data";
 import React from "react";
 import { motion, useAnimate } from "framer-motion";
+import { FaArrowAltCircleRight } from "react-icons/fa";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
@@ -83,69 +84,101 @@ export default function Main() {
   const artist = data[currentIndex];
 
   return (
-    <Container className="flex justify-center">
-      <Grid
-        container
-        spacing={2}
-        className="h-auto w-auto flex justify-center items-center"
+    <Stack spacing={10} className="flex items-center">
+      <Box
+        className="h-screen w-screen flex justify-center items-center"
+        sx={{
+          backgroundImage:
+            "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/dashboard-background.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
-        <Grid item xs={12} className="h-auto">
-          <Typography variant="h5" className="text-center">
-            Các nghệ sĩ nổi bật
+        <Stack spacing={2}>
+          <Typography variant="h3" className="text-center w-auto">
+            Khám phá thế giới âm nhạc cùng chúng tôi
           </Typography>
+          <Typography variant="h5" className="text-center w-auto">
+            Nền tảng học piano số 1 Việt Nam
+          </Typography>
+          <Box className="flex justify-center">
+            <Button
+              endIcon={<FaArrowAltCircleRight />}
+              className="normal-case text-white"
+              variant="outlined"
+              size="small"
+            >
+              Nhấn để bắt đầu kết nối
+            </Button>
+          </Box>
+        </Stack>
+      </Box>
+      <Box className="flex justify-center h-screen">
+        <Grid
+          container
+          spacing={2}
+          className="flex justify-center items-center"
+        >
+          <Grid item xs={12} className="h-auto">
+            <Box className="flex justify-center items-center bg-gray-400 h-20">
+              <Typography variant="h5" className="w-auto text-center ">
+                Các nghệ sĩ nổi bật
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={1}>
+            <IconButton onClick={handlePrev}>
+              <BsArrowLeftCircle />
+            </IconButton>
+          </Grid>
+          <Grid item xs={10}>
+            <motion.div
+              key={artist.id}
+              variants={variants}
+              initial="initial"
+              animate="animate"
+            >
+              <Stack spacing={2} direction="row">
+                <Box className="w-1/2 flex justify-center items-center">
+                  <Card>
+                    <CardContent>
+                      <Stack
+                        spacing={3}
+                        className="flex flex-col justify-center items-center"
+                      >
+                        <Typography className="text-center" variant="h5">
+                          {artist.name}
+                        </Typography>
+                        <Typography variant="subtitle1">
+                          {artist.description}
+                        </Typography>
+                        <Button className="normal-case">Xem thêm</Button>
+                        <ReactPlayer
+                          controls
+                          url={artist.demoLink}
+                          width="100%"
+                        />
+                      </Stack>
+                    </CardContent>
+                  </Card>
+                </Box>
+                <Box className="w-1/2 flex justify-center items-center">
+                  <Image
+                    objectFit="contained"
+                    src={images[artist.imageKey]}
+                    alt="An image of the pianist"
+                  />
+                </Box>
+              </Stack>
+            </motion.div>
+          </Grid>
+          <Grid item xs={1}>
+            <IconButton onClick={handleNext}>
+              <BsArrowRightCircle />
+            </IconButton>
+          </Grid>
         </Grid>
-        <Grid item xs={1}>
-          <IconButton onClick={handlePrev}>
-            <BsArrowLeftCircle />
-          </IconButton>
-        </Grid>
-        <Grid item xs={10}>
-          <motion.div
-            key={artist.id}
-            variants={variants}
-            initial="initial"
-            animate="animate"
-          >
-            <Stack spacing={2} direction="row">
-              <Box className="w-1/2 flex justify-center items-center">
-                <Card>
-                  <CardContent>
-                    <Stack
-                      spacing={3}
-                      className="flex flex-col justify-center items-center"
-                    >
-                      <Typography className="text-center" variant="h5">
-                        {artist.name}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        {artist.description}
-                      </Typography>
-                      <Button className="normal-case">Xem thêm</Button>
-                      <ReactPlayer
-                        controls
-                        url={artist.demoLink}
-                        width="100%"
-                      />
-                    </Stack>
-                  </CardContent>
-                </Card>
-              </Box>
-              <Box className="w-1/2 flex justify-center items-center">
-                <Image
-                  objectFit="contained"
-                  src={images[artist.imageKey]}
-                  alt="An image of the pianist"
-                />
-              </Box>
-            </Stack>
-          </motion.div>
-        </Grid>
-        <Grid item xs={1}>
-          <IconButton onClick={handleNext}>
-            <BsArrowRightCircle />
-          </IconButton>
-        </Grid>
-      </Grid>
-    </Container>
+      </Box>
+    </Stack>
   );
 }

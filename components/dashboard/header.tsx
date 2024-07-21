@@ -64,7 +64,7 @@ const Header = ({ children: userAvatar }: { children: React.ReactNode }) => {
   );
 
   return (
-    <AppBar className="fixed">
+    <AppBar position="static">
       <Toolbar className="flex justify-between">
         <Logo />
         <IconButton onClick={toggleDrawer(true)}>{userAvatar}</IconButton>

@@ -5,11 +5,9 @@ import { Box, Stack } from "@mui/material";
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Stack direction="column">
-      <Box className="mb-20">
-        <Header>
-          <UserAvatar />
-        </Header>
-      </Box>
+      <Header>
+        <UserAvatar />
+      </Header>
       {children}
     </Stack>
   );
