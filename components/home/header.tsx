@@ -1,14 +1,15 @@
 "use client";
 
-import { AppBar, Button, IconButton, Stack, Toolbar } from "@mui/material";
+import { AppBar, Button, Toolbar } from "@mui/material";
 import React, { useEffect } from "react";
-import Link from "next/link";
 import Logo from "../logo";
-import { auth } from "@/auth";
 import { getAuthState } from "./nav-button";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [isAuth, setIsAuth] = React.useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     getAuthState().then((res) => setIsAuth(res));
@@ -18,15 +19,22 @@ export default function Header() {
     <AppBar>
       <Toolbar className="flex justify-between">
         <Logo />
-
         {isAuth ? (
-          <Link href="/dashboard">
-            <Button className="normal-case">Go to Dashboard</Button>
-          </Link>
+          <Button variant="contained"
+            onClick={() => {
+              router.push("/dashboard");
+            }}
+          >
+            Go to Dashboard
+          </Button>
         ) : (
-          <Link href="/signin">
-            <Button className="normal-case">Đăng nhập</Button>
-          </Link>
+          <Button variant="contained"
+            onClick={() => {
+              router.push("/signin");
+            }}
+          >
+            Đăng nhập
+          </Button>
         )}
       </Toolbar>
     </AppBar>

@@ -95,10 +95,10 @@ export default function Main() {
         }}
       >
         <Stack spacing={2}>
-          <Typography variant="h3" className="text-center w-auto">
+          <Typography variant="h3" className="text-center w-auto text-white">
             Khám phá thế giới âm nhạc cùng chúng tôi
           </Typography>
-          <Typography variant="h5" className="text-center w-auto">
+          <Typography variant="h5" className="text-center w-auto text-white">
             Nền tảng học Piano hàng đầu Việt Nam
           </Typography>
           <Box className="flex justify-center">
