@@ -99,7 +99,7 @@ export default function Main() {
             Khám phá thế giới âm nhạc cùng chúng tôi
           </Typography>
           <Typography variant="h5" className="text-center w-auto">
-            Nền tảng học piano số 1 Việt Nam
+            Nền tảng học Piano hàng đầu Việt Nam
           </Typography>
           <Box className="flex justify-center">
             <Button

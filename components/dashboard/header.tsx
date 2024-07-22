@@ -18,11 +18,15 @@ import Logo from "../logo";
 import { CgProfile } from "react-icons/cg";
 import { FaSignOutAlt } from "react-icons/fa";
 import { signOutAction } from "@/actions";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Header = ({ children: userAvatar }: { children: React.ReactNode }) => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   const [isSignOutClicked, setIsSignOutClicked] = React.useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (isSignOutClicked) {
@@ -38,7 +42,12 @@ const Header = ({ children: userAvatar }: { children: React.ReactNode }) => {
     <Box role="presentation">
       <List>
         <ListItem className="flex pl-0">
-          <ListItemButton className="flex pl-0  items-center">
+          <ListItemButton
+            onClick={() => {
+              router.push("/dashboard/profile");
+            }}
+            className="flex pl-0 items-center"
+          >
             <ListItemIcon className="flex justify-center items-center">
               <CgProfile />
             </ListItemIcon>

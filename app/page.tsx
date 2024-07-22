@@ -15,11 +15,12 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import React from "react";
+import { getAuthState } from "@/components/home/nav-button";
 
 export default function Home() {
   return (
     <Stack spacing={2}>
-      <Header />
+      <Header/>
       <Main />
       <Footer />
     </Stack>

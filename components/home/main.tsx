@@ -10,7 +10,7 @@ export default function Main() {
             Kết nối những niềm đam mê âm nhạc
           </Typography>
           <Button variant="contained" className="w-fit">
-            Khám phá ngay
+            Đăng ký và khám phá ngay
           </Button>
         </Stack>
       </Grid>
