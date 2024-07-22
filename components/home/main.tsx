@@ -1,15 +1,34 @@
-import { Button, Container, Divider, Grid, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Divider,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 import image from "/public/playing-piano-background.webp";
+import { useRouter } from "next/navigation";
 export default function Main() {
+  const router = useRouter();
   return (
-    <Grid container  className="relative">
+    <Grid container className="relative">
       <Grid item xs={6} className="flex items-center justify-center">
-        <Stack spacing={4} flexDirection="column" className="flex justify-center items-center" >
+        <Stack
+          spacing={4}
+          flexDirection="column"
+          className="flex justify-center items-center"
+        >
           <Typography variant="h2" className="text-center">
             Kết nối những niềm đam mê âm nhạc
           </Typography>
-          <Button variant="contained" className="w-fit">
+          <Button
+            onClick={() => {
+              router.push("/signin");
+            }}
+            variant="contained"
+            className="w-fit"
+          >
             Đăng ký và khám phá ngay
           </Button>
         </Stack>

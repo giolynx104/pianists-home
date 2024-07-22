@@ -16,7 +16,7 @@ const Page = async () => {
   const user = sesion?.user;
 
   return (
-    <Container className="w-3/4 pt-10">
+    <Container className="w-3/4 pt-10 h-screen">
       <Grid container spacing={2}>
         <Grid item xs={9}>
           <Stack spacing={3}>
