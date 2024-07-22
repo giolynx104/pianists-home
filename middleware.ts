@@ -1,11 +1,6 @@
 import { auth } from "@/auth";
 
 export default auth((request) => {
-  // Static assets
-  if (request.nextUrl.pathname.startsWith("/_next")) {
-    return;
-  }
-
   if (
     !request.auth &&
     request.nextUrl.pathname !== "/" &&
@@ -17,3 +12,7 @@ export default auth((request) => {
     return Response.redirect(new URL("/dashboard", request.nextUrl));
   }
 });
+
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+};
