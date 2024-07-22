@@ -19,6 +19,7 @@ import SignInWithGithubButton from "@/components/signin/github-sign-in";
 import SignInWithGoogleButton from "@/components/signin/google-sign-in";
 import KeyIcon from "@mui/icons-material/Key";
 import Link from "next/link";
+import { auth } from "@/auth";
 
 export default function LoginPage() {
   return (

@@ -1,12 +1,26 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
+import Credentials from "next-auth/providers/credentials";
+import type { Provider } from "next-auth/providers";
 import Google from "next-auth/providers/google";
 
-export const config = {
-  providers: [GitHub, Google],
-  pages: {
-    signIn: "/login",
-  },
-};
+const providers: Provider[] = [GitHub, Google];
 
-export const { signIn, signOut, handlers, auth } = NextAuth(config);
+export const providerMap = providers.map((provider) => {
+  if (typeof provider === "function") {
+    const providerData = provider();
+    return { id: providerData.id, name: providerData.name };
+  } else {
+    return { id: provider.id, name: provider.name };
+  }
+});
+
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  providers,
+  pages: {
+    signIn: "/signin",
+  },
+  callbacks: {
+    
+  }
+});
