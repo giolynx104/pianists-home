@@ -113,7 +113,6 @@ export default function LoginPage() {
         </Card>
       </Container>
       <NotImplementedBackdrop open={open} handleClose={handleClose} />
-      );
     </>
   );
 }
