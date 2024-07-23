@@ -1,16 +1,9 @@
-import { auth } from "@/auth";
 import { User } from "@/lib/definitions";
 import { sql } from "@vercel/postgres";
-import { redirect } from "next/navigation";
-import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: Request, response: Response) {
-  const url = new URL(request.url);
-  const email = url.searchParams.get("email");
-
   const res = await sql<User[]>`
   SELECT * FROM users`;
-  console.log("fuck");
   return Response.json(res, {
     status: 200,
     headers: { "Content-Type": "application/json" },
