@@ -1,8 +1,11 @@
 import { User } from "@/lib/definitions";
 import { sql } from "@vercel/postgres";
 
-export async function GET({ params }: { params: { id: number } }) {
-  const id = params.id;
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  const id = parseInt(params.id);
 
   const res = await sql<User>`
     SELECT * FROM users WHERE id = ${id}

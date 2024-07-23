@@ -29,33 +29,5 @@ export async function POST(request: Request) {
   INSERT INTO users (name, email, role)
   VALUES (${user.name}, ${user.email}, ${user.role})
 `;
-  redirect("/dashboard");
   return Response.json({ message: "User created successfully", res });
-}
-
-export async function GET_USER_BY_EMAIL(request: Request) {
-  const url = new URL(request.url);
-  const email = url.searchParams.get("email");
-  console.log(email);
-  if (!email) {
-    return new Response(
-      JSON.stringify({ error: "Email parameter is missing" }),
-      { status: 400 }
-    );
-  }
-
-  const res = await sql<User[]>`
-    SELECT * FROM users WHERE email = ${email}
-  `;
-
-  if (res.rows.length === 0) {
-    return new Response(JSON.stringify({ error: "User not found" }), {
-      status: 404,
-    });
-  }
-
-  return new Response(JSON.stringify(res.rows[0]), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
 }
