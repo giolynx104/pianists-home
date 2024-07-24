@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 
+//TODO: Fix profile image having low quality from Google
+
 const Page = async () => {
   const sesion = await auth();
   const user = sesion?.user;

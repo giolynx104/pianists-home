@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import Image from "next/image";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Tooltip } from "@mui/material";
 
 export default async function UserAvatar() {
   const session = await auth();
@@ -15,6 +16,8 @@ export default async function UserAvatar() {
       className="rounded-full"
     />
   ) : (
-    <AccountCircleIcon />
+    <Tooltip title="Đăng nhập">
+      <AccountCircleIcon />
+    </Tooltip>
   );
 }
