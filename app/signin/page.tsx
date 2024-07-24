@@ -41,6 +41,9 @@ export default function LoginPage() {
             <Grid item xs={6}>
               <CardContent className="flex flex-col p-12">
                 <Stack spacing={4}>
+                  <Typography variant="h3">
+                    Welcome back!
+                  </Typography>
                   <Stack
                     spacing={1}
                     direction="row"
@@ -51,9 +54,6 @@ export default function LoginPage() {
                       Home of Pianists
                     </Typography>
                   </Stack>
-                  <Typography variant="h3" className="text-center">
-                    Welcome Back!
-                  </Typography>
                   <Stack spacing={2} direction="column">
                     <SignInWithGoogleButton />
                     <SignInWithGithubButton />
@@ -90,7 +90,7 @@ export default function LoginPage() {
                     className="normal-case font-bold"
                     variant="contained"
                   >
-                    Đăng nhập
+                    Sign in
                   </Button>
                   <Link
                     onClick={() => {

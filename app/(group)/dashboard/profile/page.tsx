@@ -1,12 +1,8 @@
 import { auth } from "@/auth";
-import { AccountCircle } from "@mui/icons-material";
 import {
   Box,
-  Container,
-  Divider,
-  Grid,
+  Card,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import Image from "next/image";
@@ -18,45 +14,23 @@ const Page = async () => {
   const user = sesion?.user;
 
   return (
-    <Container className="w-3/4 pt-10 h-screen">
-      <Grid container spacing={2}>
-        <Grid item xs={9}>
-          <Stack spacing={3}>
-            <Typography variant="h5">Public profile</Typography>
-            <Divider variant="middle" />
-            <TextField
-              fullWidth
-              label="Name"
-              variant="filled"
-              value={user?.name}
-            />
-            <TextField
-              fullWidth
-              label="Email"
-              variant="filled"
-              value={user?.email}
-            />
-          </Stack>
-        </Grid>
-        <Grid item xs={3} className="flex justify-center items-center">
-          <Stack spacing={2} className="flex justify-center items-center">
-            <Typography variant="subtitle1">Profile picture</Typography>
-            {user?.image ? (
-              <Box className="rounded-full overflow-hidden">
-                <Image
-                  src={user?.image}
-                  alt="Profile picture"
-                  width={200}
-                  height={200}
-                />
-              </Box>
-            ) : (
-              <AccountCircle />
-            )}
-          </Stack>
-        </Grid>
-      </Grid>
-    </Container>
+    <Box className="flex justify-center w-screen">
+      <Card className="w-1/2 flex justify-center relative">
+        <Box className="absolute top-0 left-0 w-full h-1/2 bg-blue-500 z-0" />
+        <Stack spacing={1} className="w-1/2 flex flex-column items-center bg-inherit relative z-10">
+          <Typography variant="h5">Profile</Typography>
+          <Image
+            src={user?.image || ""}
+            alt="User avatar"
+            width={200}
+            height={200}
+            className="rounded-full overflow-hidden"
+          />
+          <Typography variant="h6">{user?.name}</Typography>
+          <Typography variant="subtitle1">{user?.email}</Typography>
+        </Stack>
+      </Card>
+    </Box>
   );
 };
 

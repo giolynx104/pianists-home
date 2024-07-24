@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import Image from "next/image";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Tooltip } from "@mui/material";
+import { FaSignInAlt } from "react-icons/fa";
 
 export default async function UserAvatar() {
   const session = await auth();
@@ -16,8 +16,8 @@ export default async function UserAvatar() {
       className="rounded-full"
     />
   ) : (
-    <Tooltip title="Đăng nhập">
-      <AccountCircleIcon />
+    <Tooltip title="Sign in">
+      <FaSignInAlt />
     </Tooltip>
   );
 }
