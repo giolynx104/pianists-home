@@ -22,3 +22,22 @@ export async function GET(
     headers: { "Content-Type": "application/json" },
   });
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  const id = parseInt(params.id);
+
+  const res = await sql<User>`
+    DELETE FROM users WHERE id = ${id}
+  `;
+
+  return new Response(
+    JSON.stringify({ message: "User deleted successfully" }),
+    {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+}

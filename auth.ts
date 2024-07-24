@@ -1,8 +1,8 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
-import Credentials from "next-auth/providers/credentials";
 import type { Provider } from "next-auth/providers";
 import Google from "next-auth/providers/google";
+import prisma from "./lib/db";
 
 const providers: Provider[] = [GitHub, Google];
 
@@ -21,6 +21,30 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: "/signin",
   },
   callbacks: {
-    
-  }
+    async signIn({ user, account, profile, email, credentials }) {
+      const userEmail = user.email ?? "";
+      const userName = user.name ?? "";
+
+      if (userEmail !== null) {
+        const existingUser = await prisma.user.findUnique({
+          where: {
+            email: userEmail,
+          },
+        });
+
+        if (!existingUser) {
+          await prisma.user.create({
+            data: {
+              email: userEmail,
+              slug: userEmail.substring(0, userEmail.indexOf("@")),
+              name: userName,
+              role: "student",
+            },
+          });
+        }
+      }
+
+      return true;
+    },
+  },
 });
