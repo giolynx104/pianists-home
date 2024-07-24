@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import Main from "@/components/dashboard/main";
+import Main from "@/components/group/dashboard/main";
 import { redirect } from "next/navigation";
 
 const Dashboard = async () => {

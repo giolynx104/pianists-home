@@ -1,9 +1,11 @@
 import { auth } from "@/auth";
 
 export default auth((request) => {
-  if (
+  if (request.nextUrl.pathname === "/") {
+    return Response.redirect(new URL("/home", request.nextUrl));
+  } else if (
     !request.auth &&
-    request.nextUrl.pathname !== "/" &&
+    request.nextUrl.pathname !== "/home" &&
     request.nextUrl.pathname !== "/signin" &&
     !request.nextUrl.pathname.startsWith("/api/auth")
   ) {

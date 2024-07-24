@@ -11,21 +11,20 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Stack,
   Toolbar,
 } from "@mui/material";
 import React, { useEffect } from "react";
-import Logo from "../logo";
 import { CgProfile } from "react-icons/cg";
 import { FaSignOutAlt } from "react-icons/fa";
-import { signOutAction } from "@/actions";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Logo from "../logo";
+import { signOutAction } from "./sign-out-action";
 
 const Header = ({ children: userAvatar }: { children: React.ReactNode }) => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   const [isSignOutClicked, setIsSignOutClicked] = React.useState(false);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -75,7 +74,18 @@ const Header = ({ children: userAvatar }: { children: React.ReactNode }) => {
   return (
     <AppBar position="static">
       <Toolbar className="flex justify-between">
-        <Logo />
+        <Stack spacing={2} direction="row" className="flex items-center">
+          <Logo />
+          <List>
+            <ListItemButton
+              onClick={() => {
+                router.push("/dashboard");
+              }}
+            >
+              Dashboard
+            </ListItemButton>
+          </List>
+        </Stack>
         <IconButton onClick={toggleDrawer(true)}>{userAvatar}</IconButton>
         <Drawer
           open={isDrawerOpen}
