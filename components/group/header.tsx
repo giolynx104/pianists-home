@@ -30,7 +30,6 @@ const Header = ({ children: userAvatar }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (isSignOutClicked) {
-      setIsDrawerOpen(false);
       signOutAction();
     }
   }, [isSignOutClicked]);
@@ -46,7 +45,6 @@ const Header = ({ children: userAvatar }: { children: React.ReactNode }) => {
     };
 
     if (isUserAvatarClicked) {
-      setIsUserAvatarClicked(false);
       handleUserAvatarClick();
     }
   }, [isUserAvatarClicked, router]);
@@ -57,8 +55,7 @@ const Header = ({ children: userAvatar }: { children: React.ReactNode }) => {
         <ListItem className="flex pl-0">
           <ListItemButton
             onClick={() => {
-              setIsDrawerOpen(false);
-              router.push("/dashboard/profile");
+              router.push("/profile");
             }}
             className="flex pl-0 items-center"
           >
@@ -127,6 +124,3 @@ const Header = ({ children: userAvatar }: { children: React.ReactNode }) => {
 };
 
 export default Header;
-function useCallBack(arg0: () => void, arg1: boolean[]) {
-  throw new Error("Function not implemented.");
-}

@@ -29,7 +29,7 @@ export default function Main() {
             variant="contained"
             className="w-fit"
           >
-            Đăng ký và khám phá ngay
+            Start now
           </Button>
         </Stack>
       </Grid>

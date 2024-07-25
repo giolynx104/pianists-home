@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import Image from "next/image";
-import { Tooltip } from "@mui/material";
+import { Stack, Tooltip, Typography } from "@mui/material";
 import { FaSignInAlt } from "react-icons/fa";
 
 export default async function UserAvatar() {
@@ -17,7 +17,10 @@ export default async function UserAvatar() {
     />
   ) : (
     <Tooltip title="Sign in">
-      <FaSignInAlt />
+      <Stack spacing={1} direction="row">
+        <FaSignInAlt />
+        <Typography>Sign in</Typography>
+      </Stack>
     </Tooltip>
   );
 }
