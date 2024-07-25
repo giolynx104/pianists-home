@@ -87,13 +87,13 @@ export default function Main() {
   return (
     <Stack spacing={10} className="flex items-center">
       <Box
-        className="relative w-full h-screen flex justify-center items-center"
+        className="relative w-full h-full flex justify-center items-center"
         style={{
-          backgroundImage: `url("dashboard-background.jpg")`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("dashboard-background.jpg")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           width: "100%",
-          height: "100vh", // Adjust height as needed
+          height: "100vh",
         }}
       >
         <Stack spacing={2} className="flex pt-20">

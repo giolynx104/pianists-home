@@ -20,7 +20,7 @@ export default function Main() {
           className="flex justify-center items-center"
         >
           <Typography variant="h2" className="text-center">
-            Kết nối những niềm đam mê âm nhạc
+            Connect, Learn, Play
           </Typography>
           <Button
             onClick={() => {
