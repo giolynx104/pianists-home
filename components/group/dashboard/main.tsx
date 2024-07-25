@@ -19,6 +19,7 @@ import { data, images } from "@/data";
 import React from "react";
 import { motion, useAnimate } from "framer-motion";
 import { FaArrowAltCircleRight } from "react-icons/fa";
+import backgroundImage from "@/public/dashboard-background.jpg";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
@@ -86,15 +87,16 @@ export default function Main() {
   return (
     <Stack spacing={10} className="flex items-center">
       <Box
-        className="h-screen w-screen flex justify-center items-center"
-        sx={{
-          backgroundImage:
-            "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/dashboard-background.jpg')",
+        className="relative w-full h-screen flex justify-center items-center"
+        style={{
+          backgroundImage: `url("dashboard-background.jpg")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          width: "100%",
+          height: "100vh", // Adjust height as needed
         }}
       >
-        <Stack spacing={2}>
+        <Stack spacing={2} className="flex pt-20">
           <Typography variant="h3" className="text-center w-auto text-white">
             Khám phá thế giới âm nhạc cùng chúng tôi
           </Typography>
