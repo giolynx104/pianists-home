@@ -15,12 +15,15 @@ datasource db {
 }
 
 model Course {
-  id         Int          @id @default(autoincrement())
-  name       String
-  code       String
-  user       User         @relation(fields: [userId], references: [id])
-  userId     String
-  Enrollment Enrollment[]
+  id          Int          @id @default(autoincrement())
+  name        String
+  user        User         @relation(fields: [userId], references: [id])
+  userId      String
+  Enrollment  Enrollment[]
+  description String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  price       Float
 }
 
 model Enrollment {

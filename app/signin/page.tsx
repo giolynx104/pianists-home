@@ -41,7 +41,7 @@ export default function LoginPage() {
             <Grid item xs={6}>
               <CardContent className="flex flex-col p-12">
                 <Stack spacing={4}>
-                  <Typography variant="h3">
+                  <Typography variant="h3" className="text-center">
                     Welcome back!
                   </Typography>
                   <Stack
