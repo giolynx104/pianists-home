@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import CreateCourseButton from "@/components/group/profile/create-course-button";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import CourseList from "./course-list";
+import CourseList from "../../../components/group/profile/course-list";
 
 //TODO: Fix profile image having low quality from Google
 
@@ -13,7 +13,7 @@ const Page = async () => {
   const user = session.user;
   const userImage = user?.image || "no-avatar.png";
   return (
-    <Container>
+    <Container className="mt-10">
       <Grid container spacing={2}>
         <Grid item xs={3}>
           <Stack spacing={2}>

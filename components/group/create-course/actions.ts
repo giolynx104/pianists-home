@@ -1,5 +1,5 @@
 "use server";
-
+import { redirect } from "next/navigation";
 import prisma from "@/lib/db";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
@@ -34,4 +34,5 @@ export const createCourse = async (formData: FormData) => {
   });
 
   revalidatePath("/profile");
+  redirect("/profile");
 };

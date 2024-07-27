@@ -63,6 +63,8 @@ const slideInRight = {
   },
 };
 
+//TODO: Implement start connecting
+
 export default function Main() {
   const [currentIndex, setCurrentIndex] = React.useState<number>(0);
 
