@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import CreateCourseButton from "@/components/group/profile/create-course-button";
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import CourseList from "../../../components/group/profile/course-list";
 

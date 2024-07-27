@@ -1,11 +1,6 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Container,
-} from "@mui/material";
+import CourseForm from "@/components/group/create-course/course-form";
+import { Card, CardContent, CardHeader, Container } from "@mui/material";
 import { GiGrandPiano } from "react-icons/gi";
-import CourseForm from "./course-form";
 const Page = () => {
   return (
     <Container>
