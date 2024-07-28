@@ -3,11 +3,12 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const session = request.cookies.get("authjs.session-token");
-  if (
-    request.nextUrl.pathname === "/" ||
-    (request.nextUrl.pathname === "/api/auth/signin" && session)
-  ) {
+  if (request.nextUrl.pathname === "/") {
     return NextResponse.redirect(new URL("/home", request.url));
+  }
+  console.log(session);
+  if (request.nextUrl.pathname === "/api/auth/signin" && session) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 }
 
