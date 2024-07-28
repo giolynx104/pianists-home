@@ -6,7 +6,10 @@ import NoCourseCard from "./no-course-card";
 
 const CourseList = async () => {
   const session = await auth();
-  const user = session?.user;
+  if (!session) {
+    return null;
+  }
+  const user = session.user;
   const currentUser = await prisma.user.findUnique({
     where: {
       email: user?.email ?? "",

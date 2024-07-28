@@ -3,12 +3,16 @@ import CourseList from "@/components/group/profile/course-list";
 import CreateCourseButton from "@/components/group/profile/create-course-button";
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 //TODO: Fix profile image having low quality from Google
 
 const Page = async () => {
   const session = await auth();
-  const user = session?.user ?? {};
+  if (!session) {
+    redirect("/api/auth/signin");
+  }
+  const user = session.user ?? {};
   const userImage = user?.image || "no-avatar.png";
   return (
     <Container className="mt-10">

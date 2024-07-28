@@ -24,7 +24,7 @@ export default function Main() {
           </Typography>
           <Button
             onClick={() => {
-              router.push("/signin");
+              router.push("/api/auth/signin");
             }}
             variant="contained"
             className="w-fit"

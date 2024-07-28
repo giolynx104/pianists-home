@@ -7,7 +7,7 @@ const SignInButton = () => {
     <form
       action={async () => {
         "use server";
-        await signIn();
+        await signIn(undefined, { redirectTo: "/dashboard" });
       }}
     >
       <Button variant="outlined" startIcon={<FaUserCircle />} type="submit">

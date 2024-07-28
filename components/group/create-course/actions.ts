@@ -6,7 +6,10 @@ import { revalidatePath } from "next/cache";
 
 export const createCourse = async (formData: FormData) => {
   const session = await auth();
-  const user = session?.user;
+  if (!session) {
+    redirect("/api/auth/signin");
+  }
+  const user = session.user;
 
   if (!user) {
     throw new Error("User not authenticated");

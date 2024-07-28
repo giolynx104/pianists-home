@@ -15,7 +15,6 @@ import Link from "next/link";
 
 const Header = async () => {
   const session = await auth();
-
   return (
     <AppBar position="static">
       <Toolbar className="flex justify-between items-center">
@@ -28,7 +27,7 @@ const Header = async () => {
           </List>
         </Stack>
         {session ? (
-          <UserAvatar userAvatar={session?.user?.image || ""} />
+          <UserAvatar userAvatar={session.user?.image || ""} />
         ) : (
           <SignInButton />
         )}
