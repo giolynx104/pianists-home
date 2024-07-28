@@ -3,11 +3,11 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const session = request.cookies.get("authjs.session-token");
-  if (request.nextUrl.pathname.startsWith("/api/auth")) {
-    return NextResponse.next();
-  }
-  if (request.nextUrl.pathname === "/") {
-    return NextResponse.rewrite(new URL("/home", request.url));
+  if (
+    request.nextUrl.pathname === "/" ||
+    (request.nextUrl.pathname === "/api/auth/signin" && session)
+  ) {
+    return NextResponse.redirect(new URL("/home", request.url));
   }
 }
 
@@ -21,5 +21,6 @@ export const config = {
      * - favicon.ico (favicon file)
      */
     "/((?!api|_next/static|_next/image|favicon.ico).*)",
+    "/api/auth/signin",
   ],
 };
