@@ -15,16 +15,16 @@ export default function UserAvatar({ userAvatar }: { userAvatar: string }) {
   const DrawerList = (
     <List>
       <ListItem>
-        <form
-          action={() => {
+        <Button
+          onClick={() => {
             router.push("/profile");
           }}
+          type="submit"
           className="w-full"
+          startIcon={<CgProfile />}
         >
-          <Button type="submit" className="w-full" startIcon={<CgProfile />}>
-            Your Profile
-          </Button>
-        </form>
+          Your Profile
+        </Button>
       </ListItem>
       <Divider variant="middle" />
       <ListItem>

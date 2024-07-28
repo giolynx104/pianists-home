@@ -16,31 +16,6 @@ import Link from "next/link";
 const Header = async () => {
   const session = await auth();
 
-  // const [isUserAvatarClicked, setIsUserAvatarClicked] = React.useState(false);
-  // const [isSignOutClicked, setIsSignOutClicked] = React.useState(false);
-
-  // useEffect(() => {
-  //   if (isSignOutClicked) {
-  //     setOpen(false);
-  //     signOutAction();
-  //   }
-  // }, [isSignOutClicked]);
-
-  // useEffect(() => {
-  //   const handleUserAvatarClick = async () => {
-  //     const isLoggedIn = await getLogInState();
-  //     if (isLoggedIn) {
-  //       setOpen(true);
-  //     } else {
-  //       router.push("/api/auth/signin");
-  //     }
-  //   };
-
-  //   if (isUserAvatarClicked) {
-  //     handleUserAvatarClick();
-  //   }
-  // }, [isUserAvatarClicked, router]);
-
   return (
     <AppBar position="static">
       <Toolbar className="flex justify-between items-center">

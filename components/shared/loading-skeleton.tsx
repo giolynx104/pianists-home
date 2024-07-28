@@ -1,10 +1,10 @@
-import { Container, Typography } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 const LoadingSkeleton = () => {
   return (
-    <Container className="flex h-screen items-center justify-center">
-      <Typography>Loading...</Typography>
-    </Container>
+    <Box className="flex w-full h-screen items-center justify-center">
+      <CircularProgress />
+    </Box>
   );
 };
 

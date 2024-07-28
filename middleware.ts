@@ -1,16 +1,26 @@
-import { auth } from "@/auth";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export default auth((request) => {
+export function middleware(request: NextRequest) {
+  const session = request.cookies.get("authjs.session-token");
   if (request.nextUrl.pathname === "/") {
-    return Response.redirect(new URL("/home", request.nextUrl));
-  } else if (!request.auth && request.nextUrl.pathname !== "/home") {
-    console.log(request.auth);
-    return Response.redirect(new URL("/api/auth/signin", request.nextUrl));
-  } else if (request.auth && request.nextUrl.pathname === "/api/auth/signin") {
-    return Response.redirect(new URL("/dashboard", request.nextUrl));
+    return NextResponse.rewrite(new URL("/home", request.url));
   }
-});
+
+  if (!session && !(request.nextUrl.pathname === "/api/auth/signin")) {
+    return Response.redirect(new URL("/api/auth/signin", request.url));
+  }
+}
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+  ],
 };
