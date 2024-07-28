@@ -1,16 +1,14 @@
 import { auth } from "@/auth";
+import CourseList from "@/components/group/profile/course-list";
 import CreateCourseButton from "@/components/group/profile/create-course-button";
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import CourseList from "../../../components/group/profile/course-list";
 
 //TODO: Fix profile image having low quality from Google
 
 const Page = async () => {
   const session = await auth();
-
-  if (session === null || !session.user) return null;
-  const user = session.user;
+  const user = session?.user ?? {};
   const userImage = user?.image || "no-avatar.png";
   return (
     <Container className="mt-10">
@@ -26,7 +24,6 @@ const Page = async () => {
               />
             </Box>
             <Box>
-              {" "}
               <Typography variant="h5" className="font-bold">
                 {user.name}
               </Typography>
