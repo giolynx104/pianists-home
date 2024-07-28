@@ -1,7 +1,6 @@
 "use server";
 
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 
 const getLogInState = async () => {
   const session = await auth();

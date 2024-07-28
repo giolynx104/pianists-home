@@ -23,13 +23,14 @@ import { signOutAction } from "./sign-out-action";
 import getLogInState from "./get-log-in-state";
 
 const Header = ({ children: userAvatar }: { children: React.ReactNode }) => {
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const [isUserAvatarClicked, setIsUserAvatarClicked] = React.useState(false);
   const [isSignOutClicked, setIsSignOutClicked] = React.useState(false);
   const router = useRouter();
 
   useEffect(() => {
     if (isSignOutClicked) {
+      setOpen(false);
       signOutAction();
     }
   }, [isSignOutClicked]);
@@ -38,9 +39,9 @@ const Header = ({ children: userAvatar }: { children: React.ReactNode }) => {
     const handleUserAvatarClick = async () => {
       const isLoggedIn = await getLogInState();
       if (isLoggedIn) {
-        setIsDrawerOpen(true);
+        setOpen(true);
       } else {
-        router.push("/signin");
+        router.push("/api/auth/signin");
       }
     };
 
@@ -106,10 +107,10 @@ const Header = ({ children: userAvatar }: { children: React.ReactNode }) => {
           {userAvatar}
         </IconButton>
         <Drawer
-          open={isDrawerOpen}
+          open={open}
           anchor="right"
           onClose={() => {
-            setIsDrawerOpen(false);
+            setOpen(false);
           }}
           sx={{
             width: "22",

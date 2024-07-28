@@ -6,6 +6,7 @@ import {
   Button,
 } from "@mui/material";
 import { createCourse } from "./actions";
+
 const CourseForm = () => {
   return (
     <form action={createCourse}>

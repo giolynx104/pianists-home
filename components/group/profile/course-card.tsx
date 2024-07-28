@@ -65,8 +65,8 @@ const CourseCard = ({ course }: { course: Course }) => {
       </Grid>
       <Dialog open={open}>
         <DialogTitle>Delete Confirmation</DialogTitle>
-        <DialogContent>
-          <Stack>
+        <DialogContent className="flex justify-center">
+          <Stack direction="row">
             <Button
               onClick={() => {
                 deleteCourse(selectedCourseId);

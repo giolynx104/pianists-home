@@ -1,6 +1,7 @@
 import CourseForm from "@/components/group/create-course/course-form";
 import { Card, CardContent, CardHeader, Container } from "@mui/material";
 import { GiGrandPiano } from "react-icons/gi";
+
 const Page = () => {
   return (
     <Container>
