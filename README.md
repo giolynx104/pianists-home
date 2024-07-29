@@ -11,4 +11,3 @@ The app is deployed [here](https://pianists-home.vercel.app/) using Vercel.
 ## To-do
 
 - Error handling and validation (and maybe testing)
-- Add loading UI and Streaming

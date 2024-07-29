@@ -6,11 +6,12 @@ import { useRouter } from "next/navigation";
 const CreateCourseButton = () => {
   const router = useRouter();
   return (
-    <Button variant="contained"
+    <Button
+      variant="outlined"
       onClick={() => {
         router.push("/create-course");
       }}
-      className="normal-case"
+      className="normal-case w-full"
     >
       Create Course
     </Button>
