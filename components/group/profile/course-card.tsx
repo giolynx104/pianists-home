@@ -64,7 +64,7 @@ const CourseCard = ({ course }: { course: Course }) => {
         </Box>
       </Grid>
       <Dialog open={open}>
-        <DialogTitle>Delete Confirmation</DialogTitle>
+        <DialogTitle>Are you sure to delete the course?</DialogTitle>
         <DialogContent className="flex justify-center">
           <Stack direction="row">
             <Button

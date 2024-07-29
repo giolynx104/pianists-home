@@ -15,6 +15,12 @@ export const createCourse = async (formData: FormData) => {
     throw new Error("User not authenticated");
   }
 
+  const teacher = await prisma.teacher.findUnique({
+    where: {
+      userId: user.id,
+    },
+  });
+
   const name = formData.get("name") as string;
   const description = formData.get("description") as string;
   const price = parseFloat(formData.get("price") as string);
@@ -25,14 +31,10 @@ export const createCourse = async (formData: FormData) => {
 
   await prisma.course.create({
     data: {
-      name,
-      description,
-      price,
-      user: {
-        connect: {
-          email: user.email ?? "",
-        },
-      },
+      name: name,
+      description: description,
+      price: price,
+      teacherId: teacher?.id,
     },
   });
 

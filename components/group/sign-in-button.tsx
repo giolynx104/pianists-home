@@ -10,7 +10,12 @@ const SignInButton = () => {
         await signIn(undefined, { redirectTo: "/dashboard" });
       }}
     >
-      <Button variant="outlined" startIcon={<FaUserCircle />} type="submit">
+      <Button
+        variant="outlined"
+        startIcon={<FaUserCircle />}
+        type="submit"
+        className="border-white text-white hover:border-white hover:bg-slate-600"
+      >
         Sign In
       </Button>
     </form>

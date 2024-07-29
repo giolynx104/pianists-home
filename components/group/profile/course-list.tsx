@@ -15,19 +15,25 @@ const CourseList = async () => {
       email: user?.email ?? "",
     },
   });
-  const courses = await prisma.course.findMany({
+  const teacher = await prisma.teacher.findUnique({
     where: {
       userId: currentUser?.id,
     },
   });
-  return (
-    <Grid container spacing={2}>
-      {courses ? (
-        courses.map((course) => <CourseCard key={course.id} course={course} />)
-      ) : (
-        <NoCourseCard />
-      )}
+  const courses = await prisma.course.findMany({
+    where: {
+      teacherId: teacher?.id,
+    },
+  });
+  console.log(courses);
+  return courses.length !== 0 ? (
+    <Grid container spacing={2} className="w-full h-full">
+      {courses.map((course) => (
+        <CourseCard key={course.id} course={course} />
+      ))}
     </Grid>
+  ) : (
+    <NoCourseCard />
   );
 };
 

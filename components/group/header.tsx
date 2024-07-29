@@ -16,7 +16,7 @@ import Link from "next/link";
 const Header = async () => {
   const session = await auth();
   return (
-    <AppBar position="static">
+    <AppBar position="static" >
       <Toolbar className="flex justify-between items-center">
         <Stack spacing={2} direction="row" className="flex items-center">
           <Logo />

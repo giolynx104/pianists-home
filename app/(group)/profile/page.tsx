@@ -1,9 +1,11 @@
 import { auth } from "@/auth";
 import CourseList from "@/components/group/profile/course-list";
 import CreateCourseButton from "@/components/group/profile/create-course-button";
+import RegisterAsTeacherButton from "@/components/group/profile/register-as-teacher-button";
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import prisma from "@/lib/db";
 
 //TODO: Fix profile image having low quality from Google
 
@@ -14,12 +16,22 @@ const Page = async () => {
   }
   const user = session.user ?? {};
   const userImage = user?.image || "no-avatar.png";
+  const currentUser = await prisma.user.findUnique({
+    where: {
+      email: user?.email ?? "",
+    },
+  });
+  const teacher = await prisma.teacher.findUnique({
+    where: {
+      userId: currentUser?.id,
+    },
+  });
   return (
-    <Container className="mt-10">
+    <Box className="mt-10 flex w-full h-full justify-center pl-16 pr-16">
       <Grid container spacing={2}>
         <Grid item xs={3}>
-          <Stack spacing={2}>
-            <Box className="w-[260px] h-[260px] rounded-full overflow-hidden mb-5">
+          <Stack spacing={2} className="flex justify-center">
+            <Box className="w-[260px] h-[260px] rounded-full overflow-hidden mb-5 flex justify-center items-center">
               <Image
                 src={userImage}
                 alt="User Avatar"
@@ -35,14 +47,14 @@ const Page = async () => {
                 {user.email}
               </Typography>
             </Box>
-            <CreateCourseButton />
+            {teacher ? <CreateCourseButton /> : <RegisterAsTeacherButton />}
           </Stack>
         </Grid>
         <Grid item xs={9}>
           <CourseList />
         </Grid>
       </Grid>
-    </Container>
+    </Box>
   );
 };
 

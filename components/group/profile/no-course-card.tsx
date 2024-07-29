@@ -2,7 +2,10 @@ import { Box, Stack, Typography } from "@mui/material";
 import { PiCalendarBlank } from "react-icons/pi";
 const NoCourseCard = () => {
   return (
-    <Stack spacing={2}>
+    <Stack
+      spacing={2}
+      className="flex justify-center items-center w-full h-full"
+    >
       <PiCalendarBlank />
       <Typography>You don&apos;t have any public courses yet</Typography>
     </Stack>
