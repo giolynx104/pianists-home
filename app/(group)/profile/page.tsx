@@ -47,8 +47,8 @@ const Page = async () => {
                 {user.email}
               </Typography>
             </Box>
-            {teacher ? <CreateCourseButton /> : <RegisterAsTeacherButton />}
             <Button variant="outlined" className="normal-case w-full">Edit profile</Button>
+            {teacher ? <CreateCourseButton /> : <RegisterAsTeacherButton />}
           </Stack>
         </Grid>
         <Grid item xs={9}>
