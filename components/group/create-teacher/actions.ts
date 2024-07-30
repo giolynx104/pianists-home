@@ -11,7 +11,6 @@ import { Teacher } from "@prisma/client";
 const generateFileName = (bytes = 32) => {
   return crypto.randomBytes(bytes).toString("hex");
 };
-//TODO: Handle error
 
 const s3Client = new S3Client({
   region: process.env.NEXT_AWS_S3_REGION!,
@@ -21,47 +20,57 @@ const s3Client = new S3Client({
   },
 });
 
-export const getSignedUrlConfigured = async () => {
-  const session = await auth();
-  if (!session) {
-    return { error: "Unauthorized" };
+export const getSignedUrlConfigured = async (type: string) => {
+  try {
+    const session = await auth();
+    if (!session) {
+      return { error: "Unauthorized" };
+    }
+
+    const putObjectCommand = new PutObjectCommand({
+      Bucket: process.env.NEXT_AWS_S3_BUCKET_NAME!,
+      Key: `${generateFileName()}.${type.split("/")[1]}`,
+      ContentType: type,
+    });
+
+    const signedUrl = await getSignedUrl(s3Client, putObjectCommand, {
+      expiresIn: 360,
+    });
+    return { success: { url: signedUrl } };
+  } catch (error) {
+    console.error("Error generating signed URL:", error);
+    return { error: "Failed to generate signed URL" };
   }
-
-  const putObjectCommand = new PutObjectCommand({
-    Bucket: process.env.NEXT_AWS_S3_BUCKET_NAME!,
-    Key: generateFileName(),
-  });
-
-  const signedUrl = await getSignedUrl(s3Client, putObjectCommand, {
-    expiresIn: 360,
-  });
-  return { success: { url: signedUrl } };
 };
 
 export const createTeacher = async (data: Teacher, fileRemoteUrl: string) => {
-  const session = await auth();
-  const user = session!.user!;
-  const currentUser = await prisma.user.findUnique({
-    where: {
-      email: user.email!,
-    },
-  });
-  await prisma.teacher.create({
-    data: {
-      user: {
-        connect: {
-          id: currentUser!.id,
+  try {
+    const session = await auth();
+    const user = session!.user!;
+    const currentUser = await prisma.user.findUnique({
+      where: {
+        email: user.email!,
+      },
+    });
+    await prisma.teacher.create({
+      data: {
+        user: {
+          connect: {
+            id: currentUser!.id,
+          },
+        },
+        description: data.description,
+        demoLink: data.demoLink,
+        Image: {
+          create: {
+            url: fileRemoteUrl,
+          },
         },
       },
-      description: data.description,
-      demoLink: data.demoLink,
-      Image: {
-        create: {
-          url: fileRemoteUrl,
-        },
-      },
-    },
-  });
-  revalidatePath("/profile");
-  redirect("/profile");
+    });
+    revalidatePath("/profile");
+    redirect("/profile");
+  } catch (error) {
+    console.error("Error creating teacher:", error);
+  }
 };

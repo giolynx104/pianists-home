@@ -16,26 +16,30 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { Teacher } from "@prisma/client";
 
+//TODO: File type when upload image
+
 const Form = () => {
   const [fileUrl, setFileUrl] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
-  const { register, handleSubmit, watch, formState } = useForm<Teacher>();
+  const { register, handleSubmit, setError } = useForm<Teacher>();
   return (
     <Card>
       <CardHeader className="flex text-center" title="Create Teacher" />
       <CardContent className="flex justify-center items-center ">
         <form
           onSubmit={handleSubmit(async (data) => {
-            const signedUrlResult = await getSignedUrlConfigured();
-            const remoteUrl = signedUrlResult.success!.url;
-            await fetch(remoteUrl, {
-              method: "PUT",
-              body: file,
-              headers: {
-                "Content-Type": "image/*",
-              },
-            });
-            createTeacher(data, remoteUrl);
+            if (file) {
+              const signedUrlResult = await getSignedUrlConfigured(file.type);
+              const remoteUrl = signedUrlResult.success!.url;
+              await fetch(remoteUrl, {
+                method: "PUT",
+                body: file,
+                headers: {
+                  "Content-Type": file.type,
+                },
+              });
+              createTeacher(data, remoteUrl);
+            }
           })}
           className="flex justify-center items-center"
         >
