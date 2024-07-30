@@ -1,39 +1,57 @@
 "use client";
 
-import { List, ListItem, Divider, Drawer, Button } from "@mui/material";
+import {
+  List,
+  ListItem,
+  Divider,
+  Drawer,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { CiUser } from "react-icons/ci";
 import { FaSignOutAlt } from "react-icons/fa";
-import { signOutAction } from "../sign-out-action";
+import { signOutAction } from "./actions";
 
 export default function UserAvatar({ userAvatar }: { userAvatar: string }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const DrawerList = (
-    <List>
+    <List className="flex justify-start flex-col">
       <ListItem>
-        <Button
+        <ListItemButton
+          component="button"
           onClick={() => {
             router.push("/profile");
           }}
-          type="submit"
-          className="w-full"
-          startIcon={<CgProfile />}
+          className="w-full normal-case text-base"
         >
-          Your Profile
-        </Button>
+          <ListItemIcon>
+            <CgProfile />
+          </ListItemIcon>
+          <ListItemText primary="Your Profile" />
+        </ListItemButton>
       </ListItem>
       <Divider variant="middle" />
       <ListItem>
-        <form action={signOutAction} className="w-full">
-          <Button type="submit" startIcon={<FaSignOutAlt />} className="w-full">
-            Sign out
-          </Button>
-        </form>
+        <ListItemButton
+          component="button"
+          onClick={async () => {
+            await signOutAction();
+          }}
+          className="w-full normal-case text-base"
+        >
+          <ListItemIcon>
+            <FaSignOutAlt />
+          </ListItemIcon>
+          <ListItemText primary="Sign Out" />
+        </ListItemButton>
       </ListItem>
+      <Divider variant="middle" />
     </List>
   );
   return (
@@ -53,13 +71,13 @@ export default function UserAvatar({ userAvatar }: { userAvatar: string }) {
       </button>
       <Drawer
         open={open}
-        anchor="right"
+        anchor="left"
         onClose={() => {
           setOpen(false);
         }}
         sx={{
-          width: "22",
-          "& .MuiDrawer-paper": { width: "22%", borderRadius: "1rem" },
+          width: "20%",
+          "& .MuiDrawer-paper": { width: "20%", borderRadius: "1rem" },
         }}
       >
         {DrawerList}
