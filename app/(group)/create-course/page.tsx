@@ -1,4 +1,4 @@
-import CourseForm from "@/components/group/create-course/course-form";
+import Form from "@/components/group/create-course/form";
 import { Box, Card, CardContent, CardHeader, Container } from "@mui/material";
 import { GiGrandPiano } from "react-icons/gi";
 
@@ -8,7 +8,7 @@ const Page = () => {
       <Card className="flex flex-col items-center">
         <CardHeader title="Create Course" avatar={<GiGrandPiano />} />
         <CardContent>
-          <CourseForm />
+          <Form />
         </CardContent>
       </Card>
     </Box>

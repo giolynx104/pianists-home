@@ -34,7 +34,11 @@ export const createCourse = async (formData: FormData) => {
       name: name,
       description: description,
       price: price,
-      teacherId: teacher?.id,
+      Teacher: {
+        connect: {
+          id: teacher!.id,
+        },
+      },
     },
   });
 

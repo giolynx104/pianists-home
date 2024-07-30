@@ -7,7 +7,9 @@ import {
 } from "@mui/material";
 import { createCourse } from "./actions";
 
-const CourseForm = () => {
+//TODO: Using react-hook-form for this one
+
+const Form = () => {
   return (
     <form action={createCourse}>
       <Stack spacing={2}>
@@ -30,4 +32,4 @@ const CourseForm = () => {
   );
 };
 
-export default CourseForm;
+export default Form;

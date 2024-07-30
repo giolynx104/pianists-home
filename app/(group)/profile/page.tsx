@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import CourseList from "@/components/group/profile/course-list";
 import CreateCourseButton from "@/components/group/profile/create-course-button";
 import RegisterAsTeacherButton from "@/components/group/profile/register-as-teacher-button";
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/db";
