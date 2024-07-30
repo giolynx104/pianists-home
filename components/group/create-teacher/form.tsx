@@ -18,12 +18,10 @@ import { Teacher } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-//TODO: File type when upload image
-
 const Form = () => {
   const [fileUrl, setFileUrl] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
-  const { register, handleSubmit, setError } = useForm<Teacher>();
+  const { register, handleSubmit } = useForm<Teacher>();
   return (
     <Card>
       <CardHeader className="flex text-center" title="Create Teacher" />

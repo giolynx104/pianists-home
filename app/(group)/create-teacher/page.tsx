@@ -7,7 +7,7 @@ const Page = async () => {
   if (!session?.user) {
     redirect("/api/auth/signin");
   }
-  return <Form user={session.user} />;
+  return <Form />;
 };
 
 export default Page;
