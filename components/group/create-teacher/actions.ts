@@ -5,8 +5,12 @@ import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import sharp, { SharpOptions } from "sharp";
-
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import crypto from "crypto";
+import { Teacher } from "@prisma/client";
+const generateFileName = (bytes = 32) => {
+  return crypto.randomBytes(bytes).toString("hex");
+};
 //TODO: Handle error
 
 const s3Client = new S3Client({
@@ -17,16 +21,26 @@ const s3Client = new S3Client({
   },
 });
 
-
-
-export const createTeacher = async (formData: FormData) => {
-  const file = formData.get("file") as File;
+export const getSignedUrlConfigured = async () => {
   const session = await auth();
-  const user = session!.user!;
+  if (!session) {
+    return { error: "Unauthorized" };
+  }
+
   const putObjectCommand = new PutObjectCommand({
     Bucket: process.env.NEXT_AWS_S3_BUCKET_NAME!,
-    Key: file.name,
+    Key: generateFileName(),
   });
+
+  const signedUrl = await getSignedUrl(s3Client, putObjectCommand, {
+    expiresIn: 360,
+  });
+  return { success: { url: signedUrl } };
+};
+
+export const createTeacher = async (data: Teacher, fileRemoteUrl: string) => {
+  const session = await auth();
+  const user = session!.user!;
   const currentUser = await prisma.user.findUnique({
     where: {
       email: user.email!,
@@ -39,8 +53,13 @@ export const createTeacher = async (formData: FormData) => {
           id: currentUser!.id,
         },
       },
-      description: formData.get("description") as string,
-      demoLink: formData.get("demoLink") as string,
+      description: data.description,
+      demoLink: data.demoLink,
+      Image: {
+        create: {
+          url: fileRemoteUrl,
+        },
+      },
     },
   });
   revalidatePath("/profile");

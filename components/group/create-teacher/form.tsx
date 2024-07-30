@@ -8,73 +8,49 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import { createTeacher } from "./actions";
+import { createTeacher, getSignedUrlConfigured } from "./actions";
 import SubmitButton from "./submit-button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import React, { useState } from "react";
-import { User } from "next-auth";
 import Image from "next/image";
+import { useForm } from "react-hook-form";
+import { Teacher } from "@prisma/client";
 
-const Form = ({ user }: { user: User }) => {
-  const [loading, setLoading] = useState(false);
-  const [file, setFile] = useState<File | undefined>(undefined);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+const Form = () => {
   const [fileUrl, setFileUrl] = useState<string | null>(null);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setFileUrl(url);
-    } else {
-      setFileUrl(null);
-    }
-    setFile(file);
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    // e.preventDefault();
-    // setLoading(true);
-    // try {
-    //   let fileId: number | undefined = undefined;
-    //   if (file) {
-    //     setStatusMessage("Uploading...");
-    //     fileId = await handleFileUpload(file);
-    //   }
-    //   setStatusMessage("Posting post...");
-    //   await createPost({
-    //     content,
-    //     fileId: fileId,
-    //   });
-    //   setStatusMessage("Post Successful");
-    // } catch (error) {
-    //   console.error(error);
-    //   setStatusMessage("Post failed");
-    // } finally {
-    //   setLoading(false);
-    // }
-  };
+  const [file, setFile] = useState<File | null>(null);
+  const { register, handleSubmit, watch, formState } = useForm<Teacher>();
   return (
     <Card>
       <CardHeader className="flex text-center" title="Create Teacher" />
       <CardContent className="flex justify-center items-center ">
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(async (data) => {
+            const signedUrlResult = await getSignedUrlConfigured();
+            const remoteUrl = signedUrlResult.success!.url;
+            await fetch(remoteUrl, {
+              method: "PUT",
+              body: file,
+              headers: {
+                "Content-Type": "image/*",
+              },
+            });
+            createTeacher(data, remoteUrl);
+          })}
           className="flex justify-center items-center"
         >
-          <Stack className="flex justify-normal items-center" spacing={2}>
+          <Stack spacing={2} className="w-full">
             <TextField
               multiline
               label="Description"
-              name="description"
               required
               className="w-full"
+              {...register("description")}
             />
             <TextField
               className="w-full"
               label="Demo Link"
-              name="demoLink"
-              required
+              {...register("demoLink", { required: true })}
             />
             <Button
               variant="outlined"
@@ -86,12 +62,20 @@ const Form = ({ user }: { user: User }) => {
               <input
                 hidden
                 type="file"
-                name="file"
                 accept="images/*"
-                onChange={handleChange}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    setFile(file);
+                    const url = URL.createObjectURL(file);
+                    setFileUrl(url);
+                  } else {
+                    setFileUrl(null);
+                  }
+                }}
               />
             </Button>
-            {fileUrl && file && (
+            {file && fileUrl && (
               <Image
                 src={fileUrl}
                 alt="Selected file"
