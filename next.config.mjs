@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "avatars.githubusercontent.com",
       },
+      {
+        protocol: "https",
+        hostname: "pianist-home-user-images.s3.ap-southeast-2.amazonaws.com",
+      },
     ],
   },
 };

@@ -22,7 +22,7 @@ model Course {
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   price       Float
-  Teacher     Teacher     @relation(fields: [teacherId], references: [id])
+  Teacher     Teacher      @relation(fields: [teacherId], references: [id])
   teacherId   String
 }
 
@@ -43,7 +43,7 @@ model Teacher {
   updatedAt   DateTime @updatedAt
   Course      Course[]
   demoLink    String
-  Image       Image[]
+  images      Image[]
 }
 
 model Image {

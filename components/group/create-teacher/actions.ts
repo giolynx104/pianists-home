@@ -61,9 +61,9 @@ export const createTeacher = async (data: Teacher, fileRemoteUrl: string) => {
         },
         description: data.description,
         demoLink: data.demoLink,
-        Image: {
+        images: {
           create: {
-            url: fileRemoteUrl,
+            url: fileRemoteUrl.split("?")[0],
           },
         },
       },

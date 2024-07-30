@@ -15,6 +15,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { Teacher } from "@prisma/client";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 //TODO: File type when upload image
 
@@ -38,7 +40,9 @@ const Form = () => {
                   "Content-Type": file.type,
                 },
               });
-              createTeacher(data, remoteUrl);
+              await createTeacher(data, remoteUrl);
+              revalidatePath("/profile");
+              redirect("/profile");
             }
           })}
           className="flex justify-center items-center"
