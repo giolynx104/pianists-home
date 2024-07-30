@@ -28,7 +28,7 @@ const CourseCard = ({ course }: { course: Course }) => {
   const [selectedCourseId, setSelectedCourseId] = useState<number>(-1);
   return (
     <>
-      <Grid item xs={12} className=" border-gray-400 border-solid border-2 m-2">
+      <Grid item xs={12} className=" border-gray-400 border-solid border-2 m-2 h-auto">
         <Box className="justify-between flex items-start">
           <Stack spacing={2}>
             <Typography variant="h5" className="font-bold text-blue-500">

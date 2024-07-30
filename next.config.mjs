@@ -12,7 +12,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "pianist-home-user-images.s3.ap-southeast-2.amazonaws.com",
+        hostname: `${process.env.NEXT_AWS_S3_BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com`,
       },
     ],
   },
