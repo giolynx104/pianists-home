@@ -14,8 +14,9 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
-import NextImage from "next/image";
+import Image from "next/image";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 
 const ReactPlayer = dynamic(() => import("react-player/youtube"), {
   ssr: false,
@@ -48,6 +49,7 @@ const TeacherInfoPage = ({
     demoLink: string;
   })[];
 }) => {
+  const router = useRouter();
   const [currentIndex, setCurrentIndex] = React.useState<number>(0);
   const [variants, setVariants] = React.useState<any>(appearAnimation);
 
@@ -68,8 +70,12 @@ const TeacherInfoPage = ({
   const teacher = data[currentIndex];
   console.log(teacher);
   return (
-    <Box className="flex justify-center h-screen w-full">
-      <Grid container spacing={2} className="flex justify-center items-center w-full">
+    <Box className="flex justify-center w-full">
+      <Grid
+        container
+        spacing={2}
+        className="flex justify-center items-center w-full"
+      >
         <Grid item xs={12} className="h-auto">
           <Box className="flex justify-center items-center bg-gray-400 h-20">
             <Typography variant="h5" className="w-full text-center ">
@@ -103,7 +109,15 @@ const TeacherInfoPage = ({
                       <Typography variant="subtitle1">
                         {teacher.description}
                       </Typography>
-                      <Button className="normal-case">Xem thêm</Button>
+                      <Button
+                        onClick={() => {
+                          router.push(`/teacher/${teacher.id}`);
+                        }}
+                        className="normal-case"
+                      >
+                        Xem thêm
+                      </Button>
+
                       <ReactPlayer
                         controls
                         url={teacher.demoLink}
@@ -114,7 +128,7 @@ const TeacherInfoPage = ({
                 </Card>
               </Box>
               <Box className="w-1/2 flex justify-center items-center">
-                <NextImage
+                <Image
                   objectFit="contained"
                   src={teacher.images[0].url}
                   alt="An image of the pianist"

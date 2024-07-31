@@ -14,11 +14,11 @@ const Page = async () => {
   if (!session) {
     redirect("/api/auth/signin");
   }
-  const user = session.user ?? {};
-  const userImage = user?.image || "no-avatar.png";
+  const user = session.user!;
+  const userImage = user.image!;
   const currentUser = await prisma.user.findUnique({
     where: {
-      email: user?.email ?? "",
+      email: user.email!,
     },
   });
   const teacher = await prisma.teacher.findUnique({
@@ -47,7 +47,9 @@ const Page = async () => {
                 {user.email}
               </Typography>
             </Box>
-            <Button variant="outlined" className="normal-case w-full">Edit profile</Button>
+            <Button variant="outlined" className="normal-case w-full">
+              Edit profile
+            </Button>
             {teacher ? <CreateCourseButton /> : <RegisterAsTeacherButton />}
           </Stack>
         </Grid>

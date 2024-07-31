@@ -15,10 +15,9 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { Teacher } from "@prisma/client";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-
+import { useRouter } from "next/navigation";
 const Form = () => {
+  const router = useRouter();
   const [fileUrl, setFileUrl] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const { register, handleSubmit } = useForm<Teacher>();
@@ -39,8 +38,7 @@ const Form = () => {
                 },
               });
               await createTeacher(data, remoteUrl);
-              revalidatePath("/profile");
-              redirect("/profile");
+              router.push("/profile");
             }
           })}
           className="flex justify-center items-center"

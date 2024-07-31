@@ -5,7 +5,6 @@ import { getTeachers } from "./actions";
 import TeacherInfoPage from "./teacher-info-page";
 
 //TODO: Implement start connecting
-//TODO: Create network boundary
 
 export default async function Main() {
   const data = await getTeachers();

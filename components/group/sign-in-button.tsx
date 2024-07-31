@@ -7,7 +7,7 @@ const SignInButton = () => {
     <form
       action={async () => {
         "use server";
-        await signIn(undefined, { redirectTo: "/dashboard" });
+        await signIn(undefined, { redirectTo: "/" });
       }}
     >
       <Button
