@@ -28,8 +28,8 @@ const CourseCard = ({ course }: { course: Course }) => {
   const [selectedCourseId, setSelectedCourseId] = useState<number>(-1);
   return (
     <>
-      <Grid item xs={12} className=" border-gray-400 border-solid border-2 m-2 h-auto">
-        <Box className="justify-between flex items-start">
+      <Grid item xs={12}>
+        <Box className="justify-between flex items-center border-gray-400 border-solid border-2 m-2 p-4">
           <Stack spacing={2}>
             <Typography variant="h5" className="font-bold text-blue-500">
               {course.name}
@@ -44,9 +44,11 @@ const CourseCard = ({ course }: { course: Course }) => {
           </Stack>
           <Stack direction="row">
             <Tooltip title="Edit">
-              <IconButton onClick={() => {
-                router.push(`/course/${course.id}`);
-              }}>
+              <IconButton
+                onClick={() => {
+                  router.push(`/course/${course.id}`);
+                }}
+              >
                 <CiEdit />
               </IconButton>
             </Tooltip>
@@ -63,7 +65,7 @@ const CourseCard = ({ course }: { course: Course }) => {
           </Stack>
         </Box>
       </Grid>
-      <Dialog open={open}>
+      <Dialog className="rounded-md" open={open}>
         <DialogTitle>Are you sure to delete the course?</DialogTitle>
         <DialogContent className="flex justify-center">
           <Stack direction="row">
