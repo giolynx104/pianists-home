@@ -7,7 +7,7 @@ const About = ({ description }: { description: string }) => {
         <Typography variant="h4" className="uppercase p-10 pb-5">
           About me
         </Typography>
-        <Typography paragraph variant="subtitle1" className="p-10 pt-5">
+        <Typography paragraph variant="subtitle1" className="p-10 pt-5 normal-case">
           {description}
         </Typography>
       </Stack>

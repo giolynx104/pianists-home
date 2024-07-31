@@ -19,11 +19,6 @@ const Page = async ({ params }: { params: { id: string } }) => {
       courses: true,
     },
   }))!;
-  const user = await prisma.user.findUnique({
-    where: {
-      id: teacher?.userId,
-    },
-  });
   return (
     <Stack>
       <Box
