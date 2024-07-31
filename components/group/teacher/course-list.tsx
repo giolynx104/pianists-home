@@ -19,8 +19,8 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
       <Typography variant="h5" className="p-10 text-center bg-slate-400">
         Course List
       </Typography>
-      <Grid container spacing={2}>
-        <Grid item xs={2}>
+      <Grid container>
+        <Grid item xs={2} className="flex justify-center">
           <TextField
             InputProps={{
               startAdornment: (
@@ -32,9 +32,9 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
             defaultValue="Upload Year"
           />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={10} className="flex items-center justify-center ">
           {courses.map((course) => (
-            <Card key={course.id}>
+            <Card key={course.id} className="flex items-center">
               <CardContent>
                 <Grid container spacing={2}>
                   <Grid item xs={10}>

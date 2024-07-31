@@ -3,6 +3,7 @@ import CourseList from "@/components/group/profile/course-list";
 import CreateCourseButton from "@/components/group/profile/create-course-button";
 import RegisterAsTeacherButton from "@/components/group/profile/register-as-teacher-button";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import Link from "next/link";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/db";
@@ -47,9 +48,11 @@ const Page = async () => {
                 {user.email}
               </Typography>
             </Box>
-            <Button variant="outlined" className="normal-case w-full">
-              Edit profile
-            </Button>
+            <Link className="w-full" href="/profile/edit">
+              <Button variant="outlined" className="normal-case">
+                Edit profile
+              </Button>
+            </Link>
             {teacher ? <CreateCourseButton /> : <RegisterAsTeacherButton />}
           </Stack>
         </Grid>

@@ -93,8 +93,9 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  Enrollment    Enrollment[]
-  Teacher       Teacher?
+  enrollments   Enrollment[]
+  teacher       Teacher?
+  location      String?
 
   @@map("users")
 }
