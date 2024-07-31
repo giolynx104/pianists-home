@@ -11,6 +11,7 @@ import { Course } from "@prisma/client";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import Button from "@mui/material/Button";
 
 const CourseList = ({ courses }: { courses: Course[] }) => {
   return (
@@ -35,18 +36,28 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
           {courses.map((course) => (
             <Card key={course.id}>
               <CardContent>
-                <Stack spacing={2}>
-                  <Typography variant="h6" className="font-bold">
-                    {course.name}
-                  </Typography>
-                  <Typography variant="subtitle1" className="text-slate-500">
-                    {course.description}
-                  </Typography>
-                  <Typography variant="subtitle1" className="font-bold">
-                    ${course.price}
-                  </Typography>
-                  <Divider />
-                </Stack>
+                <Grid container spacing={2}>
+                  <Grid item xs={10}>
+                    <Typography variant="h6" className="font-bold">
+                      {course.name}
+                    </Typography>
+                    <Typography variant="subtitle1" className="text-slate-500">
+                      {course.description}
+                    </Typography>
+                    <Typography variant="subtitle1" className="font-bold">
+                      ${course.price}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Stack spacing={2}>
+                      <Button variant="contained">Buy now</Button>
+                      <Button variant="outlined">Add to Card</Button>
+                    </Stack>
+                  </Grid>
+                  <Grid item>
+                    <Divider />
+                  </Grid>
+                </Grid>
               </CardContent>
             </Card>
           ))}

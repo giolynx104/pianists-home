@@ -115,7 +115,7 @@ const TeacherInfoPage = ({
                         }}
                         className="normal-case"
                       >
-                        Xem thêm
+                        Discover more
                       </Button>
 
                       <ReactPlayer
