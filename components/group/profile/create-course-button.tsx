@@ -3,18 +3,14 @@
 import { Button, Typography } from "@mui/material";
 import React from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 const CreateCourseButton = () => {
-  const router = useRouter();
   return (
-    <Button
-      variant="outlined"
-      onClick={() => {
-        router.push("/create-course");
-      }}
-      className="normal-case w-full"
-    >
-      Create Course
-    </Button>
+    <Link href="/create-course" className="w-full">
+      <Button variant="outlined" className="normal-case w-full">
+        Create Course
+      </Button>
+    </Link>
   );
 };
 

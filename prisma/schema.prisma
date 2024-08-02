@@ -15,6 +15,7 @@ datasource db {
 }
 
 model Course {
+  images      Image[]
   id          Int          @id @default(autoincrement())
   name        String
   Enrollment  Enrollment[]
@@ -22,7 +23,7 @@ model Course {
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   price       Float
-  Teacher     Teacher      @relation(fields: [teacherId], references: [id])
+  teacher     Teacher      @relation(fields: [teacherId], references: [id])
   teacherId   String
 }
 
@@ -52,6 +53,8 @@ model Image {
   teacherId String
   teacher   Teacher  @relation(fields: [teacherId], references: [id])
   createdAt DateTime @default(now())
+  Course    Course?  @relation(fields: [courseId], references: [id])
+  courseId  Int?
 }
 
 model Account {

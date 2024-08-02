@@ -1,4 +1,5 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
+import Link from "next/link";
 import React from "react";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { getTeachers } from "./actions";
@@ -29,14 +30,16 @@ export default async function Main() {
             Nền tảng học Piano hàng đầu Việt Nam
           </Typography>
           <Box className="flex justify-center">
-            <Button
-              endIcon={<FaArrowAltCircleRight />}
-              className="normal-case text-white"
-              variant="outlined"
-              size="small"
-            >
-              Nhấn để bắt đầu kết nối
-            </Button>
+            <Link href="course-exploration">
+              <Button
+                endIcon={<FaArrowAltCircleRight />}
+                className="normal-case text-white"
+                variant="outlined"
+                size="small"
+              >
+                Click to start connecting
+              </Button>
+            </Link>
           </Box>
         </Stack>
       </Box>

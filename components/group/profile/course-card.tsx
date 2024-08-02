@@ -46,7 +46,7 @@ const CourseCard = ({ course }: { course: Course }) => {
             <Tooltip title="Edit">
               <IconButton
                 onClick={() => {
-                  router.push(`/course/${course.id}`);
+                  router.push(`/edit-course/${course.id}`);
                 }}
               >
                 <CiEdit />

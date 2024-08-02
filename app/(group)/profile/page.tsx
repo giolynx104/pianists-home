@@ -49,7 +49,7 @@ const Page = async () => {
               </Typography>
             </Box>
             <Link className="w-full" href="/profile/edit">
-              <Button variant="outlined" className="normal-case">
+              <Button variant="outlined" className="normal-case w-full">
                 Edit profile
               </Button>
             </Link>
