@@ -25,7 +25,7 @@ import { useRouter } from "next/navigation";
 const CourseCard = ({ course }: { course: Course }) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [selectedCourseId, setSelectedCourseId] = useState<number>(-1);
+  const [selectedCourseId, setSelectedCourseId] = useState<string>("");
   return (
     <>
       <Grid item xs={12}>
