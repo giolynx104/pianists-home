@@ -8,7 +8,6 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { Course } from "@prisma/client";
-import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Button from "@mui/material/Button";
@@ -19,7 +18,7 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
       <Typography variant="h5" className="p-10 text-center bg-slate-400">
         Course List
       </Typography>
-      <Grid container>
+      <Grid container className="ps-10">
         <Grid item xs={2} className="flex justify-center">
           <TextField
             InputProps={{
