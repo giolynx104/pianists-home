@@ -30,7 +30,7 @@ const Page = async () => {
   return (
     <Box className="mt-10 flex w-full h-full justify-center pl-16 pr-16">
       <Grid container spacing={2}>
-        <Grid item xs={3} className="flex justify-center items-center">
+        <Grid item xs={3} className="flex justify-center items-start">
           <Stack spacing={2} className="flex justify-center items-center">
             <Box className="w-[260px] h-[260px] rounded-full overflow-hidden mb-5 flex justify-center items-center">
               <Image

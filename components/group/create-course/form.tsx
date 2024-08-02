@@ -1,32 +1,56 @@
+"use client";
+
 import {
   Stack,
   FormLabel,
   TextField,
   InputAdornment,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import { createCourse } from "./actions";
+import { useForm } from "react-hook-form";
 
-//TODO: Using react-hook-form for this one
+//TODO: Add form validation
 
 const Form = () => {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting, isSubmitted },
+  } = useForm();
   return (
-    <form action={createCourse}>
-      <Stack spacing={2}>
+    <form onSubmit={handleSubmit((data) => createCourse(data))}>
+      <Stack spacing={2} className="flex justify-center items-center">
         <FormLabel>Course Information</FormLabel>
-        <TextField name="name" label="Course name" required />
-        <TextField label="Description" name="description" multiline required />
         <TextField
-          name="price"
+          {...register("name", { required: true })}
+          label="Course name"
+          required
+        className="w-full"
+        />
+        <TextField
+          label="Description"
+          {...register("description", { required: true })}
+          multiline
+          required
+          className="w-full"
+        />
+        <TextField
+          {...register("price", { required: true })}
           label="Price"
           required
           InputProps={{
             endAdornment: <InputAdornment position="end">$</InputAdornment>,
           }}
         />
-        <Button className="normal-case" variant="contained" type="submit">
-          Submit
-        </Button>
+        {isSubmitting || isSubmitted ? (
+          <CircularProgress />
+        ) : (
+          <Button className="normal-case" variant="contained" type="submit">
+            Submit
+          </Button>
+        )}
       </Stack>
     </form>
   );

@@ -6,7 +6,6 @@ export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === "/") {
     return NextResponse.redirect(new URL("/home", request.url));
   }
-  console.log(session);
   if (request.nextUrl.pathname === "/api/auth/signin" && session) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }

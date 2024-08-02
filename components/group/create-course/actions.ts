@@ -1,10 +1,12 @@
 "use server";
+
 import { redirect } from "next/navigation";
 import prisma from "@/lib/db";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
+import { FieldValues } from "react-hook-form";
 
-export const createCourse = async (formData: FormData) => {
+export const createCourse = async (fieldValues: FieldValues) => {
   const session = await auth();
   if (!session) {
     redirect("/api/auth/signin");
@@ -21,20 +23,12 @@ export const createCourse = async (formData: FormData) => {
     },
   });
 
-  const name = formData.get("name") as string;
-  const description = formData.get("description") as string;
-  const price = parseFloat(formData.get("price") as string);
-
-  if (!name || !description || isNaN(price)) {
-    throw new Error("Invalid form data");
-  }
-
   await prisma.course.create({
     data: {
-      name: name,
-      description: description,
-      price: price,
-      Teacher: {
+      name: fieldValues.name,
+      description: fieldValues.description,
+      price: parseFloat(fieldValues.price),
+      teacher: {
         connect: {
           id: teacher!.id,
         },

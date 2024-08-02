@@ -10,7 +10,6 @@ import {
   ListItemText,
 } from "@mui/material";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { CiUser } from "react-icons/ci";
@@ -20,11 +19,10 @@ import Link from "next/link";
 
 export default function UserAvatar({ userAvatar }: { userAvatar: string }) {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
   const DrawerList = (
     <List className="flex justify-start flex-col">
       <ListItem>
-        <Link href="/profile">
+        <Link href="/profile" className="w-full">
           <ListItemButton
             component="button"
             className="w-full normal-case text-base"
@@ -77,7 +75,11 @@ export default function UserAvatar({ userAvatar }: { userAvatar: string }) {
         }}
         sx={{
           width: "20%",
-          "& .MuiDrawer-paper": { width: "20%", borderRadius: "1rem" },
+          "& .MuiDrawer-paper": {
+            width: "20%",
+            borderTopLeftRadius: "1rem",
+            borderBottomLeftRadius: "1rem",
+          },
         }}
       >
         {DrawerList}

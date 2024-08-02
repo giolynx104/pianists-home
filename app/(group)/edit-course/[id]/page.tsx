@@ -11,10 +11,9 @@ import prisma from "@/lib/db";
 //TODO: Implement edit course function
 
 const Page = async ({ params }: { params: { id: string } }) => {
-  console.log(params.id);
   const course = await prisma.course.findUnique({
     where: {
-      id: parseInt(params.id),
+      id: params.id,
     },
   });
   return (

@@ -1,26 +1,12 @@
 "use client";
 
-import {
-  Stack,
-  Typography,
-  Tabs,
-  Tab,
-  Grid,
-  CardHeader,
-  Card,
-  CardContent,
-  Box,
-} from "@mui/material";
-import { Course, Teacher, User } from "@prisma/client";
+import { Stack, Typography, Grid, Card, CardContent, Box } from "@mui/material";
 import React from "react";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import CustomTab from "./custom-tab";
+import { CourseWithUser } from "@/app/(group)/course-exploration/page";
 
-const Main = ({
-  courses,
-}: {
-  courses: (Course & { Teacher: Teacher & { user: User } })[];
-}) => {
+const Main = ({ courses }: { courses: CourseWithUser[] }) => {
   const [value, setValue] = React.useState("1");
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -44,7 +30,7 @@ const Main = ({
                       <Stack spacing={1}>
                         <Typography variant="h5">{course.name}</Typography>
                         <Typography variant="subtitle2">
-                          {course.Teacher.user.name}
+                          {course.teacher.user.name}
                         </Typography>
                         <Typography variant="subtitle1">
                           {course.description}

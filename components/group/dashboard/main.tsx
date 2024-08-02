@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { getTeachers } from "./actions";
-import TeacherInfoPage from "./teacher-info-page";
+import TeacherInfoSection from "./teacher-info-section";
 
 //TODO: Implement start connecting
 
@@ -30,20 +30,20 @@ export default async function Main() {
             Nền tảng học Piano hàng đầu Việt Nam
           </Typography>
           <Box className="flex justify-center">
-            <Link href="course-exploration">
-              <Button
-                endIcon={<FaArrowAltCircleRight />}
-                className="normal-case text-white"
-                variant="outlined"
-                size="small"
-              >
+            <Button
+              endIcon={<FaArrowAltCircleRight />}
+              className="normal-case text-white"
+              variant="outlined"
+              size="small"
+            >
+              <Link href="course-exploration" className="w-full h-full">
                 Click to start connecting
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </Box>
         </Stack>
       </Box>
-      <TeacherInfoPage data={data} />
+      {data.length > 0 && <TeacherInfoSection data={data} />}
     </Stack>
   );
 }

@@ -1,6 +1,18 @@
 "use server";
 
 import prisma from "@/prisma/prisma";
+import { Prisma } from "@prisma/client";
+
+const teacherWithUserandImages = Prisma.validator<Prisma.TeacherDefaultArgs>()({
+  include: {
+    user: true,
+    images: true,
+  },
+});
+
+export type TeacherWithUserandImages = Prisma.TeacherGetPayload<
+  typeof teacherWithUserandImages
+>;
 
 export const getTeachers = async () => {
   const teachers = await prisma.teacher.findMany({

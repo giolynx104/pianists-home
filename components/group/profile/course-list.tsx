@@ -25,7 +25,6 @@ const CourseList = async () => {
       teacherId: teacher?.id,
     },
   });
-  console.log(courses);
   return courses.length !== 0 ? (
     <Grid container spacing={2} className="w-full h-full">
       {courses.map((course) => (

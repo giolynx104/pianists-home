@@ -17,38 +17,13 @@ import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
+import { TeacherWithUserandImages } from "./actions";
 
 const ReactPlayer = dynamic(() => import("react-player/youtube"), {
   ssr: false,
 });
 
-const TeacherInfoPage = ({
-  data,
-}: {
-  data: ({
-    user: {
-      id: string;
-      name: string | null;
-      email: string | null;
-      password: string | null;
-      emailVerified: Date | null;
-      image: string | null;
-    };
-    images: {
-      id: string;
-      url: string;
-      teacherId: string;
-      createdAt: Date;
-    }[];
-  } & {
-    id: string;
-    userId: string;
-    description: string;
-    createdAt: Date;
-    updatedAt: Date;
-    demoLink: string;
-  })[];
-}) => {
+const TeacherInfoSection = ({ data }: { data: TeacherWithUserandImages[] }) => {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = React.useState<number>(0);
   const [variants, setVariants] = React.useState<any>(appearAnimation);
@@ -68,7 +43,6 @@ const TeacherInfoPage = ({
   };
 
   const teacher = data[currentIndex];
-  console.log(teacher);
   return (
     <Box className="flex justify-center w-full">
       <Grid
@@ -149,4 +123,4 @@ const TeacherInfoPage = ({
   );
 };
 
-export default TeacherInfoPage;
+export default TeacherInfoSection;

@@ -16,7 +16,7 @@ datasource db {
 
 model Course {
   images      Image[]
-  id          Int          @id @default(autoincrement())
+  id          String       @id @default(cuid())
   name        String
   Enrollment  Enrollment[]
   description String?
@@ -28,11 +28,11 @@ model Course {
 }
 
 model Enrollment {
-  id       Int    @id @default(autoincrement())
+  id       String @id @default(cuid())
   student  User   @relation(fields: [userId], references: [id])
   course   Course @relation(fields: [courseId], references: [id])
   userId   String
-  courseId Int
+  courseId String
 }
 
 model Teacher {
@@ -54,7 +54,7 @@ model Image {
   teacher   Teacher  @relation(fields: [teacherId], references: [id])
   createdAt DateTime @default(now())
   Course    Course?  @relation(fields: [courseId], references: [id])
-  courseId  Int?
+  courseId  String?
 }
 
 model Account {

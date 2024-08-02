@@ -32,12 +32,12 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
             defaultValue="Upload Year"
           />
         </Grid>
-        <Grid item xs={10} className="flex items-center justify-center ">
-          {courses.map((course) => (
-            <Card key={course.id} className="flex items-center">
-              <CardContent>
-                <Grid container spacing={2}>
-                  <Grid item xs={10}>
+        <Grid item xs={10} className="flex items-center justify-center">
+          <Stack spacing={2}>
+            {courses.map((course) => (
+              <Card key={course.id}>
+                <CardContent className="flex items-center justify-between">
+                  <Stack spacing={1} className="w-3/4">
                     <Typography variant="h6" className="font-bold">
                       {course.name}
                     </Typography>
@@ -47,20 +47,15 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
                     <Typography variant="subtitle1" className="font-bold">
                       ${course.price}
                     </Typography>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <Stack spacing={2}>
-                      <Button variant="contained">Buy now</Button>
-                      <Button variant="outlined">Add to Card</Button>
-                    </Stack>
-                  </Grid>
-                  <Grid item>
-                    <Divider />
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          ))}
+                  </Stack>
+                  <Stack spacing={2}>
+                    <Button variant="contained">Buy now</Button>
+                    <Button variant="outlined">Add to Card</Button>
+                  </Stack>
+                </CardContent>
+              </Card>
+            ))}
+          </Stack>
         </Grid>
       </Grid>
     </Box>

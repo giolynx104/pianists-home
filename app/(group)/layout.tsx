@@ -3,7 +3,7 @@ import { Divider, Stack } from "@mui/material";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <Stack spacing={2}>
+    <Stack>
       {children}
       <Divider variant="fullWidth" />
       <Footer />
