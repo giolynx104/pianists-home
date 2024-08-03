@@ -6,8 +6,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import crypto from "crypto";
 import { Teacher } from "@prisma/client";
+import crypto from "crypto";
 const generateFileName = (bytes = 32) => {
   return crypto.randomBytes(bytes).toString("hex");
 };
