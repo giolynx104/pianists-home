@@ -46,7 +46,7 @@ const Table = ({
       <Grid container spacing={2}>
         {courses.map((course) => (
           <Grid item key={course.id} xs={4}>
-            <Card>
+            <Card className="w-full h-full">
               <CardContent>
                 <Stack spacing={1}>
                   <Typography variant="h5">{course.name}</Typography>

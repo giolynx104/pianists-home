@@ -30,6 +30,7 @@ const Form = () => {
             if (file) {
               const signedUrlResult = await getSignedUrlConfigured(file.type);
               const remoteUrl = signedUrlResult.success!.url;
+              console.log(`remoteUrl: ${remoteUrl}`);
               await fetch(remoteUrl, {
                 method: "PUT",
                 body: file,

@@ -12,7 +12,6 @@ const Page = ({
 }: {
   searchParams?: { query?: string; page?: string };
 }) => {
-  console.log(`The query was: ${searchParams?.query}`);
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
   const [value, setValue] = useState("1");
