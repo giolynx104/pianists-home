@@ -50,12 +50,13 @@ const Form = () => {
               label="Description"
               required
               className="w-full"
-              {...register("description")}
+              {...register("description", {required: true, maxLength: 2000})}
             />
             <TextField
               className="w-full"
               label="Demo Link"
               {...register("demoLink", { required: true })}
+              required
             />
             <Button
               variant="outlined"

@@ -24,20 +24,20 @@ const Form = () => {
       <Stack spacing={2} className="flex justify-center items-center">
         <FormLabel>Course Information</FormLabel>
         <TextField
-          {...register("name", { required: true })}
+          {...register("name", { required: true, maxLength: 100 })}
           label="Course name"
           required
-        className="w-full"
+          className="w-full"
         />
         <TextField
           label="Description"
-          {...register("description", { required: true })}
+          {...register("description", { required: true, maxLength: 1000 })}
           multiline
           required
           className="w-full"
         />
         <TextField
-          {...register("price", { required: true })}
+          {...register("price", { required: true, pattern: /^\d+(?:\.\d{1,2})?$/ })}
           label="Price"
           required
           InputProps={{
