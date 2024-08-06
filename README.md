@@ -8,8 +8,12 @@ The website provides a platform for pianists to introduce themselves, also inclu
 
 The app is deployed [here](https://pianists-home.vercel.app/) using Vercel.
 
+## Installation
+
+- Run `pnpm i`
+- Setup .env, including Prisma, AWS S3, Google/GitHub OAuth
+
 ## To-do
 
-- Form validation
 - Testing
-- Seeding database
+- Enrollment
