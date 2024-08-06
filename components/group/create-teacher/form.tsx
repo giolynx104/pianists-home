@@ -7,6 +7,8 @@ import {
   Stack,
   TextField,
   Button,
+  Box,
+  CircularProgress,
 } from "@mui/material";
 import { createTeacher, getSignedUrlConfigured } from "./actions";
 import SubmitButton from "./submit-button";
@@ -16,12 +18,8 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { Teacher } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import { z } from "zod";
-
-const FormSchema = z.object({
-  name: z.string().min(1, { message: "Name is required" }),
-  description: z.string().min(1, { message: "Description is required" }),
-})
+import { teacherFormSchema, TeacherFormSchema } from "@/lib/types";
+import { zodResolver } from "@hookform/resolvers/zod";
 const Form = () => {
   const router = useRouter();
   const [fileUrl, setFileUrl] = useState<string | null>(null);
@@ -29,8 +27,8 @@ const Form = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<Teacher>();
+    formState: { errors, isValid, isSubmitting, isSubmitted },
+  } = useForm<TeacherFormSchema>({ resolver: zodResolver(teacherFormSchema) });
   return (
     <Card>
       <CardHeader className="flex text-center" title="Create Teacher" />
@@ -57,18 +55,10 @@ const Form = () => {
             <TextField
               multiline
               label="Description"
-              required
               className="w-full"
-              {...register("description", {
-                required: {
-                  value: true,
-                  message: "Description is required",
-                },
-                maxLength: {
-                  value: 2000,
-                  message: "Description is limited to 2000 characters",
-                },
-              })}
+              {...register("description")}
+              error={!!errors.description}
+              helperText={errors.description?.message}
             />
             <TextField
               className="w-full"
@@ -79,7 +69,8 @@ const Form = () => {
                   message: "Demo link is required",
                 },
               })}
-              required
+              error={!!errors.demoLink}
+              helperText={errors.demoLink?.message}
             />
             <Button
               variant="outlined"
@@ -112,7 +103,13 @@ const Form = () => {
                 height={300}
               />
             )}
-            <SubmitButton />
+            <Box className="flex justify-center">
+              {isValid && (isSubmitting || isSubmitted) ? (
+                <CircularProgress />
+              ) : (
+                <SubmitButton />
+              )}
+            </Box>
           </Stack>
         </form>
       </CardContent>
