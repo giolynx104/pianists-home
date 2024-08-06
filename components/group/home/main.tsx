@@ -29,7 +29,7 @@ export default function Main() {
             variant="contained"
             className="w-fit"
           >
-            Start now
+            Go to Dashboard
           </Button>
         </Stack>
       </Grid>

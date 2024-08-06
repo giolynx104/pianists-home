@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { CourseWithUser, getCoursesContainQuery } from "./actions";
 import React from "react";
+import CourseCard from "./course-card";
 
 export const ITEMS_PER_PAGE = 3;
 const Table = ({
@@ -45,22 +46,7 @@ const Table = ({
     <Stack spacing={4} className="flex flex-col justify-center items-center">
       <Grid container spacing={2}>
         {courses.map((course) => (
-          <Grid item key={course.id} xs={4}>
-            <Card className="w-full h-full">
-              <CardContent>
-                <Stack spacing={1}>
-                  <Typography variant="h5">{course.name}</Typography>
-                  <Typography variant="subtitle2">
-                    {course.teacher.user.name}
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    {course.description}
-                  </Typography>
-                  <Typography variant="body2">${course.price}</Typography>
-                </Stack>
-              </CardContent>
-            </Card>
-          </Grid>
+          <CourseCard course={course} />
         ))}
       </Grid>
       <Pagination page={page} count={totalPages} onChange={handlePageChange} />

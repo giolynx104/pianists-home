@@ -19,6 +19,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
       courses: true,
     },
   }))!;
+  if (!teacher) {
+    throw new Error("Invalid Teacher ID");
+  }
   return (
     <Stack>
       <Box
