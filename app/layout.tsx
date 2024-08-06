@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ThemeClient from "@/styles/ThemeClient";
-import { SessionProvider } from "next-auth/react";
+import CartClient from "./(group)/cart-client";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionProvider>
+        <CartClient>
           <ThemeClient>{children}</ThemeClient>
-        </SessionProvider>
+        </CartClient>
       </body>
     </html>
   );

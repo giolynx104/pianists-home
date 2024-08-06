@@ -35,9 +35,9 @@ export default function UserAvatar({ userAvatar }: { userAvatar: string }) {
           </ListItemButton>
         </Link>
       </ListItem>
-      <Divider variant="middle"/>
+      <Divider variant="middle" />
       <ListItem>
-        <Link href="/my-cart" className="w-full">
+        <Link href="/cart" className="w-full">
           <ListItemButton
             component="button"
             className="w-full normal-case text-base"

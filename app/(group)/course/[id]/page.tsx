@@ -1,3 +1,5 @@
+import AddToCartButton from "@/components/group/course/add-to-cart-button";
+import Buttons from "@/components/group/course/buttons";
 import prisma from "@/lib/db";
 import { Box, Typography, Button, Grid, Stack, Container } from "@mui/material";
 import Image from "next/image";
@@ -28,7 +30,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <Container className="mt-10">
+    <Container className="my-10">
       <Grid container className="p-4 border-solid border-gray-400 border">
         <Grid item xs={9}>
           <Stack spacing={2}>
@@ -39,16 +41,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
               {course.description}
             </Typography>
             <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-              {course.price} per month
+              {course.price}$ / month
             </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              href={`/course/${course?.id}/enroll`}
-              className="normal-case sm:w-fit md:w-40 md:h-12 text-center text-lg"
-            >
-              Enroll
-            </Button>
+            <Buttons course={course} />
           </Stack>
         </Grid>
         <Grid item xs={3} className="flex justify-center items-center">
