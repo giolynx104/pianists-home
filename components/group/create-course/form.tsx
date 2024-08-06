@@ -7,50 +7,65 @@ import {
   InputAdornment,
   Button,
   CircularProgress,
+  Box,
 } from "@mui/material";
 import { createCourse } from "./actions";
 import { useForm } from "react-hook-form";
-
-//TODO: Add form validation
+import { courseFormSchema, CourseFormSchema } from "@/lib/types";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const Form = () => {
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting, isSubmitted },
-  } = useForm();
+    formState: { errors, isValid, isSubmitting, isSubmitted },
+  } = useForm<CourseFormSchema>({ resolver: zodResolver(courseFormSchema) });
+
   return (
-    <form onSubmit={handleSubmit((data) => createCourse(data))}>
-      <Stack spacing={2} className="flex justify-center items-center">
+    <form
+      onSubmit={handleSubmit((data) => {
+        console.log(data);
+        createCourse(data);
+      })}
+    >
+      <Stack spacing={2} className="flex ">
         <FormLabel>Course Information</FormLabel>
         <TextField
-          {...register("name", { required: true, maxLength: 100 })}
+          {...register("name")}
           label="Course name"
-          required
           className="w-full"
+          error={!!errors.name}
+          helperText={errors.name?.message}
         />
         <TextField
           label="Description"
-          {...register("description", { required: true, maxLength: 1000 })}
+          {...register("description")}
           multiline
-          required
           className="w-full"
+          error={!!errors.description}
+          helperText={errors.description?.message}
         />
         <TextField
-          {...register("price", { required: true, pattern: /^\d+(?:\.\d{1,2})?$/ })}
+          {...register("price")}
           label="Price"
-          required
+          type="number"
+          inputProps={{ step: "0.01" }}
           InputProps={{
             endAdornment: <InputAdornment position="end">$</InputAdornment>,
           }}
+          className="w-full"
+          error={!!errors.price}
+          helperText={errors.price?.message}
         />
-        {isSubmitting || isSubmitted ? (
-          <CircularProgress />
-        ) : (
-          <Button className="normal-case" variant="contained" type="submit">
-            Submit
-          </Button>
-        )}
+        <Box className="flex justify-center">
+          {isValid && (isSubmitting || isSubmitted) ? (
+            <CircularProgress />
+          ) : (
+            <Button className="normal-case" variant="contained" type="submit">
+              Submit
+            </Button>
+          )}
+        </Box>
       </Stack>
     </form>
   );

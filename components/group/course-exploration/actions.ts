@@ -25,7 +25,6 @@ export const getCoursesContainQuery = async (query: string) => {
     ...courseWithUser,
   });
   /*  */for (const course of courses) {
-    console.log(course.name);
   }
   return courses;
 };

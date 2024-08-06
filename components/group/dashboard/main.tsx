@@ -5,8 +5,6 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 import { getTeachers } from "./actions";
 import TeacherInfoSection from "./teacher-info-section";
 
-//TODO: Implement start connecting
-
 export default async function Main() {
   const data = await getTeachers();
 

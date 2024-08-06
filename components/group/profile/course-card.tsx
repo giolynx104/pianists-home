@@ -65,24 +65,33 @@ const CourseCard = ({ course }: { course: Course }) => {
           </Stack>
         </Box>
       </Grid>
-      <Dialog className="rounded-md" open={open}>
-        <DialogTitle>Are you sure to delete the course?</DialogTitle>
+      <Dialog className="rounded-3xl" open={open}>
+        <DialogTitle className="text-center">Delete Course</DialogTitle>
         <DialogContent className="flex justify-center">
-          <Stack direction="row">
-            <Button
-              onClick={() => {
-                deleteCourse(selectedCourseId);
-              }}
-            >
-              Yes
-            </Button>
-            <Button
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              No
-            </Button>
+          <Stack spacing={2}>
+            <Typography variant="body1">
+              Are you sure you want to delete this course?
+            </Typography>
+            <Stack direction="row" className="flex justify-center" spacing={2}>
+              <Button
+                onClick={() => {
+                  deleteCourse(selectedCourseId);
+                }}
+                variant="outlined"
+                className="text-red-500 border-red-500 normal-case hover:border-red-800 hover:bg-red-800"
+              >
+                Yes
+              </Button>
+              <Button
+                onClick={() => {
+                  setOpen(false);
+                }}
+                variant="contained"
+                className="normal-case"
+              >
+                No
+              </Button>
+            </Stack>
           </Stack>
         </DialogContent>
       </Dialog>

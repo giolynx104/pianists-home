@@ -16,11 +16,21 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { Teacher } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import { z } from "zod";
+
+const FormSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  description: z.string().min(1, { message: "Description is required" }),
+})
 const Form = () => {
   const router = useRouter();
   const [fileUrl, setFileUrl] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
-  const { register, handleSubmit } = useForm<Teacher>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Teacher>();
   return (
     <Card>
       <CardHeader className="flex text-center" title="Create Teacher" />
@@ -30,7 +40,6 @@ const Form = () => {
             if (file) {
               const signedUrlResult = await getSignedUrlConfigured(file.type);
               const remoteUrl = signedUrlResult.success!.url;
-              console.log(`remoteUrl: ${remoteUrl}`);
               await fetch(remoteUrl, {
                 method: "PUT",
                 body: file,
@@ -50,12 +59,26 @@ const Form = () => {
               label="Description"
               required
               className="w-full"
-              {...register("description", {required: true, maxLength: 2000})}
+              {...register("description", {
+                required: {
+                  value: true,
+                  message: "Description is required",
+                },
+                maxLength: {
+                  value: 2000,
+                  message: "Description is limited to 2000 characters",
+                },
+              })}
             />
             <TextField
               className="w-full"
               label="Demo Link"
-              {...register("demoLink", { required: true })}
+              {...register("demoLink", {
+                required: {
+                  value: true,
+                  message: "Demo link is required",
+                },
+              })}
               required
             />
             <Button
