@@ -4,9 +4,9 @@ import { redirect } from "next/navigation";
 import prisma from "@/lib/db";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
-import { FieldValues } from "react-hook-form";
+import { CourseFormSchema } from "@/lib/types";
 
-export const createCourse = async (fieldValues: FieldValues) => {
+export const createCourse = async (data: CourseFormSchema) => {
   const session = await auth();
   if (!session) {
     redirect("/api/auth/signin");
@@ -25,9 +25,9 @@ export const createCourse = async (fieldValues: FieldValues) => {
 
   await prisma.course.create({
     data: {
-      name: fieldValues.name,
-      description: fieldValues.description,
-      price: parseFloat(fieldValues.price),
+      name: data.name,
+      description: data.description,
+      price: data.price,
       teacher: {
         connect: {
           id: teacher!.id,

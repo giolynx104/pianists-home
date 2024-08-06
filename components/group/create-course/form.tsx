@@ -24,7 +24,6 @@ const Form = () => {
   return (
     <form
       onSubmit={handleSubmit((data) => {
-        console.log(data);
         createCourse(data);
       })}
     >
