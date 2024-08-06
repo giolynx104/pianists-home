@@ -11,6 +11,7 @@ import { Course } from "@prisma/client";
 import Grid from "@mui/material/Grid";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Button from "@mui/material/Button";
+import Link from "next/link";
 
 const CourseList = ({ courses }: { courses: Course[] }) => {
   return (
@@ -37,9 +38,11 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
               <Card key={course.id}>
                 <CardContent className="flex items-center justify-between">
                   <Stack spacing={1} className="w-3/4">
-                    <Typography variant="h6" className="font-bold">
-                      {course.name}
-                    </Typography>
+                    <Link href={`/course/${course.id}`}>
+                      <Typography variant="h6" className="font-bold hover:underline">
+                        {course.name}
+                      </Typography>
+                    </Link>
                     <Typography variant="subtitle1" className="text-slate-500">
                       {course.description}
                     </Typography>

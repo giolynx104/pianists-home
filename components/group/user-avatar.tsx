@@ -16,6 +16,7 @@ import { CiUser } from "react-icons/ci";
 import { FaSignOutAlt } from "react-icons/fa";
 import { signOutAction } from "./actions";
 import Link from "next/link";
+import { FiShoppingCart } from "react-icons/fi";
 
 export default function UserAvatar({ userAvatar }: { userAvatar: string }) {
   const [open, setOpen] = useState(false);
@@ -31,6 +32,20 @@ export default function UserAvatar({ userAvatar }: { userAvatar: string }) {
               <CgProfile />
             </ListItemIcon>
             <ListItemText primary="Your Profile" />
+          </ListItemButton>
+        </Link>
+      </ListItem>
+      <Divider variant="middle"/>
+      <ListItem>
+        <Link href="/my-cart" className="w-full">
+          <ListItemButton
+            component="button"
+            className="w-full normal-case text-base"
+          >
+            <ListItemIcon>
+              <FiShoppingCart />
+            </ListItemIcon>
+            <ListItemText primary="My Cart" />
           </ListItemButton>
         </Link>
       </ListItem>
