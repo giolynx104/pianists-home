@@ -29,7 +29,7 @@ model Course {
 
 model Enrollment {
   id       String @id @default(cuid())
-  student  User   @relation(fields: [userId], references: [id])
+  user  User   @relation(fields: [userId], references: [id])
   course   Course @relation(fields: [courseId], references: [id])
   userId   String
   courseId String
