@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ThemeClient from "@/styles/ThemeClient";
-import CartClient from "./(group)/cart-client";
+import CartClient from "./cart-client";
+import { Divider, Stack } from "@mui/material";
+import Footer from "@/components/group/footer";
+import Header from "@/components/group/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +23,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <CartClient>
-          <ThemeClient>{children}</ThemeClient>
+          <ThemeClient>
+            <Stack>
+              <Header />
+              {children}
+              <Divider variant="fullWidth" />
+              <Footer />
+            </Stack>
+          </ThemeClient>
         </CartClient>
       </body>
     </html>

@@ -13,6 +13,8 @@ import { createCourse } from "./actions";
 import { useForm } from "react-hook-form";
 import { courseFormSchema, CourseFormSchema } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LoadingButton } from "@mui/lab";
+import SendIcon from "@mui/icons-material/Send";
 
 const Form = () => {
   const {
@@ -58,7 +60,12 @@ const Form = () => {
         />
         <Box className="flex justify-center">
           {isValid && (isSubmitting || isSubmitted) ? (
-            <CircularProgress />
+            <LoadingButton
+              endIcon={<SendIcon />}
+              loading={isSubmitting || isSubmitted}
+              loadingPosition="end"
+              variant="contained"
+            ></LoadingButton>
           ) : (
             <Button className="normal-case" variant="contained" type="submit">
               Submit

@@ -16,7 +16,7 @@ import { GiGrandPiano } from "react-icons/gi";
 const Header = async () => {
   const session = await auth();
   return (
-    <AppBar position="sticky" className="top-0 left-0 bg-transparent">
+    <AppBar position="sticky" className="top-0 left-0 ">
       <Toolbar className="flex justify-between items-center">
         <Stack spacing={2} direction="row" className="flex items-center">
           <Link href="/home">

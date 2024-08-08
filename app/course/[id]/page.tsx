@@ -32,40 +32,42 @@ const Page = async ({ params }: { params: { id: string } }) => {
   return (
     <Container className="my-10">
       <Grid container className="p-4 border-solid border-gray-400 border">
-        <Grid item xs={9}>
+        <Grid item lg={9} xs={12}>
           <Stack spacing={2}>
             <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
               {course.name}
             </Typography>
+            <Stack
+              direction="row"
+              spacing={2}
+              className="w-fit rounded-full p-4 bg-gray-400"
+            >
+              <Box className="rounded-full overflow-hidden">
+                <Image
+                  src={teacher.user.image!}
+                  alt="User Avatar"
+                  width={25}
+                  height={25}
+                />
+              </Box>
+              <Link href={`/teacher/${teacher.id}`}>
+                <Typography className="text-center hover:underline">
+                  Intructor: {teacher.user.name}
+                </Typography>
+              </Link>
+            </Stack>
             <Typography variant="body1" sx={{ mb: 2 }}>
               {course.description}
             </Typography>
-            <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-              {course.price}$ / month
-            </Typography>
-            <Buttons course={course} />
           </Stack>
         </Grid>
-        <Grid item xs={3} className="flex justify-center items-center">
-          <Stack
-            direction="row"
-            spacing={2}
-            className="rounded-full p-4 bg-gray-400"
-          >
-            <Box className="rounded-full overflow-hidden">
-              <Image
-                src={teacher.user.image!}
-                alt="User Avatar"
-                width={25}
-                height={25}
-              />
-            </Box>
-            <Link href={`/teacher/${teacher.id}`}>
-              <Typography className="text-center hover:underline">
-                Intructor: {teacher.user.name}
-              </Typography>
-            </Link>
-          </Stack>
+        <Grid
+          item
+          lg={3}
+          xs={12}
+          className="lg:sticky lg:flex lg:justify-center lg:items-center"
+        >
+          <Buttons course={course} />
         </Grid>
       </Grid>
     </Container>
