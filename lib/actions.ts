@@ -2,6 +2,7 @@
 
 import { Session } from "next-auth";
 import { auth } from "../auth";
+import prisma from "./db";
 
 export const verifySession = async (
   callback: () => never
@@ -11,4 +12,13 @@ export const verifySession = async (
     callback();
   }
   return session!;
+};
+
+export const getCurrentUser = async (session: Session) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      email: session.user!.email!,
+    },
+  });
+  return user!;
 };

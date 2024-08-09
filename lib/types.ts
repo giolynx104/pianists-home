@@ -1,3 +1,4 @@
+import { Course, Enrollment } from "@prisma/client";
 import { z } from "zod";
 
 export const courseFormSchema = z.object({
@@ -26,3 +27,7 @@ export const teacherFormSchema = z.object({
 });
 
 export type TeacherFormSchema = z.infer<typeof teacherFormSchema>;
+
+export type EnrollmentWithCourse = Enrollment & {
+  course: Course;
+};

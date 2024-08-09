@@ -12,3 +12,22 @@ export const deleteCourse = async (courseId: string) => {
 
   revalidatePath("/profile");
 };
+
+export const getEnrollmentByUserId = async (userId: string) => {
+  return await prisma.enrollment.findMany({
+    where: {
+      userId: userId,
+    },
+    include: {
+      course: true,
+    }
+  });
+};
+
+export const getCoursesByTeacherId = async (teacherId: string) => {
+  return await prisma.course.findMany({
+    where: {
+      teacherId: teacherId,
+    },
+  });
+};
