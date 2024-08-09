@@ -34,9 +34,7 @@ export default async function Main() {
               variant="outlined"
               size="small"
             >
-              <Link href="course-exploration" className="w-full h-full">
-                Click to start connecting
-              </Link>
+              <Link href="course-exploration" className="w-full h-full">Nhấn vào đây để bắt đầu kết nối</Link>
             </Button>
           </Box>
         </Stack>

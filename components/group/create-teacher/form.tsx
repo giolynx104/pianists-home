@@ -35,6 +35,7 @@ const Form = () => {
       <CardContent className="flex justify-center items-center ">
         <form
           onSubmit={handleSubmit(async (data) => {
+            console.log(data);
             if (file) {
               const signedUrlResult = await getSignedUrlConfigured(file.type);
               const remoteUrl = signedUrlResult.success!.url;

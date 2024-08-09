@@ -5,8 +5,12 @@ import prisma from "@/lib/db";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
 import { CourseFormSchema } from "@/lib/types";
+import { getSignedUrlConfigured } from "../create-teacher/actions";
 
-export const createCourse = async (data: CourseFormSchema) => {
+export const createCourse = async (
+  data: CourseFormSchema,
+  remoteUrls: string[]
+) => {
   const session = await auth();
   if (!session) {
     redirect("/api/auth/signin");
@@ -32,6 +36,12 @@ export const createCourse = async (data: CourseFormSchema) => {
         connect: {
           id: teacher!.id,
         },
+      },
+      images: {
+        create: remoteUrls.map((url) => ({
+          url: url.split("?")[0],
+          teacherId: teacher!.id,
+        })),
       },
     },
   });

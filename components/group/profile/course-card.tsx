@@ -19,6 +19,7 @@ import { MdDelete } from "react-icons/md";
 import { deleteCourse } from "./actions";
 import { IoPricetagsOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
+import { boolean } from "zod";
 
 //TODO: Improving card design
 
@@ -65,7 +66,14 @@ const CourseCard = ({ course }: { course: Course }) => {
           </Stack>
         </Box>
       </Grid>
-      <Dialog className="rounded-3xl" open={open}>
+      <Dialog
+        open={open}
+        sx={{
+          "& .MuiPaper-root": {
+            borderRadius: "1.5rem",
+          },
+        }}
+      >
         <DialogTitle className="text-center">Delete Course</DialogTitle>
         <DialogContent className="flex justify-center">
           <Stack spacing={2}>

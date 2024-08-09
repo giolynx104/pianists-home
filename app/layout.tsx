@@ -27,7 +27,7 @@ export default function RootLayout({
             <Stack>
               <Header />
               {children}
-              <Divider variant="fullWidth" />
+              <Divider variant="fullWidth" className="pt-10" />
               <Footer />
             </Stack>
           </ThemeClient>
