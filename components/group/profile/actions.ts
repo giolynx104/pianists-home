@@ -1,7 +1,10 @@
 "use server";
 
+import { getCurrentUser, verifySession } from "@/lib/actions";
 import prisma from "@/lib/db";
+import { Course } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export const deleteCourse = async (courseId: string) => {
   await prisma.course.delete({
@@ -20,7 +23,7 @@ export const getEnrollmentByUserId = async (userId: string) => {
     },
     include: {
       course: true,
-    }
+    },
   });
 };
 
@@ -30,4 +33,21 @@ export const getCoursesByTeacherId = async (teacherId: string) => {
       teacherId: teacherId,
     },
   });
+};
+
+export const removeEnrollment = async (course: Course) => {
+  const user = await getCurrentUser(
+    await verifySession(() => {
+      redirect("api/auth/signin");
+    })
+  );
+
+  await prisma.enrollment.deleteMany({
+    where: {
+      userId: user.id,
+      courseId: course.id,
+    },
+  });
+
+  revalidatePath("/profile");
 };

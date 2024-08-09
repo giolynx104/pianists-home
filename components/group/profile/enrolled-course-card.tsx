@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { IoPricetagsOutline } from "react-icons/io5";
-import { deleteCourse } from "./actions";
+import { deleteCourse, removeEnrollment } from "./actions";
 import { Course } from "@prisma/client";
 import { TiThMenu } from "react-icons/ti";
 const EnrolledCourseCard = ({ course }: { course: Course }) => {
@@ -28,6 +28,15 @@ const EnrolledCourseCard = ({ course }: { course: Course }) => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleClickToUnenroll = () => {
+    const justAFunction = async () => {
+      await removeEnrollment(course);
+      handleClose();
+    };
+
+    justAFunction();
   };
 
   return (
@@ -66,18 +75,18 @@ const EnrolledCourseCard = ({ course }: { course: Course }) => {
               "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem onClick={handleClose}>Unenroll</MenuItem>
+            <MenuItem onClick={handleClickToUnenroll}>Unenroll</MenuItem>
             <MenuItem onClick={handleClose}>Rate</MenuItem>
             <MenuItem onClick={handleClose}>Share</MenuItem>
           </Menu>
         </Box>
       </Grid>
       <Dialog className="rounded-3xl" open={open}>
-        <DialogTitle className="text-center">Delete Course</DialogTitle>
+        <DialogTitle className="text-center">Unenroll</DialogTitle>
         <DialogContent className="flex justify-center">
           <Stack spacing={2}>
             <Typography variant="body1">
-              Are you sure you want to delete this course?
+              Are you sure you want to unenroll this course?
             </Typography>
             <Stack direction="row" className="flex justify-center" spacing={2}>
               <Button
@@ -85,7 +94,7 @@ const EnrolledCourseCard = ({ course }: { course: Course }) => {
                   deleteCourse(selectedCourseId);
                 }}
                 variant="outlined"
-                className="text-red-500 border-red-500 normal-case hover:border-red-800 hover:bg-red-800"
+                className="text-red-500 border-red-500 normal-case hover:border-red-800 hover:bg-red-800 rounded-xl"
               >
                 Yes
               </Button>
@@ -94,7 +103,7 @@ const EnrolledCourseCard = ({ course }: { course: Course }) => {
                   setOpen(false);
                 }}
                 variant="contained"
-                className="normal-case"
+                className="normal-case rounded-xl"
               >
                 No
               </Button>

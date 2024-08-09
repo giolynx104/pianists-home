@@ -11,19 +11,10 @@ const FinishPaymentButton = ({
   courseId: string;
   userId: string;
 }) => {
-  const [clicked, setClicked] = useState(false);
-  useEffect(() => {
-    const doSomethingFunny = async () => {
-      createEnrollment(courseId, userId);
-    };
-
-    doSomethingFunny();
-  }, [clicked]);
-
   return (
     <Button
       onClick={() => {
-        setClicked(true);
+        createEnrollment(courseId, userId);
       }}
       variant="contained"
     >
