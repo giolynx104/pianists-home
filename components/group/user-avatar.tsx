@@ -1,69 +1,47 @@
 "use client";
 
-import {
-  List,
-  ListItem,
-  Divider,
-  Drawer,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import { List, Divider, Drawer } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { CiUser } from "react-icons/ci";
 import { FaSignOutAlt } from "react-icons/fa";
 import { signOutAction } from "./actions";
-import Link from "next/link";
 import { FiShoppingCart } from "react-icons/fi";
+import { useRouter } from "next/navigation";
+import DrawerListItem from "./drawer-list-item";
 
 export default function UserAvatar({ userAvatar }: { userAvatar: string }) {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const DrawerList = (
     <List className="flex justify-start flex-col">
-      <ListItem>
-        <Link href="/profile" className="w-full">
-          <ListItemButton
-            component="button"
-            className="w-full normal-case text-base"
-          >
-            <ListItemIcon>
-              <CgProfile />
-            </ListItemIcon>
-            <ListItemText primary="Your Profile" />
-          </ListItemButton>
-        </Link>
-      </ListItem>
+      <DrawerListItem
+        setOpen={setOpen}
+        icon={<CgProfile />}
+        text="Your Profile"
+        onClick={() => {
+          router.push("/profile");
+        }}
+      />
       <Divider variant="middle" />
-      <ListItem>
-        <Link href="/cart" className="w-full">
-          <ListItemButton
-            component="button"
-            className="w-full normal-case text-base"
-          >
-            <ListItemIcon>
-              <FiShoppingCart />
-            </ListItemIcon>
-            <ListItemText primary="My Cart" />
-          </ListItemButton>
-        </Link>
-      </ListItem>
+      <DrawerListItem
+        setOpen={setOpen}
+        icon={<FiShoppingCart />}
+        text="My Cart"
+        onClick={() => {
+          router.push("/cart");
+        }}
+      />
       <Divider variant="middle" />
-      <ListItem>
-        <ListItemButton
-          component="button"
-          onClick={async () => {
-            await signOutAction();
-          }}
-          className="w-full normal-case text-base"
-        >
-          <ListItemIcon>
-            <FaSignOutAlt />
-          </ListItemIcon>
-          <ListItemText primary="Sign Out" />
-        </ListItemButton>
-      </ListItem>
+      <DrawerListItem
+        setOpen={setOpen}
+        icon={<FaSignOutAlt />}
+        text="Sign Out"
+        onClick={async () => {
+          await signOutAction();
+        }}
+      />
       <Divider variant="middle" />
     </List>
   );
