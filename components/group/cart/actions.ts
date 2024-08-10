@@ -15,6 +15,7 @@ export const getCourses = async (items: Item[]) => {
           user: true,
         },
       },
+      courseImages: true,
     },
   });
 };
