@@ -6,7 +6,7 @@ const SignInButton = () => {
   return (
     <form
       action={async () => {
-        "use server";
+        "use server"; 
         await signIn(undefined, { redirectTo: "/" });
       }}
     >
@@ -14,7 +14,7 @@ const SignInButton = () => {
         variant="outlined"
         startIcon={<FaUserCircle />}
         type="submit"
-        className="border-white text-white hover:border-white hover:bg-slate-600"
+        className="border-white text-white hover:border-white hover:bg-slate-600 normal-case"
       >
         Sign In
       </Button>

@@ -30,91 +30,97 @@ const Form = () => {
     formState: { errors, isValid, isSubmitting, isSubmitted },
   } = useForm<TeacherFormSchema>({ resolver: zodResolver(teacherFormSchema) });
   return (
-    <Card>
-      <CardHeader className="flex text-center" title="Create Teacher" />
-      <CardContent className="flex justify-center items-center ">
-        <form
-          onSubmit={handleSubmit(async (data) => {
-            console.log(data);
-            if (file) {
-              const signedUrlResult = await getSignedUrlConfigured(file.type);
-              const remoteUrl = signedUrlResult.success!.url;
-              await fetch(remoteUrl, {
-                method: "PUT",
-                body: file,
-                headers: {
-                  "Content-Type": file.type,
-                },
-              });
-              await createTeacher(data, remoteUrl);
-              router.push("/profile");
-            }
-          })}
-          className="flex justify-center items-center"
-        >
-          <Stack spacing={2} className="w-full">
-            <TextField
-              multiline
-              label="Description"
-              className="w-full"
-              {...register("description")}
-              error={!!errors.description}
-              helperText={errors.description?.message}
-            />
-            <TextField
-              className="w-full"
-              label="Demo Link"
-              {...register("demoLink", {
-                required: {
-                  value: true,
-                  message: "Demo link is required",
-                },
-              })}
-              error={!!errors.demoLink}
-              helperText={errors.demoLink?.message}
-            />
-            <Button
-              variant="outlined"
-              component="label"
-              startIcon={<CloudUploadIcon />}
-              className="w-full normal-case"
-            >
-              Upload Image
-              <input
-                hidden
-                type="file"
-                accept="images/*"
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) {
-                    setFile(file);
-                    const url = URL.createObjectURL(file);
-                    setFileUrl(url);
-                  } else {
-                    setFileUrl(null);
-                  }
-                }}
+    <Box className="w-full flex justify-center items-center">
+      <Card className="w-3/4 m-10 rounded-3xl">
+        <CardHeader
+          className="flex text-center"
+          title="Enter your infomation"
+        />
+        <CardContent className="flex justify-center items-center ">
+          <form
+            onSubmit={handleSubmit(async (data) => {
+              console.log(data);
+              if (file) {
+                const signedUrlResult = await getSignedUrlConfigured(file.type);
+                const remoteUrl = signedUrlResult.success!.url;
+                await fetch(remoteUrl, {
+                  method: "PUT",
+                  body: file,
+                  headers: {
+                    "Content-Type": file.type,
+                  },
+                });
+                await createTeacher(data, remoteUrl);
+                router.push("/profile");
+              }
+            })}
+            className="flex justify-center items-center w-full"
+          >
+            <Stack spacing={2} className="w-full">
+              <TextField
+                multiline
+                rows={5}
+                label="Description"
+                className="w-full"
+                {...register("description")}
+                error={!!errors.description}
+                helperText={errors.description?.message}
               />
-            </Button>
-            {file && fileUrl && (
-              <Image
-                src={fileUrl}
-                alt="Selected file"
-                width={300}
-                height={300}
+              <TextField
+                className="w-full"
+                label="Demo Link"
+                {...register("demoLink", {
+                  required: {
+                    value: true,
+                    message: "Demo link is required",
+                  },
+                })}
+                error={!!errors.demoLink}
+                helperText={errors.demoLink?.message}
               />
-            )}
-            <Box className="flex justify-center">
-              {isValid && (isSubmitting || isSubmitted) ? (
-                <CircularProgress />
-              ) : (
-                <SubmitButton />
+              <Button
+                variant="outlined"
+                component="label"
+                startIcon={<CloudUploadIcon />}
+                className="w-full normal-case"
+              >
+                Upload Image
+                <input
+                  hidden
+                  type="file"
+                  accept="images/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setFile(file);
+                      const url = URL.createObjectURL(file);
+                      setFileUrl(url);
+                    } else {
+                      setFileUrl(null);
+                    }
+                  }}
+                />
+              </Button>
+              {file && fileUrl && (
+                <Image
+                  src={fileUrl}
+                  alt="Selected file"
+                  width={300}
+                  height={300}
+                />
               )}
-            </Box>
-          </Stack>
-        </form>
-      </CardContent>
-    </Card>
+              <Box className="flex justify-center">
+                {isValid && (isSubmitting || isSubmitted) ? (
+                  <CircularProgress />
+                ) : (
+                  <SubmitButton />
+                )}
+              </Box>
+            </Stack>
+          </form>
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
 

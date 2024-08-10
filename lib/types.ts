@@ -1,4 +1,4 @@
-import { Course, Enrollment } from "@prisma/client";
+import { Course, Enrollment, Prisma } from "@prisma/client";
 import { z } from "zod";
 
 export const courseFormSchema = z.object({

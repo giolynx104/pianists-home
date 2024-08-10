@@ -37,10 +37,9 @@ export const createCourse = async (
           id: teacher!.id,
         },
       },
-      images: {
+      courseImages: {
         create: remoteUrls.map((url) => ({
           url: url.split("?")[0],
-          teacherId: teacher!.id,
         })),
       },
     },

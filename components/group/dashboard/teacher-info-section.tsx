@@ -104,7 +104,7 @@ const TeacherInfoSection = ({ data }: { data: TeacherWithUserandImages[] }) => {
               <Box className="w-1/2 flex justify-center items-center">
                 <Image
                   objectFit="contained"
-                  src={teacher.images[0].url}
+                  src={teacher.teacherImages[0].url}
                   alt="An image of the pianist"
                   width={400}
                   height={400}

@@ -10,6 +10,7 @@ const courseWithUser = Prisma.validator<Prisma.CourseDefaultArgs>()({
         user: true,
       },
     },
+    courseImages: true,
   },
 });
 
@@ -24,7 +25,5 @@ export const getCoursesContainQuery = async (query: string) => {
     },
     ...courseWithUser,
   });
-  /*  */for (const course of courses) {
-  }
   return courses;
 };

@@ -6,7 +6,6 @@ import {
   TextField,
   InputAdornment,
   Button,
-  CircularProgress,
   Box,
   Card,
   CardContent,
@@ -34,17 +33,19 @@ const Form = () => {
   } = useForm<CourseFormSchema>({ resolver: zodResolver(courseFormSchema) });
 
   const [images, setImages] = useState<File[]>([]);
-  const [remoteUrls, setRemoteUrls] = useState<string[]>([]);
 
   return (
     <Stack spacing={2}>
       <form
         id="create-course-form"
         onSubmit={handleSubmit(async (data) => {
+          console.log(data);
+          console.log(images);
+          let remoteUrls: string[] = [];
           for (const image of images) {
             const signedUrlResult = await getSignedUrlConfigured(image.type);
             const remoteUrl = signedUrlResult.success!.url;
-            setRemoteUrls([...remoteUrls, remoteUrl]);
+            remoteUrls = [...remoteUrls, remoteUrl];
             await fetch(remoteUrl, {
               method: "PUT",
               body: image,

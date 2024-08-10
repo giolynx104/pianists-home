@@ -29,26 +29,10 @@ const Page = async () => {
     where: {
       userId: user.id,
     },
+    include: {
+      courses: true,
+    },
   });
-
-  if (enrollments.length === 0) {
-    return (
-      <Stack
-        spacing={2}
-        className="flex justify-center items-center w-full h-full border-2 border-dashed border-gray-400"
-      >
-        <PiCalendarBlank />
-        <Typography>You haven't enrolled any courses yet</Typography>
-      </Stack>
-    );
-  }
-
-  if (teacher == null) {
-    //TODO: handle null teacher
-    return;
-  }
-
-  const courses = await getCoursesByTeacherId(teacher.id);
 
   return (
     <Box className="mt-10 flex w-full h-full justify-center pl-16 pr-16">
@@ -83,7 +67,6 @@ const Page = async () => {
           <BasicTabs
             enrollments={enrollments}
             teacher={teacher}
-            courses={courses}
           />
         </Grid>
       </Grid>

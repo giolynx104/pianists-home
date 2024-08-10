@@ -15,46 +15,51 @@ datasource db {
 }
 
 model Course {
-  images      Image[]
-  id          String       @id @default(cuid())
-  name        String
-  Enrollment  Enrollment[]
-  description String?
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  price       Float
-  teacher     Teacher      @relation(fields: [teacherId], references: [id])
-  teacherId   String
+  id           String        @id @default(cuid())
+  name         String
+  courseImages CourseImage[]
+  Enrollment   Enrollment[]
+  description  String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  price        Float
+  teacher      Teacher       @relation(fields: [teacherId], references: [id])
+  teacherId    String
 }
 
 model Enrollment {
   id       String @id @default(cuid())
-  user  User   @relation(fields: [userId], references: [id])
+  user     User   @relation(fields: [userId], references: [id])
   course   Course @relation(fields: [courseId], references: [id])
   userId   String
   courseId String
 }
 
 model Teacher {
-  id          String   @id @default(cuid())
-  user        User     @relation(fields: [userId], references: [id])
-  userId      String   @unique
-  description String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  courses     Course[]
-  demoLink    String
-  images      Image[]
+  id            String         @id @default(cuid())
+  user          User           @relation(fields: [userId], references: [id])
+  userId        String         @unique
+  description   String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  courses       Course[]
+  demoLink      String
+  teacherImages TeacherImage[]
 }
 
-model Image {
+model TeacherImage {
   id        String   @id @default(cuid())
   url       String
   teacherId String
   teacher   Teacher  @relation(fields: [teacherId], references: [id])
   createdAt DateTime @default(now())
-  Course    Course?  @relation(fields: [courseId], references: [id])
-  courseId  String?
+}
+
+model CourseImage {
+  id       String  @id @default(cuid())
+  url      String
+  Course   Course? @relation(fields: [courseId], references: [id])
+  courseId String?
 }
 
 model Account {

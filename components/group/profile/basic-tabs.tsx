@@ -8,6 +8,9 @@ import Box from "@mui/material/Box";
 import EnrolledCourseList from "./enrolled-course-list";
 import { Course, Enrollment, Teacher } from "@prisma/client";
 import { EnrollmentWithCourse } from "@/lib/types";
+import { TeacherWithCourses } from "./actions";
+import { TabPanel } from "@mui/lab";
+import { Button } from "@mui/material";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -41,11 +44,9 @@ function allyProps(index: number) {
 export default function BasicTabs({
   enrollments,
   teacher,
-  courses,
 }: {
   enrollments: EnrollmentWithCourse[];
-  teacher: Teacher;
-  courses: Course[];
+  teacher: TeacherWithCourses | null;
 }) {
   const [value, setValue] = React.useState(0);
 
@@ -68,9 +69,15 @@ export default function BasicTabs({
       <CustomTabPanel value={value} index={0}>
         <EnrolledCourseList enrollments={enrollments} />
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        <CourseList courses={courses} teacher={teacher} />
-      </CustomTabPanel>
+      {teacher != null ? (
+        <CustomTabPanel value={value} index={1}>
+          <CourseList courses={teacher.courses} teacher={teacher} />
+        </CustomTabPanel>
+      ) : (
+        <CustomTabPanel value={value} index={1}>
+          <Button variant="contained">Register as Teacher</Button>
+        </CustomTabPanel>
+      )}
     </Box>
   );
 }

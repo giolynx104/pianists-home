@@ -15,7 +15,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
     },
     include: {
       user: true,
-      images: true,
+      teacherImages: true,
       courses: true,
     },
   }))!;
@@ -26,7 +26,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
     <Stack>
       <Box
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${teacher.images[0].url})`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${teacher.teacherImages[0].url})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           width: "100%",
