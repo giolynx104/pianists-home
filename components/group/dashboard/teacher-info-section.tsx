@@ -43,6 +43,9 @@ const TeacherInfoSection = ({ data }: { data: TeacherWithUserandImages[] }) => {
   };
 
   const teacher = data[currentIndex];
+  for (const image of teacher.teacherImages) {
+    console.log(image.url);
+  }
   return (
     <Box className="flex justify-center w-full">
       <Grid
@@ -103,7 +106,6 @@ const TeacherInfoSection = ({ data }: { data: TeacherWithUserandImages[] }) => {
               </Box>
               <Box className="w-1/2 flex justify-center items-center">
                 <Image
-                  objectFit="contained"
                   src={teacher.teacherImages[0].url}
                   alt="An image of the pianist"
                   width={400}

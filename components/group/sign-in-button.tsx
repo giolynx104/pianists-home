@@ -7,7 +7,8 @@ const SignInButton = () => {
     <form
       action={async () => {
         "use server"; 
-        await signIn(undefined, { redirectTo: "/" });
+        console.log("It reached here");
+        await signIn(undefined);
       }}
     >
       <Button

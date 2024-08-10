@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import Form from "@/components/group/create-teacher/form";
 import prisma from "@/lib/db";

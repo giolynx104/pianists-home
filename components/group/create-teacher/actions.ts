@@ -46,7 +46,7 @@ export const getSignedUrlConfigured = async (type: string) => {
 
 export const createTeacher = async (
   data: TeacherFormSchema,
-  fileRemoteUrl: string
+  remoteUrls: string[]
 ) => {
   try {
     const session = await auth();
@@ -66,9 +66,7 @@ export const createTeacher = async (
         description: data.description,
         demoLink: data.demoLink,
         teacherImages: {
-          create: {
-            url: fileRemoteUrl.split("?")[0],
-          },
+          create: remoteUrls.map((url) => ({ url: url.split("?")[0] })),
         },
       },
     });

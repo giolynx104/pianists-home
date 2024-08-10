@@ -15,5 +15,4 @@ The app is deployed [here](https://pianists-home.vercel.app/) using Vercel.
 
 ## To-do
 
-- Testing
-- Enrollment
+- [ Testing with OAuth ](https://authjs.dev/guides/testing)

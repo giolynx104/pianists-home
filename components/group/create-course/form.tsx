@@ -115,7 +115,7 @@ const Form = () => {
                 className="border border-[secondary]"
                 sx={{
                   "&.MuiPaper-root": {
-                    minHeight: "10rem",
+                    minHeight: "20rem",
                   },
                 }}
               >
@@ -123,7 +123,7 @@ const Form = () => {
                   className="flex justify-center items-center hover:bg-gray-700"
                   sx={{
                     "&.MuiCardContent-root": {
-                      minHeight: "10rem",
+                      minHeight: "20rem",
                     },
                   }}
                 >
@@ -134,7 +134,7 @@ const Form = () => {
             </Grid>
           </Grid>
         )}
-      </Dropzone>{" "}
+      </Dropzone>
       <Box className="flex justify-center">
         {isValid && (isSubmitting || isSubmitted) ? (
           <LoadingButton

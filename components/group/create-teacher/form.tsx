@@ -6,24 +6,27 @@ import {
   CardContent,
   Stack,
   TextField,
-  Button,
   Box,
   CircularProgress,
+  Grid,
+  Button,
+  Typography,
 } from "@mui/material";
 import { createTeacher, getSignedUrlConfigured } from "./actions";
 import SubmitButton from "./submit-button";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import React, { useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import { Teacher } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { teacherFormSchema, TeacherFormSchema } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Dropzone from "react-dropzone";
+import { CiCirclePlus } from "react-icons/ci";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+
 const Form = () => {
   const router = useRouter();
-  const [fileUrl, setFileUrl] = useState<string | null>(null);
-  const [file, setFile] = useState<File | null>(null);
+  const [images, setImages] = useState<File[]>([]);
   const {
     register,
     handleSubmit,
@@ -36,23 +39,26 @@ const Form = () => {
           className="flex text-center"
           title="Enter your infomation"
         />
-        <CardContent className="flex justify-center items-center ">
+        <CardContent className="flex justify-center items-center">
           <form
             onSubmit={handleSubmit(async (data) => {
-              console.log(data);
-              if (file) {
-                const signedUrlResult = await getSignedUrlConfigured(file.type);
+              let remoteUrls: string[] = [];
+              for (const image of images) {
+                const signedUrlResult = await getSignedUrlConfigured(
+                  image.type
+                );
                 const remoteUrl = signedUrlResult.success!.url;
+                remoteUrls = [...remoteUrls, remoteUrl];
                 await fetch(remoteUrl, {
                   method: "PUT",
-                  body: file,
+                  body: image,
                   headers: {
-                    "Content-Type": file.type,
+                    "Content-Type": image.type,
                   },
                 });
-                await createTeacher(data, remoteUrl);
-                router.push("/profile");
               }
+              await createTeacher(data, remoteUrls);
+              router.push("/profile");
             })}
             className="flex justify-center items-center w-full"
           >
@@ -78,37 +84,55 @@ const Form = () => {
                 error={!!errors.demoLink}
                 helperText={errors.demoLink?.message}
               />
-              <Button
-                variant="outlined"
-                component="label"
-                startIcon={<CloudUploadIcon />}
-                className="w-full normal-case"
+              <Stack
+                spacing={2}
+                direction="row"
+                className="border border-[primary] flex justify-center items-center"
               >
-                Upload Image
-                <input
-                  hidden
-                  type="file"
-                  accept="images/*"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      setFile(file);
-                      const url = URL.createObjectURL(file);
-                      setFileUrl(url);
-                    } else {
-                      setFileUrl(null);
-                    }
-                  }}
-                />
-              </Button>
-              {file && fileUrl && (
-                <Image
-                  src={fileUrl}
-                  alt="Selected file"
-                  width={300}
-                  height={300}
-                />
-              )}
+                <CloudUploadIcon />
+                <Typography variant="subtitle2">Upload images</Typography>
+              </Stack>
+              <Dropzone
+                onDrop={(acceptedFiles) => {
+                  setImages([...images, ...acceptedFiles]);
+                }}
+              >
+                {({ getRootProps, getInputProps }) => (
+                  <Grid container>
+                    {images.length > 0 &&
+                      images.map((image) => (
+                        <Grid item xs={4} key={image.name} className="p-2">
+                          <img
+                            src={URL.createObjectURL(image)}
+                            alt={image.name}
+                          />
+                        </Grid>
+                      ))}
+                    <Grid item xs={4} {...getRootProps()} className="p-2">
+                      <Card
+                        className="border border-[secondary]"
+                        sx={{
+                          "&.MuiPaper-root": {
+                            minHeight: "20rem",
+                          },
+                        }}
+                      >
+                        <CardContent
+                          className="flex justify-center items-center hover:bg-gray-700"
+                          sx={{
+                            "&.MuiCardContent-root": {
+                              minHeight: "20rem",
+                            },
+                          }}
+                        >
+                          <CiCirclePlus className="text-3xl" />
+                          <input {...getInputProps()} hidden />
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                  </Grid>
+                )}
+              </Dropzone>
               <Box className="flex justify-center">
                 {isValid && (isSubmitting || isSubmitted) ? (
                   <CircularProgress />
