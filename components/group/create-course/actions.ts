@@ -5,21 +5,17 @@ import prisma from "@/lib/db";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
 import { CourseFormSchema } from "@/lib/types";
-import { getSignedUrlConfigured } from "../create-teacher/actions";
+import { getUserBySession, verifySession } from "@/lib/actions";
 
 export const createCourse = async (
   data: CourseFormSchema,
   remoteUrls: string[]
 ) => {
-  const session = await auth();
-  if (!session) {
-    redirect("/api/auth/signin");
-  }
-  const user = session.user;
+  const session = await verifySession(() => {
+    redirect("api/auth/signin");
+  });
 
-  if (!user) {
-    throw new Error("User not authenticated");
-  }
+  const user = await getUserBySession(session);
 
   const teacher = await prisma.teacher.findUnique({
     where: {
@@ -29,9 +25,7 @@ export const createCourse = async (
 
   await prisma.course.create({
     data: {
-      name: data.name,
-      description: data.description,
-      price: data.price,
+      ...data,
       teacher: {
         connect: {
           id: teacher!.id,
