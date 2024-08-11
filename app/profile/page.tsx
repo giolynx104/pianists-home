@@ -11,7 +11,7 @@ import {
   getCoursesByTeacherId,
   getEnrollmentByUserId,
 } from "@/components/group/profile/actions";
-import { verifySession, getCurrentUser } from "@/lib/actions";
+import { verifySession, getUserBySession } from "@/lib/actions";
 import { PiCalendarBlank } from "react-icons/pi";
 
 //TODO: Fix profile image having low quality from Google
@@ -21,7 +21,7 @@ const Page = async () => {
     redirect("api/auth/signin");
   });
 
-  const user = await getCurrentUser(session);
+  const user = await getUserBySession(session);
 
   const enrollments = await getEnrollmentByUserId(user.id);
 
@@ -64,10 +64,7 @@ const Page = async () => {
           </Stack>
         </Grid>
         <Grid item xs={9}>
-          <BasicTabs
-            enrollments={enrollments}
-            teacher={teacher}
-          />
+          <BasicTabs enrollments={enrollments} teacher={teacher} />
         </Grid>
       </Grid>
     </Box>

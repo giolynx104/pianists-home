@@ -15,16 +15,17 @@ datasource db {
 }
 
 model Course {
-  id           String        @id @default(cuid())
-  name         String
-  courseImages CourseImage[]
-  Enrollment   Enrollment[]
-  description  String?
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  price        Float
-  teacher      Teacher       @relation(fields: [teacherId], references: [id])
-  teacherId    String
+  id            String        @id @default(cuid())
+  name          String
+  courseImages  CourseImage[]
+  Enrollment    Enrollment[]
+  description   String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  price         Float
+  teacher       Teacher       @relation(fields: [teacherId], references: [id])
+  teacherId     String
+  courseImageId String
 }
 
 model Enrollment {
@@ -93,17 +94,21 @@ model Session {
 }
 
 model User {
-  id            String       @id @default(cuid())
-  name          String?
-  email         String?      @unique
-  password      String?
-  emailVerified DateTime?    @map("email_verified")
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  enrollments   Enrollment[]
-  teacher       Teacher?
-  location      String?
+  id                 String       @id @default(cuid())
+  name               String?
+  email              String?      @unique
+  password           String?
+  emailVerified      DateTime?    @map("email_verified")
+  image              String?
+  accounts           Account[]
+  sessions           Session[]
+  enrollments        Enrollment[]
+  teacher            Teacher?
+  location           String?
+  facebookLink       String?
+  xLink              String?
+  instagramLink      String?
+  youtubeChannelLink String?
 
   @@map("users")
 }

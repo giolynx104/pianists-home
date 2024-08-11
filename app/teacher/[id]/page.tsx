@@ -7,21 +7,16 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import FeaturedVideos from "@/components/group/teacher/featured-videos";
 import About from "@/components/group/teacher/about";
 import CourseList from "@/components/group/teacher/course-list";
+import { getTeacher } from "@/components/group/teacher/actions";
+import Link from "next/link";
 
 const Page = async ({ params }: { params: { id: string } }) => {
-  const teacher = (await prisma.teacher.findUnique({
-    where: {
-      id: params.id,
-    },
-    include: {
-      user: true,
-      teacherImages: true,
-      courses: true,
-    },
-  }))!;
+  const teacher = await getTeacher(params.id);
+
   if (!teacher) {
     throw new Error("Invalid Teacher ID");
   }
+
   return (
     <Stack>
       <Box
@@ -39,10 +34,26 @@ const Page = async ({ params }: { params: { id: string } }) => {
             Contact me
           </Typography>
           <Stack spacing={1} direction="row">
-            <FacebookIcon />
-            <XIcon />
-            <InstagramIcon />
-            <YouTubeIcon />
+            {teacher.user.facebookLink && (
+              <Link href={teacher.user.facebookLink}>
+                <FacebookIcon />
+              </Link>
+            )}
+            {teacher.user.youtubeChannelLink && (
+              <Link href={teacher.user.youtubeChannelLink}>
+                <YouTubeIcon />
+              </Link>
+            )}
+            {teacher.user.instagramLink && (
+              <Link href={teacher.user.instagramLink}>
+                <InstagramIcon />
+              </Link>
+            )}
+            {teacher.user.xLink && (
+              <Link href={teacher.user.xLink}>
+                <XIcon />
+              </Link>
+            )}
           </Stack>
         </Stack>
       </Box>

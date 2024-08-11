@@ -64,16 +64,16 @@ const Form = () => {
           >
             <Stack spacing={2} className="w-full">
               <TextField
+                required
                 multiline
                 rows={5}
                 label="Description"
-                className="w-full"
                 {...register("description")}
                 error={!!errors.description}
                 helperText={errors.description?.message}
               />
               <TextField
-                className="w-full"
+                required
                 label="Demo Link"
                 {...register("demoLink", {
                   required: {
@@ -83,6 +83,30 @@ const Form = () => {
                 })}
                 error={!!errors.demoLink}
                 helperText={errors.demoLink?.message}
+              />
+              <TextField
+                label="Facebook"
+                {...register("facebookLink")}
+                error={!!errors.facebookLink}
+                helperText={errors.facebookLink?.message}
+              />
+              <TextField
+                label="Instagram"
+                {...register("instagramLink")}
+                error={!!errors.instagramLink}
+                helperText={errors.instagramLink?.message}
+              />
+              <TextField
+                label="Youtube"
+                {...register("youtubeChannelLink")}
+                error={!!errors.youtubeChannelLink}
+                helperText={errors.youtubeChannelLink?.message}
+              />
+              <TextField
+                label="X"
+                {...register("xLink")}
+                error={!!errors.xLink}
+                helperText={errors.xLink?.message}
               />
               <Stack
                 spacing={2}

@@ -39,8 +39,6 @@ const Form = () => {
       <form
         id="create-course-form"
         onSubmit={handleSubmit(async (data) => {
-          console.log(data);
-          console.log(images);
           let remoteUrls: string[] = [];
           for (const image of images) {
             const signedUrlResult = await getSignedUrlConfigured(image.type);

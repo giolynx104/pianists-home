@@ -3,6 +3,7 @@
 import { Session } from "next-auth";
 import { auth } from "../auth";
 import prisma from "./db";
+import { teacherIncludeAll } from "./types";
 
 export const verifySession = async (
   callback: () => never
@@ -14,11 +15,20 @@ export const verifySession = async (
   return session!;
 };
 
-export const getCurrentUser = async (session: Session) => {
+export const getUserBySession = async (session: Session) => {
   const user = await prisma.user.findUnique({
     where: {
       email: session.user!.email!,
     },
   });
   return user!;
+};
+
+export const getTeacherIncludeAllByUserId = async (userId: string) => {
+  return await prisma.teacher.findUnique({
+    where: {
+      userId: userId,
+    },
+    include: teacherIncludeAll,
+  });
 };

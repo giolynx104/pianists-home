@@ -10,9 +10,9 @@ const Page = async () => {
       userId: user!.id,
     },
   });
-  if (teacher) {
-    redirect("/profile");
-  }
+  // if (teacher) {
+  //   redirect("/profile");
+  // }
   return <Form />;
 };
 

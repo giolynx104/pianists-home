@@ -1,6 +1,6 @@
 "use server";
 
-import { getCurrentUser, verifySession } from "@/lib/actions";
+import { getUserBySession, verifySession } from "@/lib/actions";
 import prisma from "@/lib/db";
 import { Course, Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
@@ -36,7 +36,7 @@ export const getCoursesByTeacherId = async (teacherId: string) => {
 };
 
 export const removeEnrollment = async (course: Course) => {
-  const user = await getCurrentUser(
+  const user = await getUserBySession(
     await verifySession(() => {
       redirect("api/auth/signin");
     })

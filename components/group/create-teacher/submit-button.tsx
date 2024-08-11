@@ -12,6 +12,7 @@ const SubmitButton = () => {
       color="primary"
       aria-disabled={pending}
       className="normal-case"
+      size="large"
     >
       {pending ? "Submitting..." : "Submit"}
     </Button>

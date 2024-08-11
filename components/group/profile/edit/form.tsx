@@ -1,59 +1,55 @@
 "use client";
 
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 import {
+  Box,
   Button,
   Card,
   CardContent,
-  Grid,
+  CardHeader,
   Stack,
+  Tab,
   TextField,
 } from "@mui/material";
 import { User } from "@prisma/client";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { TeacherIncludeAll } from "@/lib/types";
+import TeacherInfoCard from "./teacher-info";
+import UserInfo from "./user-info";
 
-const Form = ({ user }: { user: User }) => {
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm();
+//TODO: Implement user location
+
+const Form = ({
+  user,
+  teacher,
+}: {
+  user: User;
+  teacher: TeacherIncludeAll | null;
+}) => {
+  const [value, setValue] = useState("1");
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
   return (
-    <Card>
-      <CardContent>
-        <form onSubmit={handleSubmit(() => {})}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                label="Name"
-                {...register("name")}
-                defaultValue={user.name}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Location"
-                defaultValue={user.location ? user.location : ""}
-                {...register("location")}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Stack direction="row" spacing={1} className="flex">
-                <Button
-                  variant="contained"
-                  type="submit"
-                  className="normal-case"
-                >
-                  Save
-                </Button>
-                <Button variant="outlined" className="normal-case">
-                  Cancel
-                </Button>
-              </Stack>
-            </Grid>
-          </Grid>
-        </form>
-      </CardContent>
-    </Card>
+    <>
+      <TabContext value={value}>
+        <TabList onChange={handleChange}>
+          <Tab className="normal-case" label="Profile" value="1" />
+          <Tab label="Teacher" value="2" className="normal-case" />
+        </TabList>
+        <TabPanel value="1">
+          <UserInfo user={user} />
+        </TabPanel>
+        <TabPanel value="2">
+          {!teacher ? (
+            <Button variant="contained">Register as Teacher</Button>
+          ) : (
+            <TeacherInfoCard teacher={teacher} />
+          )}
+        </TabPanel>
+      </TabContext>
+    </>
   );
 };
 
