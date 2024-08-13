@@ -2,7 +2,7 @@
 
 import { getUserBySession, verifySession } from "@/lib/actions";
 import prisma from "@/lib/db";
-import { Course, Prisma } from "@prisma/client";
+import { Course } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -51,15 +51,3 @@ export const removeEnrollment = async (course: Course) => {
 
   revalidatePath("/profile");
 };
-
-export const teacherWithCourses = Prisma.validator<Prisma.TeacherDefaultArgs>()(
-  {
-    include: {
-      courses: true,
-    },
-  }
-);
-
-export type TeacherWithCourses = Prisma.TeacherGetPayload<
-  typeof teacherWithCourses
->;

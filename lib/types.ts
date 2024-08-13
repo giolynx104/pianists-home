@@ -85,3 +85,15 @@ export const teacherWithUserandImages =
 export type TeacherWithUserandImages = Prisma.TeacherGetPayload<
   typeof teacherWithUserandImages
 >;
+
+export const teacherWithCourses = Prisma.validator<Prisma.TeacherDefaultArgs>()(
+  {
+    include: {
+      courses: true,
+    },
+  }
+);
+
+export type TeacherWithCourses = Prisma.TeacherGetPayload<
+  typeof teacherWithCourses
+>;

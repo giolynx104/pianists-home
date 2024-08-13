@@ -6,8 +6,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import EnrolledCourseList from "./enrolled-course-list";
-import { EnrollmentWithCourse } from "@/lib/types";
-import { TeacherWithCourses } from "./actions";
+import { EnrollmentWithCourse, TeacherWithCourses } from "@/lib/types";
 import { Button } from "@mui/material";
 
 interface TabPanelProps {
