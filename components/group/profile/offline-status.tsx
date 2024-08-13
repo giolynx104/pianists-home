@@ -1,7 +1,7 @@
-import { Typography } from "@mui/material";
+import Status from "./status";
 
 const OfflineStatus = () => {
-    return <Typography className="bg-blue-500 text-black rounded-3xl" variant="subtitle2">Offline</Typography>
+    return <Status name="Offline" backgroundColor="blue-500" textColor="black" />
 }
 
 export default OfflineStatus;

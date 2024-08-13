@@ -120,11 +120,11 @@ const Form = () => {
         }}
       >
         {({ getRootProps, getInputProps }) => (
-          <Grid container>
+          <Grid container spacing={2}>
             {images.length > 0 &&
               images.map((image) => (
-                <Grid item xs={4} key={image.name} className="p-2">
-                  <Image src={URL.createObjectURL(image)} alt={image.name} />
+                <Grid item xs={4} key={image.name} className="p-2 relative">
+                  <Image src={URL.createObjectURL(image)} alt={image.name} fill />
                 </Grid>
               ))}
             <Grid item xs={4} {...getRootProps()} className="p-2">

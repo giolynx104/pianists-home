@@ -1,7 +1,7 @@
-import { Typography } from "@mui/material"
+import Status from "./status";
 
 const OnlineStatus = () => {
-    return <Typography variant="subtitle2" className="bg-green-500 text-black rounded-3xl">Online</Typography>
+    return <Status name="Online" backgroundColor="green-500" textColor="black" />
 }
 
 export default OnlineStatus;
