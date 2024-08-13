@@ -12,12 +12,12 @@ import {
   CardContent,
   Button,
 } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { TeacherWithUserandImages } from "./actions";
+import { TeacherWithUserandImages } from "@/lib/types";
 
 const ReactPlayer = dynamic(() => import("react-player/youtube"), {
   ssr: false,
@@ -26,7 +26,7 @@ const ReactPlayer = dynamic(() => import("react-player/youtube"), {
 const TeacherInfoSection = ({ data }: { data: TeacherWithUserandImages[] }) => {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = React.useState<number>(0);
-  const [variants, setVariants] = React.useState<any>(appearAnimation);
+  const [variants, setVariants] = React.useState<Variants>(appearAnimation);
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>

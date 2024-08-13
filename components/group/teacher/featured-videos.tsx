@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 
 const ReactPlayer = dynamic(() => import("react-player/youtube"), {

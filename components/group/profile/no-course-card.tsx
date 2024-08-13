@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { PiCalendarBlank } from "react-icons/pi";
 const NoCourseCard = () => {
   return (

@@ -74,3 +74,14 @@ export const userFormSchema = z.object({
 
 export type UserFormSchema = z.infer<typeof userFormSchema>;
 
+export const teacherWithUserandImages =
+  Prisma.validator<Prisma.TeacherDefaultArgs>()({
+    include: {
+      user: true,
+      teacherImages: true,
+    },
+  });
+
+export type TeacherWithUserandImages = Prisma.TeacherGetPayload<
+  typeof teacherWithUserandImages
+>;
