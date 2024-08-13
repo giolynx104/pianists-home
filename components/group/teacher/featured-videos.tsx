@@ -9,7 +9,10 @@ const ReactPlayer = dynamic(() => import("react-player/youtube"), {
 const FeaturedVideos = ({ url }: { url: string }) => {
   return (
     <Stack className="bg-black flex items-center justify-center">
-      <Typography variant="h4" className="text-center p-10 text-white uppercase">
+      <Typography
+        variant="h4"
+        className="text-center p-10 text-white uppercase"
+      >
         Featured Videos
       </Typography>
       <ReactPlayer url={url} />

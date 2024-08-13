@@ -1,6 +1,11 @@
 "use client";
 
-import { createTheme, Theme, ThemeProvider, useMediaQuery } from "@mui/material";
+import {
+  createTheme,
+  Theme,
+  ThemeProvider,
+  useMediaQuery,
+} from "@mui/material";
 import React from "react";
 
 export default function ThemeClient({

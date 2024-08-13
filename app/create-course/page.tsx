@@ -1,5 +1,5 @@
 import Form from "@/components/group/create-course/form";
-import { Box, Card, CardContent, CardHeader, Container } from "@mui/material";
+import { Box, Card, CardContent, CardHeader } from "@mui/material";
 import { GiGrandPiano } from "react-icons/gi";
 
 const Page = () => {

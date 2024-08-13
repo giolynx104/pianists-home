@@ -6,7 +6,7 @@ const SignInButton = () => {
   return (
     <form
       action={async () => {
-        "use server"; 
+        "use server";
         console.log("It reached here");
         await signIn(undefined);
       }}

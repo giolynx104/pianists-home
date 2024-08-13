@@ -9,7 +9,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { signOutAction } from "./actions";
 import { FiShoppingCart } from "react-icons/fi";
 import { useRouter } from "next/navigation";
-import DrawerListItem from "./drawer-list-item";
+import DrawerListItem from "./drawer-list-item"; import { FaListAlt } from "react-icons/fa";
 
 export default function UserAvatar({ userAvatar }: { userAvatar: string }) {
   const router = useRouter();
@@ -20,6 +20,15 @@ export default function UserAvatar({ userAvatar }: { userAvatar: string }) {
         setOpen={setOpen}
         icon={<CgProfile />}
         text="Your Profile"
+        onClick={() => {
+          router.push("/profile");
+        }}
+      />
+      <Divider variant="middle" />
+      <DrawerListItem
+        setOpen={setOpen}
+        icon={<FaListAlt />}
+        text="Your Courses"
         onClick={() => {
           router.push("/profile");
         }}

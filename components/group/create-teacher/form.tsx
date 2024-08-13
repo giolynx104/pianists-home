@@ -9,7 +9,6 @@ import {
   Box,
   CircularProgress,
   Grid,
-  Button,
   Typography,
 } from "@mui/material";
 import { createTeacher, getSignedUrlConfigured } from "./actions";
@@ -45,7 +44,7 @@ const Form = () => {
               let remoteUrls: string[] = [];
               for (const image of images) {
                 const signedUrlResult = await getSignedUrlConfigured(
-                  image.type
+                  image.type,
                 );
                 const remoteUrl = signedUrlResult.success!.url;
                 remoteUrls = [...remoteUrls, remoteUrl];
@@ -116,6 +115,7 @@ const Form = () => {
                 <CloudUploadIcon />
                 <Typography variant="subtitle2">Upload images</Typography>
               </Stack>
+              <Typography variant="subtitle2">*Your first image will be used as the avatar for the teacher.</Typography>
               <Dropzone
                 onDrop={(acceptedFiles) => {
                   setImages([...images, ...acceptedFiles]);
@@ -126,7 +126,7 @@ const Form = () => {
                     {images.length > 0 &&
                       images.map((image) => (
                         <Grid item xs={4} key={image.name} className="p-2">
-                          <img
+                          <Image
                             src={URL.createObjectURL(image)}
                             alt={image.name}
                           />

@@ -62,9 +62,4 @@ export type TeacherIncludeAll = Prisma.TeacherGetPayload<
   typeof TeacherIncludeAll
 >;
 
-const teacherWithUserandImages = Prisma.validator<Prisma.TeacherDefaultArgs>()({
-  include: {
-    user: true,
-    teacherImages: true,
-  },
-});
+

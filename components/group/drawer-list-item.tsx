@@ -4,7 +4,6 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import router from "next/router";
 import { Dispatch, SetStateAction } from "react";
 
 const DrawerListItem = ({
@@ -24,8 +23,8 @@ const DrawerListItem = ({
         component="button"
         className="w-full normal-case text-base"
         onClick={() => {
-            onClick();
-            setOpen(false);
+          onClick();
+          setOpen(false);
         }}
       >
         <ListItemIcon>{icon}</ListItemIcon>

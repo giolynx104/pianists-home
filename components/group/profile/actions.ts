@@ -39,7 +39,7 @@ export const removeEnrollment = async (course: Course) => {
   const user = await getUserBySession(
     await verifySession(() => {
       redirect("api/auth/signin");
-    })
+    }),
   );
 
   await prisma.enrollment.deleteMany({

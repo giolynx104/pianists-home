@@ -8,7 +8,7 @@ const CourseMaterialListItem = ({ courseId }: { courseId: string }) => {
     <SimpleTreeView>
       <TreeItem2 itemId="course-material" label="Course Material">
         {modules.map((module) => (
-          <TreeItem2 itemId={module} label={module} />
+          <TreeItem2 key={module} itemId={module} label={module} />
         ))}
       </TreeItem2>
     </SimpleTreeView>

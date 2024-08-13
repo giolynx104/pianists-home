@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import CreateCourseButton from "@/components/group/profile/create-course-button";
 import RegisterAsTeacherButton from "@/components/group/profile/register-as-teacher-button";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
@@ -8,11 +7,9 @@ import { redirect } from "next/navigation";
 import prisma from "@/lib/db";
 import BasicTabs from "@/components/group/profile/basic-tabs";
 import {
-  getCoursesByTeacherId,
   getEnrollmentByUserId,
 } from "@/components/group/profile/actions";
 import { verifySession, getUserBySession } from "@/lib/actions";
-import { PiCalendarBlank } from "react-icons/pi";
 
 //TODO: Fix profile image having low quality from Google
 

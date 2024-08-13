@@ -17,7 +17,10 @@ export default function Error({
 
   return (
     <Container className="h-screen flex justify-center items-center">
-      <Stack spacing={2} className="h-screen flex justify-center items-center text-red-400">
+      <Stack
+        spacing={2}
+        className="h-screen flex justify-center items-center text-red-400"
+      >
         <MdError />
         <Typography variant="body1" className="text-center">
           {error.message}

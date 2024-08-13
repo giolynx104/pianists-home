@@ -9,7 +9,7 @@ import { getUserBySession, verifySession } from "@/lib/actions";
 
 export const createCourse = async (
   data: CourseFormSchema,
-  remoteUrls: string[]
+  remoteUrls: string[],
 ) => {
   const session = await verifySession(() => {
     redirect("api/auth/signin");

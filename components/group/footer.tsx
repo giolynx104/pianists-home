@@ -1,4 +1,11 @@
-import { Box, List, ListItem, ListItemButton, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { GiGrandPiano } from "react-icons/gi";
 
 export default function Footer() {
@@ -27,7 +34,11 @@ export default function Footer() {
       <Typography variant="body2">
         Do not share my personal information
       </Typography>
-      <Stack direction="row" className="mt-3 flex justify-center items-center" spacing={1}>
+      <Stack
+        direction="row"
+        className="mt-3 flex justify-center items-center"
+        spacing={1}
+      >
         <GiGrandPiano />
         <Typography>&copy; 2024 GiaoLe, Inc.</Typography>
       </Stack>

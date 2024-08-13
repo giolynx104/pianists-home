@@ -46,7 +46,7 @@ export const getSignedUrlConfigured = async (type: string) => {
 
 export const createTeacher = async (
   data: TeacherFormSchema,
-  remoteUrls: string[]
+  remoteUrls: string[],
 ) => {
   try {
     const session = await auth();

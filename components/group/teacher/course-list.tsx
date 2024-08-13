@@ -39,7 +39,10 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
                 <CardContent className="flex items-center justify-between">
                   <Stack spacing={1} className="w-3/4">
                     <Link href={`/course/${course.id}`}>
-                      <Typography variant="h6" className="font-bold hover:underline">
+                      <Typography
+                        variant="h6"
+                        className="font-bold hover:underline"
+                      >
                         {course.name}
                       </Typography>
                     </Link>

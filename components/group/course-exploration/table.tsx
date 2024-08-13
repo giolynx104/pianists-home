@@ -37,7 +37,7 @@ const Table = ({
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
-    newValue: number
+    newValue: number,
   ) => {
     setPage(newValue);
   };
@@ -46,7 +46,7 @@ const Table = ({
     <Stack spacing={4} className="flex flex-col justify-center items-center">
       <Grid container spacing={2}>
         {courses.map((course) => (
-          <CourseCard course={course} />
+          <CourseCard key={course.id} course={course} />
         ))}
       </Grid>
       <Pagination page={page} count={totalPages} onChange={handlePageChange} />

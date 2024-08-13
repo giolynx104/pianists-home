@@ -25,7 +25,7 @@ const EnrolledCourseList = ({
       className="flex justify-center items-center w-full h-full border-2 border-dashed border-gray-400"
     >
       <PiCalendarBlank />
-      <Typography>You haven't enrolled any courses yet</Typography>
+      <Typography>You haven&apos;t enrolled any courses yet</Typography>
     </Stack>
   );
 };

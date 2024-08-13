@@ -6,7 +6,7 @@ import prisma from "./db";
 import { teacherIncludeAll } from "./types";
 
 export const verifySession = async (
-  callback: () => never
+  callback: () => never,
 ): Promise<Session> => {
   const session = await auth();
   if (session == null) {

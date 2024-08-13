@@ -6,10 +6,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import EnrolledCourseList from "./enrolled-course-list";
-import { Course, Enrollment, Teacher } from "@prisma/client";
 import { EnrollmentWithCourse } from "@/lib/types";
 import { TeacherWithCourses } from "./actions";
-import { TabPanel } from "@mui/lab";
 import { Button } from "@mui/material";
 
 interface TabPanelProps {
@@ -62,8 +60,8 @@ export default function BasicTabs({
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Your Courses" {...allyProps(0)} />
-          <Tab label="Teaching Classes" {...allyProps(1)} />
+          <Tab label="My Courses" {...allyProps(0)} />
+          <Tab label="My Classes" {...allyProps(1)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>

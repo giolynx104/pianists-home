@@ -10,7 +10,9 @@ import {
   Card,
   CardContent,
   Grid,
+  Typography,
 } from "@mui/material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { createCourse } from "./actions";
 import { useForm } from "react-hook-form";
 import { courseFormSchema, CourseFormSchema } from "@/lib/types";
@@ -23,6 +25,7 @@ import { CiCirclePlus } from "react-icons/ci";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { getSignedUrlConfigured } from "../create-teacher/actions";
+import Image from "next/image";
 
 const Form = () => {
   const router = useRouter();
@@ -95,6 +98,15 @@ const Form = () => {
           />
         </Stack>
       </form>
+      <Stack
+        spacing={2}
+        direction="row"
+        className="border border-[primary] flex justify-center items-center"
+      >
+        <CloudUploadIcon />
+        <Typography variant="subtitle2">Upload images</Typography>
+      </Stack>
+      <Typography variant="subtitle2">*Your first image will be used as thumbnail for the course.</Typography>
       <Dropzone
         onDrop={(acceptedFiles) => {
           setImages([...images, ...acceptedFiles]);
@@ -105,7 +117,7 @@ const Form = () => {
             {images.length > 0 &&
               images.map((image) => (
                 <Grid item xs={4} key={image.name} className="p-2">
-                  <img src={URL.createObjectURL(image)} alt={image.name} />
+                  <Image src={URL.createObjectURL(image)} alt={image.name} />
                 </Grid>
               ))}
             <Grid item xs={4} {...getRootProps()} className="p-2">

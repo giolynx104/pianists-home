@@ -30,14 +30,14 @@ const TeacherInfoSection = ({ data }: { data: TeacherWithUserandImages[] }) => {
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? data.length - 1 : prevIndex - 1
+      prevIndex === 0 ? data.length - 1 : prevIndex - 1,
     );
     setVariants(slideInRight);
   };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === data.length - 1 ? 0 : prevIndex + 1
+      prevIndex === data.length - 1 ? 0 : prevIndex + 1,
     );
     setVariants(slideInLeft);
   };

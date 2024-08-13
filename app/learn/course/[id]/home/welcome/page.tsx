@@ -2,11 +2,7 @@ import CourseMaterialListItem from "@/components/learn/course/home/welcome/cours
 import { Drawer, List } from "@mui/material";
 
 const Page = ({ params }: { params: { id: string } }) => {
-  return (
-    <>
-      
-    </>
-  );
+  return <></>;
 };
 
 export default Page;
