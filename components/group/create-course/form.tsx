@@ -113,7 +113,7 @@ const Form = () => {
         <CloudUploadIcon />
         <Typography variant="subtitle2">Upload images</Typography>
       </Stack>
-      <Typography variant="subtitle2">*Your first image will be used as thumbnail for the course.</Typography>
+      <Typography variant="subtitle2" className="text-gray-600">*Your first image will be used as thumbnail for the course.</Typography>
       <Dropzone
         onDrop={(acceptedFiles) => {
           setImages([...images, ...acceptedFiles]);

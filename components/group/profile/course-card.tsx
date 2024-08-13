@@ -19,7 +19,8 @@ import { MdDelete } from "react-icons/md";
 import { deleteCourse } from "./actions";
 import { IoPricetagsOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
-import { boolean } from "zod";
+import OfflineStatus from "./offline-status";
+import OnlineStatus from "./online-status";
 
 //TODO: Improving card design
 
@@ -35,6 +36,7 @@ const CourseCard = ({ course }: { course: Course }) => {
             <Typography variant="h5" className="font-bold text-blue-500">
               {course.name}
             </Typography>
+            {course.offline ? <OfflineStatus /> : <OnlineStatus />}
             <Typography variant="body1" className="text-[#8d96a0]">
               {course.description}
             </Typography>

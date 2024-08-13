@@ -83,7 +83,7 @@ const Form = () => {
                 error={!!errors.demoLink}
                 helperText={errors.demoLink?.message}
               />
-              <TextField
+              {/* <TextField
                 label="Facebook"
                 {...register("facebookLink")}
                 error={!!errors.facebookLink}
@@ -106,7 +106,7 @@ const Form = () => {
                 {...register("xLink")}
                 error={!!errors.xLink}
                 helperText={errors.xLink?.message}
-              />
+              /> */}
               <Stack
                 spacing={2}
                 direction="row"
@@ -115,7 +115,7 @@ const Form = () => {
                 <CloudUploadIcon />
                 <Typography variant="subtitle2">Upload images</Typography>
               </Stack>
-              <Typography variant="subtitle2">*Your first image will be used as the avatar for the teacher.</Typography>
+              <Typography variant="subtitle2" className="text-gray-600">*Your first image will be used as the avatar for the teacher.</Typography>
               <Dropzone
                 onDrop={(acceptedFiles) => {
                   setImages([...images, ...acceptedFiles]);
@@ -125,10 +125,11 @@ const Form = () => {
                   <Grid container>
                     {images.length > 0 &&
                       images.map((image) => (
-                        <Grid item xs={4} key={image.name} className="p-2">
+                        <Grid item xs={4} key={image.name} className="p-2 relative">
                           <Image
                             src={URL.createObjectURL(image)}
                             alt={image.name}
+                            fill
                           />
                         </Grid>
                       ))}

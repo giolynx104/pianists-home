@@ -1,16 +1,22 @@
 "use server";
 
 import prisma from "@/lib/db";
-import { User } from "@prisma/client";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/dist/server/api-utils";
+import { TeacherFormSchema, UserFormSchema } from "@/lib/types";
 
-export const updateUserInfo = (userId: string, data: User) => {
-  const { id, ...rest } = data;
+export const updateUserInfo = (userId: string, data: UserFormSchema) => {
   return prisma.user.update({
     where: {
       id: userId,
     },
-    data: { ...rest },
+    data: { ...data },
+  });
+};
+
+export const updateTeacherInfo = (userId: string, data: TeacherFormSchema) => {
+  return prisma.teacher.update({
+    where: {
+      userId: userId,
+    },
+    data: { ...data },
   });
 };

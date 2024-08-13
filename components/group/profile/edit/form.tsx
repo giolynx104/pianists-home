@@ -2,18 +2,11 @@
 
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import {
-  Box,
   Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Stack,
   Tab,
-  TextField,
 } from "@mui/material";
 import { User } from "@prisma/client";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { TeacherIncludeAll } from "@/lib/types";
 import TeacherInfoCard from "./teacher-info";
 import UserInfo from "./user-info";

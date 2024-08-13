@@ -27,20 +27,14 @@ export const teacherFormSchema = z.object({
   demoLink: z.string().regex(/^https?:\/\//, "Demo link must be a valid URL"),
   youtubeChannelLink: z
     .string()
-    .regex(/^https?:\/\//, "Youtube channel link must be a valid URL")
-    .optional(),
+    .regex(/^https?:\/\/.*|$/, "Youtube channel link must be a valid URL"),
   facebookLink: z
     .string()
-    .regex(/^https?:\/\//, "Facebook link must be a valid URL")
-    .optional(),
+    .regex(/^(https?:\/\/[^\s]+)?$/, "Facebook link must be a valid URL"),
   instagramLink: z
     .string()
-    .regex(/^https?:\/\//, "Instagram link must be a valid URL")
-    .optional(),
-  xLink: z
-    .string()
-    .regex(/^https?:\/\//, "X link must be a valid URL")
-    .optional(),
+    .regex(/^https?:\/\/.*|$/, "Instagram link must be a valid URL"),
+  xLink: z.string().regex(/^https?:\/\/.*|$/, "X link must be a valid URL"),
 });
 
 export type TeacherFormSchema = z.infer<typeof teacherFormSchema>;
@@ -63,4 +57,20 @@ export type TeacherIncludeAll = Prisma.TeacherGetPayload<
   typeof TeacherIncludeAll
 >;
 
+export const userFormSchema = z.object({
+  name: z.string().min(1, "Name can't be empty"),
+  youtubeChannelLink: z
+    .string()
+    .regex(/^https?:\/\/.*|$/, "Youtube channel link must be a valid URL"),
+  facebookLink: z
+    .string()
+    .regex(/^(https?:\/\/[^\s]+)?$/, "Facebook link must be a valid URL"),
+  instagramLink: z
+    .string()
+    .regex(/^https?:\/\/.*|$/, "Instagram link must be a valid URL"),
+  xLink: z.string().regex(/^https?:\/\/.*|$/, "X link must be a valid URL"),
+  location: z.string().optional(),
+});
+
+export type UserFormSchema = z.infer<typeof userFormSchema>;
 

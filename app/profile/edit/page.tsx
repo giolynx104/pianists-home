@@ -1,6 +1,4 @@
-import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import prisma from "@/lib/db";
 import Form from "@/components/group/profile/edit/form";
 import {
   getUserBySession,

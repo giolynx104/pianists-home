@@ -1,6 +1,5 @@
 "use client";
 
-import FacebookIcon from "@mui/icons-material/Facebook";
 import {
   Box,
   Card,
@@ -15,12 +14,19 @@ import { useForm } from "react-hook-form";
 import { updateUserInfo } from "./actions";
 import { useRouter } from "next/navigation";
 
+import FacebookIcon from "@mui/icons-material/Facebook";
+import XIcon from "@mui/icons-material/X";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import { userFormSchema, UserFormSchema } from "@/lib/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 const UserInfo = ({ user }: { user: User }) => {
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<User>();
+  } = useForm<UserFormSchema>({ resolver: zodResolver(userFormSchema) });
 
   const router = useRouter();
 
@@ -41,45 +47,57 @@ const UserInfo = ({ user }: { user: User }) => {
                 {...register("name")}
                 defaultValue={user.name}
                 required
+                error={!!errors.name}
+                helperText={errors.name?.message}
               />
               <TextField
                 label="Facebook"
-                defaultValue={user.facebookLink ? user.facebookLink : ""}
+                defaultValue={user.facebookLink}
                 {...register("facebookLink")}
                 InputProps={{
                   startAdornment: <FacebookIcon />,
                 }}
+                error={!!errors.facebookLink}
+                helperText={errors.facebookLink?.message}
               />
               <TextField
                 label="Instagram"
-                defaultValue={user.instagramLink ? user.instagramLink : ""}
+                defaultValue={user.instagramLink}
                 {...register("instagramLink")}
                 InputProps={{
-                  startAdornment: <FacebookIcon />,
+                  startAdornment: <InstagramIcon />,
                 }}
+                error={!!errors.instagramLink}
+                helperText={errors.instagramLink?.message}
               />
               <TextField
-                label="Facebook"
-                defaultValue={user.xLink ? user.xLink : ""}
+                label="X"
+                defaultValue={user.xLink}
                 {...register("xLink")}
                 InputProps={{
-                  startAdornment: <FacebookIcon />,
+                  startAdornment: <XIcon />,
                 }}
+                error={!!errors.xLink}
+                helperText={errors.xLink?.message}
               />
               <TextField
                 label="Youtube"
                 defaultValue={
-                  user.youtubeChannelLink ? user.youtubeChannelLink : ""
+                  user.youtubeChannelLink
                 }
                 {...register("youtubeChannelLink")}
                 InputProps={{
-                  startAdornment: <FacebookIcon />,
+                  startAdornment: <YouTubeIcon />,
                 }}
+                error={!!errors.youtubeChannelLink}
+                helperText={errors.youtubeChannelLink?.message}
               />
               <TextField
                 label="Location"
-                defaultValue={user.location ? user.location : ""}
+                defaultValue={user.location}
                 {...register("location")}
+                error={!!errors.location}
+                helperText={errors.location?.message}
               />
               <Stack
                 direction="row"
