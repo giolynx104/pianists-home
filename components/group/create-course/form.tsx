@@ -11,6 +11,9 @@ import {
   CardContent,
   Grid,
   Typography,
+  Checkbox,
+  FormGroup,
+  FormControlLabel,
 } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { createCourse } from "./actions";
@@ -96,6 +99,10 @@ const Form = () => {
             error={!!errors.price}
             helperText={errors.price?.message}
           />
+          <FormGroup>
+            <FormControlLabel control={<Checkbox {...register("offline")} defaultChecked />
+            } label="Offline" />
+          </FormGroup>
         </Stack>
       </form>
       <Stack

@@ -15,6 +15,7 @@ export const courseFormSchema = z.object({
     .max(1000, "Description is limited to 500 characters")
     .min(1, "Description can't be empty"),
   price: z.coerce.number().nonnegative().finite(),
+  offline: z.boolean(),
 });
 
 export type CourseFormSchema = z.infer<typeof courseFormSchema>;

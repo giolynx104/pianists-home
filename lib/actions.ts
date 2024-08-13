@@ -4,9 +4,10 @@ import { Session } from "next-auth";
 import { auth } from "../auth";
 import prisma from "./db";
 import { teacherIncludeAll } from "./types";
+import { redirect } from "next/navigation";
 
 export const verifySession = async (
-  callback: () => never,
+  callback: () => never
 ): Promise<Session> => {
   const session = await auth();
   if (session == null) {
@@ -30,5 +31,21 @@ export const getTeacherIncludeAllByUserId = async (userId: string) => {
       userId: userId,
     },
     include: teacherIncludeAll,
+  });
+};
+
+export const getUserOfVerifiedSessionAndRedirectIfNotSignedIn = async () => {
+  const session = await verifySession(() => {
+    redirect("/api/auth/signin");
+  });
+  const user = await getUserBySession(session);
+  return user!;
+};
+
+export const getTeacherByUserId = async (userId: string) => {
+  return await prisma.teacher.findUnique({
+    where: {
+      userId: userId,
+    },
   });
 };

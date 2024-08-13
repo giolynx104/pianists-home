@@ -25,7 +25,7 @@ model Course {
   price        Float
   teacher      Teacher       @relation(fields: [teacherId], references: [id])
   teacherId    String
-  isOffline    Boolean
+  offline    Boolean
 }
 
 model Enrollment {
