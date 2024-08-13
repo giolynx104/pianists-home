@@ -1,15 +1,12 @@
 "use client";
 
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Button, Container, Stack, Typography } from "@mui/material";
 import { useCart } from "react-use-cart";
-import prisma from "@/lib/db";
-import { PiCalendarBlank } from "react-icons/pi";
 import { CourseWithUser } from "../course-exploration/actions";
 import { useEffect, useState } from "react";
 import { getCourses } from "./actions";
 import { FaDropbox } from "react-icons/fa";
 import Link from "next/link";
-import CourseCard from "../course-exploration/course-card";
 import CourseItem from "./course-item";
 
 const CartItems = () => {

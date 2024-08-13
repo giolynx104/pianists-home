@@ -16,9 +16,11 @@ import { IoPricetagsOutline } from "react-icons/io5";
 import { deleteCourse, removeEnrollment } from "./actions";
 import { Course } from "@prisma/client";
 import { TiThMenu } from "react-icons/ti";
+
+//TODO: change deleteCourse to removeEnrollment
+
 const EnrolledCourseCard = ({ course }: { course: Course }) => {
   const [open, setOpen] = useState(false);
-  const [selectedCourseId, setSelectedCourseId] = useState<string>("");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const openMenu = Boolean(anchorEl);
 
@@ -91,7 +93,7 @@ const EnrolledCourseCard = ({ course }: { course: Course }) => {
             <Stack direction="row" className="flex justify-center" spacing={2}>
               <Button
                 onClick={() => {
-                  deleteCourse(selectedCourseId);
+                  deleteCourse(course.id);
                 }}
                 variant="outlined"
                 className="text-red-500 border-red-500 normal-case hover:border-red-800 hover:bg-red-800 rounded-xl"

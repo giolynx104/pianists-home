@@ -39,7 +39,7 @@ export const removeEnrollment = async (course: Course) => {
   const user = await getUserBySession(
     await verifySession(() => {
       redirect("api/auth/signin");
-    }),
+    })
   );
 
   await prisma.enrollment.deleteMany({
@@ -52,11 +52,13 @@ export const removeEnrollment = async (course: Course) => {
   revalidatePath("/profile");
 };
 
-const teacherWithCourses = Prisma.validator<Prisma.TeacherDefaultArgs>()({
-  include: {
-    courses: true,
-  },
-});
+export const teacherWithCourses = Prisma.validator<Prisma.TeacherDefaultArgs>()(
+  {
+    include: {
+      courses: true,
+    },
+  }
+);
 
 export type TeacherWithCourses = Prisma.TeacherGetPayload<
   typeof teacherWithCourses

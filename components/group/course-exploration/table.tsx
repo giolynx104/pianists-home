@@ -2,12 +2,8 @@
 
 import {
   Grid,
-  Card,
-  CardContent,
   Stack,
-  Typography,
   Pagination,
-  Box,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { CourseWithUser, getCoursesContainQuery } from "./actions";

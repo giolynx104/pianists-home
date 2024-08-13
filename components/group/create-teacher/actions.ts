@@ -6,9 +6,9 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { Teacher } from "@prisma/client";
 import crypto from "crypto";
 import { TeacherFormSchema } from "@/lib/types";
+import { getUserOfVerifiedSessionAndRedirectIfNotSignedIn } from "@/lib/actions";
 const generateFileName = (bytes = 32) => {
   return crypto.randomBytes(bytes).toString("hex");
 };
@@ -46,47 +46,23 @@ export const getSignedUrlConfigured = async (type: string) => {
 
 export const createTeacher = async (
   data: TeacherFormSchema,
-  remoteUrls: string[],
+  remoteUrls: string[]
 ) => {
-  try {
-    const session = await auth();
-    const user = session!.user!;
-    const currentUser = await prisma.user.findUnique({
-      where: {
-        email: user.email!,
-      },
-    });
-    await prisma.teacher.create({
-      data: {
-        user: {
-          connect: {
-            id: currentUser!.id,
-          },
-        },
-        description: data.description,
-        demoLink: data.demoLink,
-        teacherImages: {
-          create: remoteUrls.map((url) => ({ url: url.split("?")[0] })),
+  const user = await getUserOfVerifiedSessionAndRedirectIfNotSignedIn();
+  await prisma.teacher.create({
+    data: {
+      user: {
+        connect: {
+          id: user.id,
         },
       },
-    });
-    revalidatePath("/profile");
-    redirect("/profile");
-  } catch (error) {
-    console.error("Error creating teacher:", error);
-  }
-};
-
-export const getUser = async () => {
-  const session = await auth();
-  if (!session) {
-    redirect("/api/auth/signin");
-  }
-  const user = await prisma.user.findUnique({
-    where: {
-      email: session?.user?.email!,
+      description: data.description,
+      demoLink: data.demoLink,
+      teacherImages: {
+        create: remoteUrls.map((url) => ({ url: url.split("?")[0] })),
+      },
     },
   });
-
-  return user;
+  revalidatePath("/profile");
+  redirect("/profile");
 };

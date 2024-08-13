@@ -2,7 +2,6 @@
 
 import { Button } from "@mui/material";
 import { createEnrollment } from "./actions";
-import { useEffect, useState } from "react";
 
 const FinishPaymentButton = ({
   courseId,

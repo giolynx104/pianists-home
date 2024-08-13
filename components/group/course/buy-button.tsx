@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { Course } from "@prisma/client";
 
+//TODO: Implement this button
 const BuyButton = ({ course }: { course: Course }) => {
   return (
     <Button

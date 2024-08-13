@@ -1,7 +1,6 @@
-import AddToCartButton from "@/components/group/course/add-to-cart-button";
 import Buttons from "@/components/group/course/buttons";
 import prisma from "@/lib/db";
-import { Box, Typography, Button, Grid, Stack, Container } from "@mui/material";
+import { Box, Typography, Grid, Stack, Container } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 
