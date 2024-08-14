@@ -2,6 +2,9 @@
 
 import prisma from "@/lib/db";
 import { Item } from "react-use-cart";
+import { Course } from "@prisma/client";
+import { getUserOfVerifiedSessionAndRedirectIfNotSignedIn } from "@/lib/actions";
+
 export const getCourses = async (items: Item[]) => {
   return await prisma.course.findMany({
     where: {
@@ -18,4 +21,21 @@ export const getCourses = async (items: Item[]) => {
       courseImages: true,
     },
   });
+};
+
+export const checkout = async (courses: Course[]) => {
+  const user = await getUserOfVerifiedSessionAndRedirectIfNotSignedIn();
+
+  try {
+    await prisma.enrollment.createMany({
+      data: courses.map((course: Course) => {
+        return {
+          userId: user.id,
+          courseId: course.id,
+        };
+      }),
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };
