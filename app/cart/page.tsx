@@ -7,13 +7,11 @@ import { Button, Container, Grid, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useCart } from "react-use-cart";
 import CartItems from "@/components/group/cart/cart-items";
-import { useRouter } from "next/navigation";
 
 const Page = () => {
   const { isEmpty, items, emptyCart } = useCart();
   const [courses, setCourses] = useState<CourseWithUser[]>([]);
   const [total, setTotal] = useState(0);
-  const router = useRouter();
 
   useEffect(() => {
     const initializeCourses = async () => {
@@ -35,10 +33,10 @@ const Page = () => {
           Shopping Cart
         </Typography>
         <form
-          onSubmit={() => {
+          onSubmit={(event) => {
+            event.preventDefault();
             emptyCart();
             checkout(courses);
-            router.push("/profile");
           }}
         >
           {isEmpty ? (
@@ -51,7 +49,7 @@ const Page = () => {
               <Grid item xs={3}>
                 <Stack
                   spacing={2}
-                  className="rounded-3xl flex justify-center bg-gray-500 border border-[primary]"
+                  className="rounded-2xl flex justify-center bg-gray-500 border border-[primary] p-4"
                 >
                   <Typography variant="h5">Total: </Typography>
                   <Typography variant="h2">{total}$</Typography>
