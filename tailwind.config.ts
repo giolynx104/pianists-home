@@ -6,10 +6,13 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  // plugins: [],
-  // corePlugins: {
-  //   preflight: false,
-  // },
-  // important: "#__next",
+  important: '#root',
+  theme: {
+    extend: {},
+  },
+  corePlugins: {
+    preflight: false,
+  },
+  plugins: [],
 };
 export default config;

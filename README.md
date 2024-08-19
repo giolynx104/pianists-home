@@ -12,7 +12,4 @@ The app is deployed [here](https://pianists-home.vercel.app/) using Vercel.
 
 - Run `pnpm i`
 - Setup .env, including Prisma, AWS S3, Google/GitHub OAuth
-
-## To-do
-
-- [ Testing with OAuth ](https://authjs.dev/guides/testing)
+- Run Prisma setup `pnpm prisma migrate dev --name init`
