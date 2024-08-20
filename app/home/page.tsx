@@ -15,7 +15,9 @@ export default function Page() {
             Connect, Learn, Play
           </Typography>
           <Link href="/dashboard">
-            <Button variant="contained" className="normal-case">
+            <Button variant="contained" size="large" sx={{
+              textTransform: "none",
+            }}>
               Go to Dashboard
             </Button>
           </Link>

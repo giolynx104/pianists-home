@@ -9,9 +9,13 @@ const SignInButton = () => {
       startIcon={<FaUserCircle />}
       type="submit"
       className="border-white text-white hover:border-white hover:bg-slate-600 normal-case"
+      color="inherit"
+      sx={{
+        textTransform: "none",
+      }}
       onClick={() => handleSignIn()}
     >
-      Sign In
+      Sign in
     </Button>
   );
 };
