@@ -1,6 +1,6 @@
 "use client";
 
-import { List, Divider, Drawer } from "@mui/material";
+import { List, Divider, Drawer, Box, Button } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
@@ -57,19 +57,21 @@ export default function UserAvatar({ userAvatar }: { userAvatar: string }) {
   );
   return (
     <>
-      <button onClick={() => setOpen(true)}>
+      <Button onClick={() => setOpen(true)}>
         {userAvatar !== "" ? (
-          <Image
-            src={userAvatar}
-            alt="User avatar"
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
+          <Box className="rounded-full overflow-hidden w-fit h-fit flex justify-center items-center">
+            <Image
+              src={userAvatar}
+              alt="User avatar"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+          </Box>
         ) : (
           <CiUser />
         )}
-      </button>
+      </Button>
       <Drawer
         open={open}
         anchor="right"

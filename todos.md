@@ -10,3 +10,4 @@
 - [] Documentation for collaboration
 - [] Image aspect ratio
 - [] Session Provider for faster access and no reauthen
+- [] Teacher Card in dashboard - light mode
