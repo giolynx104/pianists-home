@@ -6,16 +6,17 @@ import SignInButton from "./SignInButton";
 import UserAvatar from "./UserAvatar";
 import Logo from "./Logo";
 import { Session } from "next-auth";
+import { useRouter } from "next/navigation";
+import NavigationButton from "./NavigationButton";
 const Header = ({ session }: { session: Session | null }) => {
-  const pages = ["dashboard", "courses"];
+  const router = useRouter();
   return (
     <AppBar position="sticky" className="top-0 left-0">
       <Toolbar className="flex justify-between items-center">
         <Stack spacing={2} direction="row" className="flex items-center">
           <Logo />
-          {pages.map((page) => (
-            <Button key={page}>{page}</Button>
-          ))}
+          <NavigationButton text="Dashboard" link="/dashboard" />
+          <NavigationButton text="Courses" link="/course-exploration" />
         </Stack>
         {session ? (
           <UserAvatar userAvatar={session.user!.image!} />

@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { FaUserCircle } from "react-icons/fa";
-import { handleSignIn } from "../actions";
+import { handleSignIn } from "./actions";
 
 const SignInButton = () => {
   return (

@@ -8,9 +8,9 @@ import { CiUser } from "react-icons/ci";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import { useRouter } from "next/navigation";
-import DrawerListItem from "./DrawerListItems";
+import { DrawerListItem } from "./DrawerListItems";
 import { FaListAlt } from "react-icons/fa";
-import { signOutAction } from "../actions";
+import { signOutAction } from "./actions";
 
 export default function UserAvatar({ userAvatar }: { userAvatar: string }) {
   const router = useRouter();
