@@ -4,9 +4,8 @@ import "./globals.css";
 import ThemeClient from "@/styles/ThemeClient";
 import { Divider, Stack } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import { CartProvider } from "react-use-cart";
 import { auth } from "@/auth";
-import { Header, Footer } from "./components";
+import { Header, Footer, CartClient } from "./components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,16 +24,16 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AppRouterCacheProvider>
-          <CartProvider>
+          <CartClient>
             <ThemeClient>
               <Stack>
-                <Header session={session}/>
+                <Header session={session} />
                 {children}
                 <Divider variant="fullWidth" className="pt-10" />
                 <Footer />
               </Stack>
             </ThemeClient>
-          </CartProvider>
+          </CartClient>
         </AppRouterCacheProvider>
       </body>
     </html>
