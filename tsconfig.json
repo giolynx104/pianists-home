@@ -26,7 +26,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "components/signin/oauth-sign-in.tsx"
   ],
   "exclude": ["node_modules"],
   "ts-node": {
