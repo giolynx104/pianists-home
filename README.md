@@ -24,7 +24,7 @@ If you’d like to contribute to the project, please refer to the [CONTRIBUTING.
 
 ## Roadmap
 
-To view upcoming features and improvements, check out the [ todos.md ](https://github.com/giolynx104/pianists-home/blob/main/todos.md) file in the root of this repository.
+To view upcoming features and improvements, check out the [ TODOs.md ](https://github.com/giolynx104/pianists-home/blob/main/todos.md) file in the root of this repository.
 
 ## License
 
