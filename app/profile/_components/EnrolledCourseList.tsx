@@ -1,6 +1,6 @@
 import { Grid, Stack, Typography } from "@mui/material";
 import { EnrollmentWithCourse } from "@/lib/types";
-import EnrolledCourseCard from "./enrolled-course-card";
+import EnrolledCourseCard from "./EnrolledCourseCard";
 import { PiCalendarBlank } from "react-icons/pi";
 
 //TODO: Make empty course list better UI
@@ -22,7 +22,7 @@ const EnrolledCourseList = ({
   ) : (
     <Stack
       spacing={2}
-      className="flex justify-center items-center w-full h-full border-2 border-dashed border-gray-400"
+      className="flex justify-center items-center p-10 border-2 border-dashed border-gray-400"
     >
       <PiCalendarBlank />
       <Typography>You haven&apos;t enrolled any courses yet</Typography>

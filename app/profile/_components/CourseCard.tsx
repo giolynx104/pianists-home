@@ -88,7 +88,7 @@ const CourseCard = ({ course }: { course: Course }) => {
                   deleteCourse(selectedCourseId);
                 }}
                 variant="outlined"
-                className="text-red-500 border-red-500 normal-case hover:border-red-800 hover:bg-red-800"
+                className="normal-case text-red-500 border-red-300 hover:border-red-500"
               >
                 Yes
               </Button>

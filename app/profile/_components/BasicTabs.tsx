@@ -4,10 +4,10 @@ import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import EnrolledCourseList from "./enrolled-course-list";
 import { EnrollmentWithCourse, TeacherWithCourses } from "@/lib/types";
 import { Button } from "@mui/material";
 import CourseList from "./CourseList";
+import EnrolledCourseList from "./EnrolledCourseList";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -59,8 +59,8 @@ export function BasicTabs({
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="My Courses" {...allyProps(0)} />
-          <Tab label="My Classes" {...allyProps(1)} />
+          <Tab className="normal-case text-lg" label="My Courses" {...allyProps(0)} />
+          <Tab className="normal-case text-lg" label="My Classes" {...allyProps(1)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -72,7 +72,7 @@ export function BasicTabs({
         </CustomTabPanel>
       ) : (
         <CustomTabPanel value={value} index={1}>
-          <Button variant="contained">Register as Teacher</Button>
+          <Button variant="contained">Create Teacher Account</Button>
         </CustomTabPanel>
       )}
     </Box>

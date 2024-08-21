@@ -1,9 +1,8 @@
 import { Grid } from "@mui/material";
-import CourseCard from "./course-card";
-import NoCourseCard from "./no-course-card";
-import CreateTeacherAccountButton from "./CreateTeacherAccountButton";
+import CourseCard from "./CourseCard";
+import NoTeachingCourseBox from "./NoTeachingCourseBox";
 import { Course, Teacher } from "@prisma/client";
-
+import { CreateTeacherAccountButton } from "./CreateTeacherAccountButton";
 const CourseList = ({
   teacher,
   courses,
@@ -22,7 +21,7 @@ const CourseList = ({
       ))}
     </Grid>
   ) : (
-    <NoCourseCard />
+    <NoTeachingCourseBox />
   );
 };
 
