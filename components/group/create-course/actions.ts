@@ -4,13 +4,13 @@ import { redirect } from "next/navigation";
 import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { CourseFormSchema } from "@/lib/types";
-import { getUserOfVerifiedSessionAndRedirectIfNotSignedIn } from "@/lib/actions";
+import { getUserBySessionAndRedirectIfNoSessionExist } from "@/lib/actions";
 
 export const createCourse = async (
   data: CourseFormSchema,
   remoteUrls: string[]
 ) => {
-  const user = await getUserOfVerifiedSessionAndRedirectIfNotSignedIn();
+  const user = await getUserBySessionAndRedirectIfNoSessionExist();
 
   const teacher = await prisma.teacher.findUnique({
     where: {

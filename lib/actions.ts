@@ -34,7 +34,7 @@ export const getTeacherIncludeAllByUserId = async (userId: string) => {
   });
 };
 
-export const getUserOfVerifiedSessionAndRedirectIfNotSignedIn = async () => {
+export const getUserBySessionAndRedirectIfNoSessionExist = async () => {
   const session = await verifySession(() => {
     redirect("/api/auth/signin");
   });

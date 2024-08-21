@@ -1,8 +1,8 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
-import { getTeachers } from "./components/actions";
-import TeacherInfoSection from "./components/teacher-info-section";
-import { CourseExplorationButton } from "./components";
+import { getTeachers } from "./_components/actions";
+import TeacherInfoSection from "./_components/teacher-info-section";
+import { CourseExplorationButton } from "./_components";
 
 const Page = async () => {
   const teacherData = await getTeachers();

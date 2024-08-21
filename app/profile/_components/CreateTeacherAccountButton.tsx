@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import Link from "next/link";
 
-const RegisterAsTeacherButton = () => {
+export const CreateTeacherAccountButton = () => {
   return (
     <Link href="/create-teacher" className="w-full">
       <Button className="normal-case w-full" variant="outlined" color="primary">
@@ -10,5 +10,3 @@ const RegisterAsTeacherButton = () => {
     </Link>
   );
 };
-
-export default RegisterAsTeacherButton;

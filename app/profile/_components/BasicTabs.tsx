@@ -1,13 +1,13 @@
 "use client";
 
 import * as React from "react";
-import CourseList from "@/components/group/profile/course-list";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import EnrolledCourseList from "./enrolled-course-list";
 import { EnrollmentWithCourse, TeacherWithCourses } from "@/lib/types";
 import { Button } from "@mui/material";
+import CourseList from "./CourseList";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -38,7 +38,7 @@ function allyProps(index: number) {
   };
 }
 
-export default function BasicTabs({
+export function BasicTabs({
   enrollments,
   teacher,
 }: {

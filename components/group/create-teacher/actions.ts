@@ -8,7 +8,7 @@ import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import crypto from "crypto";
 import { TeacherFormSchema } from "@/lib/types";
-import { getUserOfVerifiedSessionAndRedirectIfNotSignedIn } from "@/lib/actions";
+import { getUserBySessionAndRedirectIfNoSessionExist } from "@/lib/actions";
 const generateFileName = (bytes = 32) => {
   return crypto.randomBytes(bytes).toString("hex");
 };
@@ -48,7 +48,7 @@ export const createTeacher = async (
   data: TeacherFormSchema,
   remoteUrls: string[]
 ) => {
-  const user = await getUserOfVerifiedSessionAndRedirectIfNotSignedIn();
+  const user = await getUserBySessionAndRedirectIfNoSessionExist();
   await prisma.teacher.create({
     data: {
       user: {

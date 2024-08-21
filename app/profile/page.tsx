@@ -1,24 +1,15 @@
-import CreateCourseButton from "@/components/group/profile/create-course-button";
-import RegisterAsTeacherButton from "@/components/group/profile/register-as-teacher-button";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 import prisma from "@/lib/db";
-import BasicTabs from "@/components/group/profile/basic-tabs";
-import {
-  getEnrollmentByUserId,
-} from "@/components/group/profile/actions";
-import { verifySession, getUserBySession } from "@/lib/actions";
+import { getUserBySessionAndRedirectIfNoSessionExist } from "@/lib/actions";
+import { getEnrollmentByUserId } from "./_components/actions";
+import { CreateTeacherAccountButton, BasicTabs, CreateCourseButton } from "./_components"
 
 //TODO: Fix profile image having low quality from Google
 
 const Page = async () => {
-  const session = await verifySession(() => {
-    redirect("api/auth/signin");
-  });
-
-  const user = await getUserBySession(session);
+  const user = await getUserBySessionAndRedirectIfNoSessionExist();
 
   const enrollments = await getEnrollmentByUserId(user.id);
 
@@ -57,7 +48,7 @@ const Page = async () => {
                 Edit profile
               </Button>
             </Link>
-            {teacher ? <CreateCourseButton /> : <RegisterAsTeacherButton />}
+            {teacher ? <CreateCourseButton /> : <CreateTeacherAccountButton />}
           </Stack>
         </Grid>
         <Grid item xs={9}>

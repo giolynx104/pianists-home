@@ -3,7 +3,7 @@
 import prisma from "@/lib/db";
 import { Item } from "react-use-cart";
 import { Course } from "@prisma/client";
-import { getUserOfVerifiedSessionAndRedirectIfNotSignedIn } from "@/lib/actions";
+import { getUserBySessionAndRedirectIfNoSessionExist } from "@/lib/actions";
 import { redirect } from "next/navigation";
 
 export const getCourses = async (items: Item[]) => {
@@ -25,7 +25,7 @@ export const getCourses = async (items: Item[]) => {
 };
 
 export const checkout = async (courses: Course[]) => {
-  const user = await getUserOfVerifiedSessionAndRedirectIfNotSignedIn();
+  const user = await getUserBySessionAndRedirectIfNoSessionExist();
 
   try {
     await prisma.enrollment.createMany({

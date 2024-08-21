@@ -5,7 +5,7 @@ import ThemeClient from "@/styles/ThemeClient";
 import { Divider, Stack } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { auth } from "@/auth";
-import { Header, Footer, CartClient } from "./components";
+import { Header, Footer, CartClient } from "./_components";
 
 const inter = Inter({ subsets: ["latin"] });
 
