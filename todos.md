@@ -2,13 +2,14 @@
 
 ## Todos
 
-- [] Online course details
+- [] Online course implementation
 - [] Search for teacher
 - [] [ Testing OAuth ](https://authjs.dev/guides/testing)
-- [] Location
+- [] Testing
+- [] User location
 - [] Multi-language
-- [] Documentation for collaboration
-- [] Image aspect ratio
+- [] Image aspect ratio (?)
 - [] Accessibility code
+- [x] Documentation for collaboration
 - [x] Session Provider for faster access and no reauthen
 - [x] Teacher Card in dashboard - light mode
