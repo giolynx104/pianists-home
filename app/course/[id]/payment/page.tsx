@@ -3,7 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/db";
 import { verifySession } from "@/lib/actions";
-import FinishPaymentButton from "@/components/group/course/payment/finish-payment-button";
+import FinishPaymentButton from "./_components/finish-payment-button";
 const Page = async ({ params }: { params: { id: string } }) => {
   const session = await verifySession(() => {
     redirect("/api/auth/signin");

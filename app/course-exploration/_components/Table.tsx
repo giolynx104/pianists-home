@@ -11,7 +11,7 @@ import React from "react";
 import CourseCard from "./course-card";
 
 export const ITEMS_PER_PAGE = 3;
-const Table = ({
+export const Table = ({
   query,
   currentPage,
 }: {
@@ -49,5 +49,3 @@ const Table = ({
     </Stack>
   );
 };
-
-export default Table;

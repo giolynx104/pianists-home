@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation";
-import Form from "@/components/group/profile/edit/form";
 import {
   getUserBySession,
   getTeacherIncludeAllByUserId,
   verifySession,
 } from "@/lib/actions";
+import Form from "./_components/form";
 
 const Page = async () => {
   const session = await verifySession(() => {

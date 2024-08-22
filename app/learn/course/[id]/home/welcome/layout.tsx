@@ -1,4 +1,4 @@
-import CourseMaterialListItem from "@/components/learn/course/home/welcome/course-material-list-item";
+import CourseMaterialListItem from "@/app/learn/course/[id]/home/welcome/_components/course-material-list-item";
 import { Drawer, List } from "@mui/material";
 
 const Layout = ({ params }: { params: { id: string } }) => {

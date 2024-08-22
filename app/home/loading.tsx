@@ -1,4 +1,4 @@
-import LoadingSkeleton from "@/components/shared/loading-skeleton";
+import LoadingSkeleton from "../_shared/loading-skeleton";
 
 const Loading = () => {
   return <LoadingSkeleton />;

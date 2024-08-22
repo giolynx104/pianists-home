@@ -3,9 +3,7 @@
 import { Stack, Typography, Box, CircularProgress } from "@mui/material";
 import React, { Suspense, useState } from "react";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import Search from "@/components/group/course-exploration/search";
-import CustomTab from "@/components/group/course-exploration/custom-tab";
-import Table from "@/components/group/course-exploration/table";
+import { Search, CustomTab, Table } from "./_components";
 
 const Page = ({
   searchParams,

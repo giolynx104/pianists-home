@@ -1,15 +1,15 @@
 "use client";
 
-import { CourseWithUser } from "@/components/group/course-exploration/actions";
 import { Button, Container, Grid, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useCart } from "react-use-cart";
 import { handleCheckout, getCourses } from "./_components/actions";
 import { CartItems, EmptyCart } from "./_components";
+import { CourseIncludeTeacherIncludeUser } from "@/lib/types";
 
 const Page = () => {
   const { isEmpty, items, emptyCart } = useCart();
-  const [courses, setCourses] = useState<CourseWithUser[]>([]);
+  const [courses, setCourses] = useState<CourseIncludeTeacherIncludeUser[]>([]);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {

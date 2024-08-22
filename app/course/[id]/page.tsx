@@ -1,4 +1,4 @@
-import Buttons from "@/components/group/course/buttons";
+import Buttons from "@/app/course/[id]/_components/buttons";
 import prisma from "@/lib/db";
 import { Box, Typography, Grid, Stack, Container } from "@mui/material";
 import Image from "next/image";

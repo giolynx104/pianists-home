@@ -16,7 +16,6 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { createCourse } from "./actions";
 import { useForm } from "react-hook-form";
 import { courseFormSchema, CourseFormSchema } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,8 +26,9 @@ import Dropzone from "react-dropzone";
 import { CiCirclePlus } from "react-icons/ci";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { getSignedUrlConfigured } from "../create-teacher/actions";
 import Image from "next/image";
+import { getSignedUrlConfigured } from "@/app/create-teacher/_components/actions";
+import { createCourse } from "./actions";
 
 const Form = () => {
   const router = useRouter();
@@ -100,8 +100,10 @@ const Form = () => {
             helperText={errors.price?.message}
           />
           <FormGroup>
-            <FormControlLabel control={<Checkbox {...register("offline")} defaultChecked />
-            } label="Offline" />
+            <FormControlLabel
+              control={<Checkbox {...register("offline")} defaultChecked />}
+              label="Offline"
+            />
           </FormGroup>
         </Stack>
       </form>
@@ -113,7 +115,9 @@ const Form = () => {
         <CloudUploadIcon />
         <Typography variant="subtitle2">Upload images</Typography>
       </Stack>
-      <Typography variant="subtitle2" className="text-gray-600">*Your first image will be used as thumbnail for the course.</Typography>
+      <Typography variant="subtitle2" className="text-gray-600">
+        *Your first image will be used as thumbnail for the course.
+      </Typography>
       <Dropzone
         onDrop={(acceptedFiles) => {
           setImages([...images, ...acceptedFiles]);
@@ -124,7 +128,11 @@ const Form = () => {
             {images.length > 0 &&
               images.map((image) => (
                 <Grid item xs={4} key={image.name} className="p-2 relative">
-                  <Image src={URL.createObjectURL(image)} alt={image.name} fill />
+                  <Image
+                    src={URL.createObjectURL(image)}
+                    alt={image.name}
+                    fill
+                  />
                 </Grid>
               ))}
             <Grid item xs={4} {...getRootProps()} className="p-2">

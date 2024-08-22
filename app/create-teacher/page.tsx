@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
-import Form from "@/components/group/create-teacher/form";
 import prisma from "@/lib/db";
 import { getUserBySessionAndRedirectIfNoSessionExist } from "@/lib/actions";
+import Form from "./_components/form";
 
 const Page = async () => {
   const user = await getUserBySessionAndRedirectIfNoSessionExist();
