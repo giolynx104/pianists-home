@@ -2,7 +2,7 @@ import { Stack, Typography, Button } from "@mui/material";
 import Link from "next/link";
 import { FaDropbox } from "react-icons/fa";
 
-const EmptyCart = () => {
+export const EmptyCart = () => {
   return (
     <Stack spacing={4} className="flex justify-center items-center">
       <FaDropbox />
@@ -17,5 +17,3 @@ const EmptyCart = () => {
     </Stack>
   );
 };
-
-export default EmptyCart;

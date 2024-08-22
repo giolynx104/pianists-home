@@ -97,3 +97,18 @@ export const teacherWithCourses = Prisma.validator<Prisma.TeacherDefaultArgs>()(
 export type TeacherWithCourses = Prisma.TeacherGetPayload<
   typeof teacherWithCourses
 >;
+
+export const courseIncludeTeacherIncludeUser =
+  Prisma.validator<Prisma.CourseDefaultArgs>()({
+    include: {
+      teacher: {
+        include: {
+          user: true,
+        },
+      },
+    },
+  });
+
+export type CourseIncludeTeacherIncludeUser = Prisma.CourseGetPayload<
+  typeof courseIncludeTeacherIncludeUser
+>;

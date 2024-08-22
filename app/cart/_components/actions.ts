@@ -24,7 +24,7 @@ export const getCourses = async (items: Item[]) => {
   });
 };
 
-export const checkout = async (courses: Course[]) => {
+export const handleCheckout = async (courses: Course[]) => {
   const user = await getUserBySessionAndRedirectIfNoSessionExist();
 
   try {

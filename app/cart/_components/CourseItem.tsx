@@ -1,3 +1,4 @@
+import { CourseIncludeTeacherIncludeUser } from "@/lib/types";
 import {
   Button,
   Card,
@@ -6,11 +7,14 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { CourseWithUser } from "../course-exploration/actions";
 import Link from "next/link";
 import { useCart } from "react-use-cart";
 
-const CourseItem = ({ course }: { course: CourseWithUser }) => {
+const CourseItem = ({
+  course,
+}: {
+  course: CourseIncludeTeacherIncludeUser;
+}) => {
   const { removeItem } = useCart();
   return (
     <Card>

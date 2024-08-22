@@ -1,12 +1,11 @@
 "use client";
 
-import { checkout, getCourses } from "@/components/group/cart/actions";
-import EmptyCart from "@/components/group/cart/empty-cart";
 import { CourseWithUser } from "@/components/group/course-exploration/actions";
 import { Button, Container, Grid, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useCart } from "react-use-cart";
-import CartItems from "@/components/group/cart/cart-items";
+import { handleCheckout, getCourses } from "./_components/actions";
+import { CartItems, EmptyCart } from "./_components";
 
 const Page = () => {
   const { isEmpty, items, emptyCart } = useCart();
@@ -36,7 +35,7 @@ const Page = () => {
           onSubmit={(event) => {
             event.preventDefault();
             emptyCart();
-            checkout(courses);
+            handleCheckout(courses);
           }}
         >
           {isEmpty ? (
