@@ -38,7 +38,7 @@ export default function Footer() {
         spacing={1}
       >
         <GiGrandPiano />
-        <Typography>&copy; 2024 GiaoLe, Inc.</Typography>
+        <Typography>&copy; 2024 JAM-P, Inc.</Typography>
       </Stack>
     </Stack>
   );
