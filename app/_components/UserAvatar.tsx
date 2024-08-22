@@ -59,7 +59,7 @@ export default function UserAvatar({ userAvatar }: { userAvatar: string }) {
     <>
       <Button onClick={() => setOpen(true)}>
         {userAvatar !== "" ? (
-          <Box className="rounded-full overflow-hidden w-fit h-fit flex justify-center items-center">
+          <Box className="hover:border hover: border-solid hover:border-orange-500 rounded-full overflow-hidden w-fit h-fit flex justify-center items-center">
             <Image
               src={userAvatar}
               alt="User avatar"
