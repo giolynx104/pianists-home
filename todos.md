@@ -9,5 +9,6 @@
 - [] Multi-language
 - [] Documentation for collaboration
 - [] Image aspect ratio
+- [] Accessibility code
 - [x] Session Provider for faster access and no reauthen
 - [x] Teacher Card in dashboard - light mode
