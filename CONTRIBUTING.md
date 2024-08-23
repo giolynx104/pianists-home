@@ -16,7 +16,7 @@ Ensure you have the following installed on your machine:
 
 #### Install Dependencies
 
-    pnpm install
+   pnpm install
 
 #### Environment Variables
 

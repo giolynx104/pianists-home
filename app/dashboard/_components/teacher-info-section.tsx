@@ -54,7 +54,7 @@ const TeacherInfoSection = ({ data }: { data: TeacherWithUserandImages[] }) => {
     >
       <Grid item xs={12} className="h-auto p-0">
         <Typography variant="h5" className="text-center bg-gray-300 w-full p-6">
-          Các nghệ sĩ nổi bật
+          Notable Pianists
         </Typography>
       </Grid>
       <Grid item xs={1} className="flex justify-center items-center">

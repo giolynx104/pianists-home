@@ -16,7 +16,7 @@ export const CourseExplorationButton = () => {
         router.push("/course-exploration");
       }}
     >
-      Nhấn vào đây để bắt đầu kết nối
+      Click here to start exploring courses
     </Button>
   );
 };

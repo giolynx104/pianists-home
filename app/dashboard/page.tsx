@@ -21,19 +21,19 @@ const Page = async () => {
       >
         <Stack spacing={2} className="flex pt-20">
           <Typography variant="h3" className="text-center w-auto text-white">
-            Khám phá thế giới âm nhạc cùng chúng tôi
+            Exploring the magical world of Piano with us
           </Typography>
           <Typography variant="h5" className="text-center w-auto text-white">
-            Nền tảng học Piano hàng đầu Việt Nam
+            A platform making connections
           </Typography>
           <Box className="flex justify-center">
-            <CourseExplorationButton/>
+            <CourseExplorationButton />
           </Box>
         </Stack>
       </Box>
       {teacherData.length > 0 && <TeacherInfoSection data={teacherData} />}
     </Stack>
   );
-}
+};
 
 export default Page;
