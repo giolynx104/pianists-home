@@ -27,3 +27,5 @@ export const getCoursesContainQuery = async (query: string) => {
   });
   return courses;
 };
+
+
