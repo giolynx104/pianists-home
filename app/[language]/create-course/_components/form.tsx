@@ -27,7 +27,7 @@ import { CiCirclePlus } from "react-icons/ci";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { getSignedUrlConfigured } from "@/app/create-teacher/_components/actions";
+import { getSignedUrlConfigured } from "@/app/[language]/create-teacher/_components/actions";
 import { createCourse } from "./actions";
 
 const Form = () => {

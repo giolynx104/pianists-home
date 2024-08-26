@@ -1,4 +1,4 @@
-import Form from "@/app/create-course/_components/form";
+import Form from "@/app/[language]/create-course/_components/form";
 import {
   getTeacherByUserId,
   getUserBySessionAndRedirectIfNoSessionExist,

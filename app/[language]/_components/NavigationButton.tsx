@@ -1,13 +1,9 @@
+"use client";
+
 import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 
-const NavigationButton = ({
-  text,
-  link,
-}: {
-  text: string;
-  link: string;
-}) => {
+const NavigationButton = ({ text, link }: { text: string; link: string }) => {
   const router = useRouter();
 
   return (

@@ -2,7 +2,9 @@ import { Button, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import image from "/public/playing-piano-background.webp";
 import Link from "next/link";
-export default function Page() {
+import { useTranslation } from "@/app/i18n";
+const Page = async ({params : {language}} : {params: {language: string}}) => {
+  const { t } =  await useTranslation(language, "home");
   return (
     <Grid container className="relative">
       <Grid item xs={6} className="flex items-center justify-center">
@@ -11,15 +13,11 @@ export default function Page() {
           flexDirection="column"
           className="flex justify-center items-center"
         >
-          <Typography variant="h2" className="text-center">
-            Connect, Learn, Play
-          </Typography>
+          <Typography variant="h2" className="text-center">{t("motto")}</Typography>
           <Link href="/dashboard">
             <Button variant="contained" size="large" sx={{
               textTransform: "none",
-            }}>
-              Go to Dashboard
-            </Button>
+            }}>{t("go-to-dashboard")}</Button>
           </Link>
         </Stack>
       </Grid>
@@ -29,3 +27,5 @@ export default function Page() {
     </Grid>
   );
 }
+
+export default Page;

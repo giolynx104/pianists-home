@@ -6,8 +6,13 @@ import { Divider, Stack } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { auth } from "@/auth";
 import { Header, Footer, CartClient } from "./_components";
+import { dir } from "i18next";
+import { languages } from "../i18n/settings";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const generateStaticParams = () =>
+  languages.map((language) => ({ language }));
 
 export const metadata: Metadata = {
   title: "Home of Pianists",
@@ -16,18 +21,20 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  params: { language },
 }: Readonly<{
   children: React.ReactNode;
+  params: { language: string };
 }>) {
   const session = await auth();
   return (
-    <html lang="en">
+    <html lang={language} dir={dir(language)}>
       <body className={inter.className} id="root">
         <AppRouterCacheProvider>
           <CartClient>
             <ThemeClient>
               <Stack>
-                <Header session={session} />
+                <Header session={session} language={language} />
                 {children}
                 <Divider variant="fullWidth" className="pt-10" />
                 <Footer />

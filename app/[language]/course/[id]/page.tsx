@@ -1,4 +1,4 @@
-import Buttons from "@/app/course/[id]/_components/buttons";
+import Buttons from "@/app/[language]/course/[id]/_components/buttons";
 import prisma from "@/lib/db";
 import { Box, Typography, Grid, Stack, Container } from "@mui/material";
 import Image from "next/image";
@@ -10,8 +10,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
       id: params.id,
     },
     include: {
-      courseImages: true
-    }
+      courseImages: true,
+    },
   });
 
   if (!course) {
@@ -39,7 +39,12 @@ const Page = async ({ params }: { params: { id: string } }) => {
             <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
               {course.name}
             </Typography>
-            <Image src={course.courseImages[0].url} alt="Course Image" width={200} height={200} />
+            <Image
+              src={course.courseImages[0].url}
+              alt="Course Image"
+              width={200}
+              height={200}
+            />
             <Stack
               direction="row"
               spacing={2}
