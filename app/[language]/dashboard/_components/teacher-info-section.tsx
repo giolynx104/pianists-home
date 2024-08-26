@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useContext } from "react";
 import { appearAnimation, slideInLeft, slideInRight } from "./animation";
 import {
   Box,
@@ -18,6 +18,8 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { TeacherWithUserandImages } from "@/lib/types";
+import { I18nContext } from "../../_components/I18nClient";
+import { useTranslation } from "@/app/i18n/client";
 
 const ReactPlayer = dynamic(() => import("react-player/youtube"), {
   ssr: false,
@@ -27,6 +29,8 @@ const TeacherInfoSection = ({ data }: { data: TeacherWithUserandImages[] }) => {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = React.useState<number>(0);
   const [variants, setVariants] = React.useState<Variants>(appearAnimation);
+  const language = useContext(I18nContext);
+  const { t } = useTranslation(language, "dashboard");
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -54,7 +58,7 @@ const TeacherInfoSection = ({ data }: { data: TeacherWithUserandImages[] }) => {
     >
       <Grid item xs={12} className="h-auto p-0">
         <Typography variant="h5" className="text-center bg-gray-300 w-full p-6">
-          Notable Pianists
+          {t("notable-pianists")}
         </Typography>
       </Grid>
       <Grid item xs={1} className="flex justify-center items-center">

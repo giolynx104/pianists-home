@@ -8,6 +8,7 @@ import { auth } from "@/auth";
 import { Header, Footer, CartClient } from "./_components";
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
+import { I18nClient, I18nContext } from "./_components/I18nClient";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,16 +32,18 @@ export default async function RootLayout({
     <html lang={language} dir={dir(language)}>
       <body className={inter.className} id="root">
         <AppRouterCacheProvider>
-          <CartClient>
-            <ThemeClient>
-              <Stack>
-                <Header session={session} language={language} />
-                {children}
-                <Divider variant="fullWidth" className="pt-10" />
-                <Footer />
-              </Stack>
-            </ThemeClient>
-          </CartClient>
+          <I18nClient language={language}>
+            <CartClient>
+              <ThemeClient>
+                <Stack>
+                  <Header session={session} language={language} />
+                  {children}
+                  <Divider variant="fullWidth" className="pt-10" />
+                  <Footer />
+                </Stack>
+              </ThemeClient>
+            </CartClient>
+          </I18nClient>
         </AppRouterCacheProvider>
       </body>
     </html>

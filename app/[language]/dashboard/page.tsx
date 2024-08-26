@@ -3,10 +3,15 @@ import React from "react";
 import { getTeachers } from "./_components/actions";
 import TeacherInfoSection from "./_components/teacher-info-section";
 import { CourseExplorationButton } from "./_components";
+import { useTranslation } from "@/app/i18n";
 
-const Page = async () => {
+const Page = async ({
+  params: { language },
+}: {
+  params: { language: string };
+}) => {
   const teacherData = await getTeachers();
-
+  const { t } = await useTranslation(language, "dashboard");
   return (
     <Stack spacing={10} className="flex items-center">
       <Box
@@ -21,13 +26,13 @@ const Page = async () => {
       >
         <Stack spacing={2} className="flex pt-20">
           <Typography variant="h3" className="text-center w-auto text-white">
-            Exploring the magical world of Piano with us
+            {t("motto")}
           </Typography>
           <Typography variant="h5" className="text-center w-auto text-white">
-            A platform making connections
+            {t("platform-intro")}
           </Typography>
           <Box className="flex justify-center">
-            <CourseExplorationButton />
+            <CourseExplorationButton language={language} />
           </Box>
         </Stack>
       </Box>
