@@ -6,6 +6,7 @@ import Logo from "./Logo";
 import { Session } from "next-auth";
 import NavigationButton from "./NavigationButton";
 import { useTranslation } from "@/app/i18n";
+import { LanguageSelector } from "./LanguageSelector";
 const Header = async ({
   session,
   language,
@@ -25,11 +26,14 @@ const Header = async ({
             link="/course-exploration"
           />
         </Stack>
-        {session ? (
-          <UserAvatar userAvatar={session.user!.image!} />
-        ) : (
-          <SignInButton />
-        )}
+        <Stack direction={"row"}>
+          <LanguageSelector language={language} />
+          {session ? (
+            <UserAvatar userAvatar={session.user!.image!} />
+          ) : (
+            <SignInButton />
+          )}
+        </Stack>
       </Toolbar>
     </AppBar>
   );
