@@ -8,7 +8,7 @@ import { auth } from "@/auth";
 import { Header, Footer, CartClient } from "./_components";
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
-import { I18nClient, I18nContext } from "./_components/I18nClient";
+import { I18nClient } from "./_components/I18nClient";
 
 const inter = Inter({ subsets: ["latin"] });
 
