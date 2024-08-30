@@ -4,7 +4,7 @@ import SignInButton from "./SignInButton";
 import UserAvatar from "./UserAvatar";
 import Logo from "./Logo";
 import { Session } from "next-auth";
-import NavigationButton from "./NavigationButton";
+import NavigatingButton from "./NavigatingButton";
 import { useTranslation } from "@/app/i18n";
 import { LanguageSelector } from "./LanguageSelector";
 const Header = async ({
@@ -20,8 +20,8 @@ const Header = async ({
       <Toolbar className="flex justify-between items-center">
         <Stack spacing={2} direction="row" className="flex items-center">
           <Logo />
-          <NavigationButton text={t("dashboard-button")} link="/dashboard" />
-          <NavigationButton
+          <NavigatingButton text={t("dashboard-button")} link="/dashboard" />
+          <NavigatingButton
             text={t("courses-button")}
             link="/course-exploration"
           />
