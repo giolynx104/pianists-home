@@ -6,7 +6,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { CartClient } from "./(shared-default-layout)/_components";
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
-import { I18nClient } from "./(shared-default-layout)/_components/I18nClient";
+import { LanguageClient } from "../i18n/LanguageClient";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,13 +28,13 @@ export default async function RootLayout({
   return (
     <html lang={language} dir={dir(language)}>
       <body className={inter.className} id="root">
-        <AppRouterCacheProvider>
-          <I18nClient language={language}>
+        <LanguageClient language={language}>
+          <AppRouterCacheProvider>
             <CartClient>
               <ThemeClient>{children}</ThemeClient>
             </CartClient>
-          </I18nClient>
-        </AppRouterCacheProvider>
+          </AppRouterCacheProvider>
+        </LanguageClient>
       </body>
     </html>
   );

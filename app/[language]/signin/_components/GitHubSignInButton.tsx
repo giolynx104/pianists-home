@@ -1,11 +1,5 @@
 import { SignInOptionButton } from "./SignInOptionButton";
 
-export const GitHubSignInButton = ({ language }: { language: string }) => {
-  return (
-    <SignInOptionButton
-      text="sign-in-with-github"
-      language={language}
-      provider="github"
-    />
-  );
+export const GitHubSignInButton = () => {
+  return <SignInOptionButton text="sign-in-with-github" provider="github" />;
 };

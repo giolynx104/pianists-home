@@ -21,8 +21,8 @@ const Page = async ({
         />
         <CardContent className="flex justify-center">
           <Stack spacing={2}>
-            <GoogleSignInButton language={language} />
-            <GitHubSignInButton language={language} />
+            <GoogleSignInButton />
+            <GitHubSignInButton />
           </Stack>
         </CardContent>
       </Card>
