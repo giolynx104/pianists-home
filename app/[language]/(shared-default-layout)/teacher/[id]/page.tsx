@@ -3,10 +3,10 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import XIcon from "@mui/icons-material/X";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import FeaturedVideos from "@/app/[language]/teacher/[id]/_components/featured-videos";
-import About from "@/app/[language]/teacher/[id]/_components/about";
-import CourseList from "@/app/[language]/teacher/[id]/_components/course-list";
-import { getTeacher } from "@/app/[language]/teacher/[id]/_components/actions";
+import FeaturedVideos from "@/app/[language]/(shared-default-layout)/teacher/[id]/_components/featured-videos";
+import About from "@/app/[language]/(shared-default-layout)/teacher/[id]/_components/about";
+import CourseList from "@/app/[language]/(shared-default-layout)/teacher/[id]/_components/course-list";
+import { getTeacher } from "@/app/[language]/(shared-default-layout)/teacher/[id]/_components/actions";
 import Link from "next/link";
 
 const Page = async ({ params }: { params: { id: string } }) => {

@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ThemeClient from "@/styles/ThemeClient";
-import { Divider, Stack } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import { auth } from "@/auth";
-import { Header, Footer, CartClient } from "./_components";
+import { CartClient } from "./(shared-default-layout)/_components";
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
-import { I18nClient } from "./_components/I18nClient";
+import { I18nClient } from "./(shared-default-layout)/_components/I18nClient";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,21 +25,13 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { language: string };
 }>) {
-  const session = await auth();
   return (
     <html lang={language} dir={dir(language)}>
       <body className={inter.className} id="root">
         <AppRouterCacheProvider>
           <I18nClient language={language}>
             <CartClient>
-              <ThemeClient>
-                <Stack>
-                  <Header session={session} language={language} />
-                  {children}
-                  <Divider variant="fullWidth" className="pt-10" />
-                  <Footer />
-                </Stack>
-              </ThemeClient>
+              <ThemeClient>{children}</ThemeClient>
             </CartClient>
           </I18nClient>
         </AppRouterCacheProvider>

@@ -1,8 +1,11 @@
+"use client";
+
 import { Button } from "@mui/material";
 import { FaUserCircle } from "react-icons/fa";
-import { handleSignIn } from "./actions";
+import { useRouter } from "next/navigation";
 
-const SignInButton = () => {
+const SignInButton = ({ language }: { language: string }) => {
+  const router = useRouter();
   return (
     <Button
       variant="outlined"
@@ -13,7 +16,9 @@ const SignInButton = () => {
       sx={{
         textTransform: "none",
       }}
-      onClick={() => handleSignIn()}
+      onClick={() => {
+        router.push(`/${language}/signin`);
+      }}
     >
       Sign in
     </Button>

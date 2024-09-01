@@ -26,12 +26,12 @@ const Header = async ({
             link="/course-exploration"
           />
         </Stack>
-        <Stack direction={"row"}>
+        <Stack direction={"row"} spacing={2}>
           <LanguageSelector language={language} />
           {session ? (
             <UserAvatar userAvatar={session.user!.image!} />
           ) : (
-            <SignInButton />
+            <SignInButton language={language}/>
           )}
         </Stack>
       </Toolbar>
