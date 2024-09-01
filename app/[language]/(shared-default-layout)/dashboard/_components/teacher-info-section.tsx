@@ -18,8 +18,8 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { TeacherWithUserandImages } from "@/lib/types";
-import { I18nContext } from "../../_components/I18nClient";
 import { useTranslation } from "@/app/i18n/client";
+import { LanguageContext } from "@/app/i18n/LanguageContext";
 
 const ReactPlayer = dynamic(() => import("react-player/youtube"), {
   ssr: false,
@@ -29,7 +29,7 @@ const TeacherInfoSection = ({ data }: { data: TeacherWithUserandImages[] }) => {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = React.useState<number>(0);
   const [variants, setVariants] = React.useState<Variants>(appearAnimation);
-  const language = useContext(I18nContext);
+  const language = useContext(LanguageContext);
   const { t } = useTranslation(language, "dashboard");
 
   const handlePrev = () => {
