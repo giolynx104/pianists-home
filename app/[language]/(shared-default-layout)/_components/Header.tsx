@@ -27,11 +27,11 @@ const Header = async ({
           />
         </Stack>
         <Stack direction={"row"} spacing={2}>
-          <LanguageSelector language={language} />
+          <LanguageSelector />
           {session ? (
             <UserAvatar userAvatar={session.user!.image!} />
           ) : (
-            <SignInButton language={language}/>
+            <SignInButton />
           )}
         </Stack>
       </Toolbar>

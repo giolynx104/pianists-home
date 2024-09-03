@@ -1,9 +1,12 @@
 "use client";
 
+import { LanguageContext } from "@/app/i18n/LanguageContext";
 import { MenuItem, Select } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
+import { useContext } from "react";
 
-export const LanguageSelector = ({ language }: { language: string }) => {
+export const LanguageSelector = () => {
+  const language = useContext(LanguageContext);
   const router = useRouter();
   const pathname = usePathname();
 

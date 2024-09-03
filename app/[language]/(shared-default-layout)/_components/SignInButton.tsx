@@ -3,8 +3,13 @@
 import { Button } from "@mui/material";
 import { FaUserCircle } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { LanguageContext } from "@/app/i18n/LanguageContext";
+import { useTranslation } from "@/app/i18n/client";
 
-const SignInButton = ({ language }: { language: string }) => {
+const SignInButton = () => {
+  const language = useContext(LanguageContext);
+  const { t } = useTranslation(language, "layout");
   const router = useRouter();
   return (
     <Button
@@ -20,7 +25,7 @@ const SignInButton = ({ language }: { language: string }) => {
         router.push(`/${language}/signin`);
       }}
     >
-      Sign in
+      {t("sign-in-button")}
     </Button>
   );
 };
