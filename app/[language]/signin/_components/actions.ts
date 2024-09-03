@@ -3,5 +3,5 @@
 import { signIn } from "@/auth";
 
 export const handleSignIn = async (provider: string) => {
-  await signIn(provider);
+  await signIn(provider, {redirectTo: "/dashboard"});
 }

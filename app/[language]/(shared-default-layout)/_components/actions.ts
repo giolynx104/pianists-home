@@ -2,8 +2,9 @@
 
 import { signIn, signOut } from "@/auth";
 
+
 export async function signOutAction() {
-  await signOut({ redirectTo: "/home" });
+  await signOut();
 }
 
 export const handleSignIn = async () => {

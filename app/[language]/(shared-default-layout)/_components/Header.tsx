@@ -31,7 +31,7 @@ const Header = async ({
           {session ? (
             <UserAvatar userAvatar={session.user!.image!} />
           ) : (
-            <SignInButton />
+            <SignInButton language={language}/>
           )}
         </Stack>
       </Toolbar>
