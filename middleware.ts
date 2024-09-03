@@ -6,13 +6,13 @@ import { cookieName, fallbackLanguage, languages } from "./app/i18n/settings";
 acceptLanguage.languages(languages);
 
 export function middleware(request: NextRequest) {
-  // const session = request.cookies.get("authjs.session-token");
+  const session = request.cookies.get("authjs.session-token");
   if (request.nextUrl.pathname === "/") {
     return NextResponse.redirect(new URL("/home", request.url));
   }
-  // if (request.nextUrl.pathname === "/api/auth/signin" && session) {
-  //   return NextResponse.redirect(new URL("/dashboard", request.url));
-  // }
+  if (request.nextUrl.pathname === "/signin" && session) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
   // if (request.nextUrl.pathname.includes("/api/auth/signin")) {
   //   return NextResponse.redirect(new URL("/"))
   let language: string | undefined | null;

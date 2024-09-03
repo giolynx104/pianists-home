@@ -9,7 +9,7 @@ const SignInButton = async ({ language }: { language: string }) => {
     <form
       action={async () => {
         "use server";
-        redirect(`/signin`);
+        redirect("/signin");
       }}
     >
       <Button
