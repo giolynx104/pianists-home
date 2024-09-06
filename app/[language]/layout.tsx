@@ -28,13 +28,13 @@ export default async function RootLayout({
   return (
     <html lang={language} dir={dir(language)}>
       <body className={inter.className} id="root">
-        <LanguageClient language={language}>
-          <AppRouterCacheProvider>
-            <CartClient>
-              <ThemeClient>{children}</ThemeClient>
-            </CartClient>
-          </AppRouterCacheProvider>
-        </LanguageClient>
+        <ThemeClient>
+          <LanguageClient language={language}>
+            <AppRouterCacheProvider>
+              <CartClient>{children}</CartClient>
+            </AppRouterCacheProvider>
+          </LanguageClient>
+        </ThemeClient>
       </body>
     </html>
   );

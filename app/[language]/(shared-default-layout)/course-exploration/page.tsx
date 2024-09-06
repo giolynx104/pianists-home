@@ -20,7 +20,7 @@ const Page = ({
   };
 
   return (
-    <Box className="p-20">
+    <Box className="p-20" color={"inherit"}>
       <Stack spacing={2}>
         <Typography variant="h4">Course Exploration</Typography>
         <Search placeholder="Search for courses..." />
@@ -28,7 +28,7 @@ const Page = ({
           <TabList onChange={handleTabChange}>
             <CustomTab label="Most popular" value="1" />
             <CustomTab label="New" value="2" />
-            <CustomTab label="Nearby offline courses" value="3" />
+            <CustomTab label="Nearby Offline Courses" value="3" />
             <CustomTab label="Beginner Favourites" value="4" />
           </TabList>
           <TabPanel value="1" className="p-0">

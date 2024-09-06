@@ -1,3 +1,4 @@
+import Map from "./Map";
 export const NearbyOfflineCourseList = () => {
-  return <div>NearbyOfflineCourseList</div>;
+  return <Map />;
 };
