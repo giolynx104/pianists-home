@@ -21,7 +21,6 @@ export const MapInstance = () => {
   }, []);
 
   useEffect(() => {
-    console.log(map.getCenter());
     if (position) {
       map.setView(position);
       L.marker(position)
