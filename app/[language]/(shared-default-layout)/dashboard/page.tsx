@@ -4,6 +4,7 @@ import { getTeachers } from "./_components/actions";
 import TeacherInfoSection from "./_components/teacher-info-section";
 import { CourseExplorationButton } from "./_components";
 import { useTranslation } from "@/app/i18n";
+import dashboardBackground from "@/public/dashboard-background.jpg";
 
 const Page = async ({
   params: { language },
@@ -17,7 +18,7 @@ const Page = async ({
       <Box
         className="relative w-full h-screen flex justify-center items-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("dashboard-background.jpg")`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${dashboardBackground})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           width: "100%",
@@ -25,10 +26,10 @@ const Page = async ({
         }}
       >
         <Stack spacing={2} className="flex pt-20">
-          <Typography variant="h3" className="text-center w-auto text-white">
+          <Typography variant="h3" className="text-center w-auto">
             {t("motto")}
           </Typography>
-          <Typography variant="h5" className="text-center w-auto text-white">
+          <Typography variant="h5" className="text-center w-auto">
             {t("platform-intro")}
           </Typography>
           <Box className="flex justify-center">

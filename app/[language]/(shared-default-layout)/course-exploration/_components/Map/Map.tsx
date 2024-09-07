@@ -1,27 +1,24 @@
-"use client";
-
 import "leaflet/dist/leaflet.css";
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import "leaflet-defaulticon-compatibility";
-import { RecenteredMap } from "./RecenteredMap";
+import { MapInstance } from "./MapInstance";
 
-const Map = ({ position }: { position: [number, number] }) => {
+const Map = () => {
   return (
     <MapContainer
-      className="w-[400px] h-80"
-      center={position}
-      zoom={0}
-      scrollWheelZoom={false}
+      center={[0, 0]}
+      zoom={4}
+      scrollWheelZoom={true}
+      style={{ height: "400px", width: "100%" }}
     >
+      <MapInstance />
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>  
+ contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <RecenteredMap position={position} />
-      {position ? <Marker position={position}></Marker> : null}
     </MapContainer>
   );
 };
-
 export default Map;
