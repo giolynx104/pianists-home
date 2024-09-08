@@ -1,6 +1,7 @@
 import Buttons from "@/app/[language]/(shared-default-layout)/course/[id]/_components/buttons";
 import prisma from "@/lib/db";
-import { Box, Typography, Grid, Stack, Container } from "@mui/material";
+import { Box, Typography, Stack, Container } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -34,7 +35,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
   return (
     <Container className="my-10">
       <Grid container className="p-4 border-solid border-gray-400 border">
-        <Grid item lg={9} xs={12}>
+        <Grid size={9}>
           <Stack spacing={2}>
             <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
               {course.name}
@@ -70,9 +71,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
           </Stack>
         </Grid>
         <Grid
-          item
-          lg={3}
-          xs={12}
+          size={{ lg: 3, xs: 12 }}
           className="lg:sticky lg:flex lg:justify-center lg:items-center"
         >
           <Buttons course={course} />

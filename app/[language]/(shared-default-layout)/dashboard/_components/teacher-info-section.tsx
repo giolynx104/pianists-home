@@ -4,7 +4,6 @@ import React, { useContext } from "react";
 import { appearAnimation, slideInLeft, slideInRight } from "./animation";
 import {
   Box,
-  Grid,
   Typography,
   IconButton,
   Stack,
@@ -20,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { TeacherWithUserandImages } from "@/lib/types";
 import { useTranslation } from "@/app/i18n/client";
 import { LanguageContext } from "@/app/i18n/LanguageContext";
+import Grid from "@mui/material/Grid2"
 
 const ReactPlayer = dynamic(() => import("react-player/youtube"), {
   ssr: false,
@@ -56,17 +56,17 @@ const TeacherInfoSection = ({ data }: { data: TeacherWithUserandImages[] }) => {
       spacing={2}
       className="flex justify-center items-center w-full border border-solid border-gray-300"
     >
-      <Grid item xs={12} className="h-auto p-0">
+      <Grid size={12} className="h-auto p-0">
         <Typography variant="h5" className="text-center bg-gray-300 w-full p-6">
           {t("notable-pianists")}
         </Typography>
       </Grid>
-      <Grid item xs={1} className="flex justify-center items-center">
+      <Grid size={1} className="flex justify-center items-center">
         <IconButton onClick={handlePrev}>
           <BsArrowLeftCircle />
         </IconButton>
       </Grid>
-      <Grid item xs={10}>
+      <Grid size={10}>
         <motion.div
           key={teacher.id}
           variants={variants}
@@ -111,7 +111,7 @@ const TeacherInfoSection = ({ data }: { data: TeacherWithUserandImages[] }) => {
           </Stack>
         </motion.div>
       </Grid>
-      <Grid item xs={1} className="flex justify-center items-center">
+      <Grid size={1} className="flex justify-center items-center">
         <IconButton onClick={handleNext}>
           <BsArrowRightCircle />
         </IconButton>

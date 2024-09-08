@@ -1,10 +1,10 @@
 "use client";
 
 import {
-  Grid,
   Stack,
   Pagination,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2"
 import { useEffect, useState } from "react";
 import { CourseWithUser, getCoursesContainQuery } from "./actions";
 import React from "react";

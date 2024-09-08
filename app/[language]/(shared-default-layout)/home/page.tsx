@@ -1,4 +1,5 @@
-import { Button, Grid, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2"
 import Image from "next/image";
 import image from "/public/playing-piano-background.webp";
 import Link from "next/link";
@@ -7,7 +8,7 @@ const Page = async ({params : {language}} : {params: {language: string}}) => {
   const { t } =  await useTranslation(language, "home");
   return (
     <Grid container className="relative">
-      <Grid item xs={6} className="flex items-center justify-center">
+      <Grid size={6} className="flex items-center justify-center">
         <Stack
           spacing={4}
           flexDirection="column"
@@ -21,7 +22,7 @@ const Page = async ({params : {language}} : {params: {language: string}}) => {
           </Link>
         </Stack>
       </Grid>
-      <Grid item xs={6} className="flex justify-center">
+      <Grid size={6} className="flex justify-center">
         <Image src={image} alt="Piano" className="h-lvh w-auto" />
       </Grid>
     </Grid>

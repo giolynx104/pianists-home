@@ -9,12 +9,12 @@ import {
   Box,
   Card,
   CardContent,
-  Grid,
   Typography,
   Checkbox,
   FormGroup,
   FormControlLabel,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2"
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useForm } from "react-hook-form";
 import { courseFormSchema, CourseFormSchema } from "@/lib/types";
@@ -129,7 +129,7 @@ const Form = () => {
           <Grid container spacing={2}>
             {images.length > 0 &&
               images.map((image) => (
-                <Grid item xs={4} key={image.name} className="p-2 relative">
+                <Grid size={4} key={image.name} className="p-2 relative">
                   <Image
                     src={URL.createObjectURL(image)}
                     alt={image.name}
@@ -137,7 +137,7 @@ const Form = () => {
                   />
                 </Grid>
               ))}
-            <Grid item xs={4} {...getRootProps()} className="p-2">
+            <Grid size={4} {...getRootProps()} className="p-2">
               <Card
                 className="border border-[secondary]"
                 sx={{

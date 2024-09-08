@@ -8,7 +8,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { Course } from "@prisma/client";
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid2";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Button from "@mui/material/Button";
 import Link from "next/link";
@@ -20,7 +20,7 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
         Course List
       </Typography>
       <Grid container className="ps-10">
-        <Grid item xs={2} className="flex justify-center">
+        <Grid size={2} className="flex justify-center">
           <TextField
             defaultValue="Upload Year"
             slotProps={{
@@ -34,7 +34,7 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
             }}
           />
         </Grid>
-        <Grid item xs={10} className="flex items-center justify-center">
+        <Grid size={10} className="flex items-center justify-center">
           <Stack spacing={2}>
             {courses.map((course) => (
               <Card key={course.id}>
