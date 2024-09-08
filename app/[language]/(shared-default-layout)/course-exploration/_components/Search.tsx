@@ -19,18 +19,20 @@ export const Search = ({ placeholder }: { placeholder: string }) => {
     replace(`${pathname}?${params.toString()}`);
   }, 500);
   return (
-    <TextField
+    (<TextField
       className=" w-full rounded-md border border-gray-200 py-[9px] text-sm outline-2 placeholder:text-gray-500"
       placeholder={placeholder}
-      InputProps={{
-        startAdornment: (
-          <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
-        ),
-      }}
       onChange={(e) => {
         handleSearch(e.target.value);
       }}
       defaultValue={searchParams.get("query")?.toString()}
-    />
+      slotProps={{
+        input: {
+          startAdornment: (
+            <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
+          ),
+        }
+      }}
+    />)
   );
 };

@@ -41,7 +41,7 @@ const Form = () => {
   const [images, setImages] = useState<File[]>([]);
 
   return (
-    <Stack spacing={2}>
+    (<Stack spacing={2}>
       <form
         id="create-course-form"
         onSubmit={handleSubmit(async (data) => {
@@ -87,18 +87,20 @@ const Form = () => {
             label="Price"
             variant="filled"
             type="number"
-            inputProps={{ step: "0.01" }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  <CiBadgeDollar className="text-3xl" />
-                </InputAdornment>
-              ),
-            }}
             className="w-full"
             error={!!errors.price}
             helperText={errors.price?.message}
-          />
+            slotProps={{
+              input: {
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <CiBadgeDollar className="text-3xl" />
+                  </InputAdornment>
+                ),
+              },
+
+              htmlInput: { step: "0.01" }
+            }} />
           <FormGroup>
             <FormControlLabel
               control={<Checkbox {...register("offline")} defaultChecked />}
@@ -179,7 +181,7 @@ const Form = () => {
           </Button>
         )}
       </Box>
-    </Stack>
+    </Stack>)
   );
 };
 

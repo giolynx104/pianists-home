@@ -15,21 +15,23 @@ import Link from "next/link";
 
 const CourseList = ({ courses }: { courses: Course[] }) => {
   return (
-    <Box>
+    (<Box>
       <Typography variant="h5" className="p-10 text-center bg-slate-400">
         Course List
       </Typography>
       <Grid container className="ps-10">
         <Grid item xs={2} className="flex justify-center">
           <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <FilterAltIcon />
-                </InputAdornment>
-              ),
-            }}
             defaultValue="Upload Year"
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <FilterAltIcon />
+                  </InputAdornment>
+                ),
+              }
+            }}
           />
         </Grid>
         <Grid item xs={10} className="flex items-center justify-center">
@@ -63,7 +65,7 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
           </Stack>
         </Grid>
       </Grid>
-    </Box>
+    </Box>)
   );
 };
 

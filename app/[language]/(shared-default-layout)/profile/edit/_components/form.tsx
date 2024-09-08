@@ -36,7 +36,7 @@ const Form = ({
         </TabPanel>
         <TabPanel value="2">
           {!teacher ? (
-            <Button variant="contained">Register as Teacher</Button>
+            <Button variant="contained">Become a Teacher</Button>
           ) : (
             <TeacherInfoCard teacher={teacher} />
           )}
