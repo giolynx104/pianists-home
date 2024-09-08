@@ -20,7 +20,7 @@ const Page = ({
   };
 
   return (
-    <Box className="p-20" color={"inherit"}>
+    <Box className="p-20">
       <Stack spacing={2}>
         <Typography variant="h4">Course Exploration</Typography>
         <Search placeholder="Search for courses..." />

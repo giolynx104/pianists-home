@@ -11,7 +11,7 @@ export const CourseExplorationButton = ({ language }: { language: string }) => {
   return (
     <Button
       endIcon={<FaArrowAltCircleRight />}
-      className="normal-case"
+      className="normal-case text-blue-300"
       variant="outlined"
       size="small"
       onClick={() => {

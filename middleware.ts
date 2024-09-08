@@ -4,6 +4,7 @@ import acceptLanguage from "accept-language";
 import { cookieName, fallbackLanguage, languages } from "./app/i18n/settings";
 
 acceptLanguage.languages(languages);
+const PUBLIC_FILE = /\.(.*)$/;
 
 export function middleware(request: NextRequest) {
   const session = request.cookies.get("authjs.session-token");
@@ -18,13 +19,18 @@ export function middleware(request: NextRequest) {
   let language: string | undefined | null;
   if (request.cookies.has(cookieName))
     language = acceptLanguage.get(request.cookies.get(cookieName)?.value);
-  if (!language) language = acceptLanguage.get(request.headers.get("Accept-Language"));
+  if (!language) {
+    language = acceptLanguage.get(request.headers.get("Accept-Language"));
+  }
   if (!language) language = fallbackLanguage;
 
   // Redirect if lng in path is not supported
   if (
-    !languages.some((locale) => request.nextUrl.pathname.startsWith(`/${locale}`)) &&
-    !request.nextUrl.pathname.startsWith("/_next")
+    !languages.some((locale) =>
+      request.nextUrl.pathname.startsWith(`/${locale}`)
+    ) &&
+    !request.nextUrl.pathname.startsWith("/_next") &&
+    !PUBLIC_FILE.test(request.nextUrl.pathname)
   ) {
     return NextResponse.redirect(
       new URL(`/${language}${request.nextUrl.pathname}`, request.url)

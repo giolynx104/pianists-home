@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ThemeClient from "@/styles/ThemeClient";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { CartClient } from "./(shared-default-layout)/_components";
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
 import { LanguageClient } from "../i18n/LanguageClient";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import theme from "@/styles/theme";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,14 +28,15 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang={language} dir={dir(language)}>
-      <body className={inter.className} id="root">
-        <ThemeClient>
+      <body className={inter.className}>
+        <AppRouterCacheProvider>
           <LanguageClient language={language}>
-            <AppRouterCacheProvider>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
               <CartClient>{children}</CartClient>
-            </AppRouterCacheProvider>
+            </ThemeProvider>
           </LanguageClient>
-        </ThemeClient>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

@@ -15,7 +15,7 @@ const Layout = async ({
     <Stack>
       <Header session={session} language={language} />
       {children}
-      <Divider variant="fullWidth" className="pt-10" />
+      <Divider variant="fullWidth" className="pt-10 w-10" />
       <Footer />
     </Stack>
   );
