@@ -11,8 +11,6 @@ import { TeacherIncludeAll } from "@/lib/types";
 import TeacherInfoCard from "./teacher-info";
 import UserInfo from "./user-info";
 
-//TODO: Implement user location
-
 const Form = ({
   user,
   teacher,
