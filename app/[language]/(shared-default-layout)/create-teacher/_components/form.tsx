@@ -7,12 +7,10 @@ import {
   Stack,
   TextField,
   Box,
-  CircularProgress,
   Typography,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2"
+import Grid from "@mui/material/Grid2";
 import { createTeacher, getSignedUrlConfigured } from "./actions";
-import SubmitButton from "./submit-button";
 import React, { useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
@@ -22,6 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Dropzone from "react-dropzone";
 import { CiCirclePlus } from "react-icons/ci";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { SubmitButton } from "./submit-button";
 
 const Form = () => {
   const router = useRouter();
@@ -29,7 +28,7 @@ const Form = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isSubmitting, isSubmitted },
+    formState: { errors },
   } = useForm<TeacherFormSchema>({ resolver: zodResolver(teacherFormSchema) });
   return (
     <Box className="w-full flex justify-center items-center">
@@ -41,10 +40,11 @@ const Form = () => {
         <CardContent className="flex justify-center items-center">
           <form
             onSubmit={handleSubmit(async (data) => {
+              console.log("Form On Submit!!!!!!!!!!");
               let remoteUrls: string[] = [];
               for (const image of images) {
                 const signedUrlResult = await getSignedUrlConfigured(
-                  image.type,
+                  image.type
                 );
                 const remoteUrl = signedUrlResult.success!.url;
                 remoteUrls = [...remoteUrls, remoteUrl];
@@ -86,12 +86,14 @@ const Form = () => {
               <Stack
                 spacing={2}
                 direction="row"
-                className="border border-[primary] flex justify-center items-center"
+                className="border border-[primary] flex justify-center items-center bg-gray-400 p-1 rounded-lg"
               >
                 <CloudUploadIcon />
                 <Typography variant="subtitle2">Upload images</Typography>
               </Stack>
-              <Typography variant="subtitle2" className="text-gray-600">*Your first image will be used as the avatar for the teacher.</Typography>
+              <Typography variant="subtitle2" className="text-gray-600">
+                *Your first image will be used as the avatar for the teacher.
+              </Typography>
               <Dropzone
                 onDrop={(acceptedFiles) => {
                   setImages([...images, ...acceptedFiles]);
@@ -101,7 +103,11 @@ const Form = () => {
                   <Grid container>
                     {images.length > 0 &&
                       images.map((image) => (
-                        <Grid size={4} key={image.name} className="p-2 relative">
+                        <Grid
+                          size={4}
+                          key={image.name}
+                          className="p-2 relative"
+                        >
                           <Image
                             src={URL.createObjectURL(image)}
                             alt={image.name}
@@ -135,11 +141,7 @@ const Form = () => {
                 )}
               </Dropzone>
               <Box className="flex justify-center">
-                {isValid && (isSubmitting || isSubmitted) ? (
-                  <CircularProgress />
-                ) : (
-                  <SubmitButton />
-                )}
+                <SubmitButton />
               </Box>
             </Stack>
           </form>

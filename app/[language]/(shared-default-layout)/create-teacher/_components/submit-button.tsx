@@ -1,22 +1,18 @@
 "use client";
 
 import { Button } from "@mui/material";
-import { useFormStatus } from "react-dom";
 
-const SubmitButton = () => {
-  const { pending } = useFormStatus();
+export const SubmitButton = () => {
   return (
     <Button
       type="submit"
       variant="contained"
       color="primary"
-      aria-disabled={pending}
       className="normal-case"
       size="large"
     >
-      {pending ? "Submitting..." : "Submit"}
+      Submit
     </Button>
   );
 };
 
-export default SubmitButton;
