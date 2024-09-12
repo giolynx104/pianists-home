@@ -31,7 +31,7 @@ const UserInfo = ({ user }: { user: User }) => {
   const router = useRouter();
 
   return (
-    <Box className="w-full justify-center flex">
+    (<Box className="w-full justify-center flex">
       <Card className="rounded-3xl w-3/4">
         <CardHeader title="Profile" className="text-center" />
         <CardContent>
@@ -54,31 +54,37 @@ const UserInfo = ({ user }: { user: User }) => {
                 label="Facebook"
                 defaultValue={user.facebookLink}
                 {...register("facebookLink")}
-                InputProps={{
-                  startAdornment: <FacebookIcon />,
-                }}
                 error={!!errors.facebookLink}
                 helperText={errors.facebookLink?.message}
+                slotProps={{
+                  input: {
+                    startAdornment: <FacebookIcon />,
+                  }
+                }}
               />
               <TextField
                 label="Instagram"
                 defaultValue={user.instagramLink}
                 {...register("instagramLink")}
-                InputProps={{
-                  startAdornment: <InstagramIcon />,
-                }}
                 error={!!errors.instagramLink}
                 helperText={errors.instagramLink?.message}
+                slotProps={{
+                  input: {
+                    startAdornment: <InstagramIcon />,
+                  }
+                }}
               />
               <TextField
                 label="X"
                 defaultValue={user.xLink}
                 {...register("xLink")}
-                InputProps={{
-                  startAdornment: <XIcon />,
-                }}
                 error={!!errors.xLink}
                 helperText={errors.xLink?.message}
+                slotProps={{
+                  input: {
+                    startAdornment: <XIcon />,
+                  }
+                }}
               />
               <TextField
                 label="Youtube"
@@ -86,11 +92,13 @@ const UserInfo = ({ user }: { user: User }) => {
                   user.youtubeChannelLink
                 }
                 {...register("youtubeChannelLink")}
-                InputProps={{
-                  startAdornment: <YouTubeIcon />,
-                }}
                 error={!!errors.youtubeChannelLink}
                 helperText={errors.youtubeChannelLink?.message}
+                slotProps={{
+                  input: {
+                    startAdornment: <YouTubeIcon />,
+                  }
+                }}
               />
               <TextField
                 label="Location"
@@ -119,7 +127,7 @@ const UserInfo = ({ user }: { user: User }) => {
           </form>
         </CardContent>
       </Card>
-    </Box>
+    </Box>)
   );
 };
 

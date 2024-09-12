@@ -11,8 +11,6 @@ import { TeacherIncludeAll } from "@/lib/types";
 import TeacherInfoCard from "./teacher-info";
 import UserInfo from "./user-info";
 
-//TODO: Implement user location
-
 const Form = ({
   user,
   teacher,
@@ -36,7 +34,7 @@ const Form = ({
         </TabPanel>
         <TabPanel value="2">
           {!teacher ? (
-            <Button variant="contained">Register as Teacher</Button>
+            <Button variant="contained">Become a Teacher</Button>
           ) : (
             <TeacherInfoCard teacher={teacher} />
           )}

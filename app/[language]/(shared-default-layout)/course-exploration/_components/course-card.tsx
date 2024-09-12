@@ -1,5 +1,6 @@
-import { Grid, Card, CardContent, Stack, Typography, Box } from "@mui/material";
+import {Card, CardContent, Stack, Typography, Box } from "@mui/material";
 import { CourseWithUser } from "./actions";
+import Grid from "@mui/material/Grid2"
 import Link from "next/link";
 import Image from "next/image";
 
@@ -7,7 +8,7 @@ import Image from "next/image";
 
 const CourseCard = ({ course }: { course: CourseWithUser }) => {
   return (
-    <Grid item key={course.id} xs={4}>
+    <Grid key={course.id} size={4}>
       <Card className="w-full h-full">
         <CardContent>
           <Stack spacing={1}>

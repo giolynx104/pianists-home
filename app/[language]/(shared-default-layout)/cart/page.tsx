@@ -1,6 +1,7 @@
 "use client";
 
-import { Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { Button, Container, Stack, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { useEffect, useState } from "react";
 import { useCart } from "react-use-cart";
 import { handleCheckout, getCourses } from "./_components/actions";
@@ -42,10 +43,10 @@ const Page = () => {
             <EmptyCart />
           ) : (
             <Grid container spacing={2}>
-              <Grid item xs={9}>
+              <Grid size={9}>
                 <CartItems courses={courses} />
               </Grid>
-              <Grid item xs={3}>
+              <Grid size={3}>
                 <Stack
                   spacing={2}
                   className="rounded-2xl flex justify-center bg-gray-500 border border-[primary] p-4"

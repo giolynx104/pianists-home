@@ -1,4 +1,5 @@
-import { Grid, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { EnrollmentWithCourse } from "@/lib/types";
 import EnrolledCourseCard from "./EnrolledCourseCard";
 import { PiCalendarBlank } from "react-icons/pi";

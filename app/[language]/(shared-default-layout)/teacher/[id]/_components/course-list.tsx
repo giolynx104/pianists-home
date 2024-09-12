@@ -8,31 +8,33 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { Course } from "@prisma/client";
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid2";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Button from "@mui/material/Button";
 import Link from "next/link";
 
 const CourseList = ({ courses }: { courses: Course[] }) => {
   return (
-    <Box>
+    (<Box>
       <Typography variant="h5" className="p-10 text-center bg-slate-400">
         Course List
       </Typography>
       <Grid container className="ps-10">
-        <Grid item xs={2} className="flex justify-center">
+        <Grid size={2} className="flex justify-center">
           <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <FilterAltIcon />
-                </InputAdornment>
-              ),
-            }}
             defaultValue="Upload Year"
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <FilterAltIcon />
+                  </InputAdornment>
+                ),
+              }
+            }}
           />
         </Grid>
-        <Grid item xs={10} className="flex items-center justify-center">
+        <Grid size={10} className="flex items-center justify-center">
           <Stack spacing={2}>
             {courses.map((course) => (
               <Card key={course.id}>
@@ -63,7 +65,7 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
           </Stack>
         </Grid>
       </Grid>
-    </Box>
+    </Box>)
   );
 };
 

@@ -9,12 +9,12 @@ import {
   Box,
   Card,
   CardContent,
-  Grid,
   Typography,
   Checkbox,
   FormGroup,
   FormControlLabel,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2"
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useForm } from "react-hook-form";
 import { courseFormSchema, CourseFormSchema } from "@/lib/types";
@@ -41,7 +41,7 @@ const Form = () => {
   const [images, setImages] = useState<File[]>([]);
 
   return (
-    <Stack spacing={2}>
+    (<Stack spacing={2}>
       <form
         id="create-course-form"
         onSubmit={handleSubmit(async (data) => {
@@ -87,18 +87,20 @@ const Form = () => {
             label="Price"
             variant="filled"
             type="number"
-            inputProps={{ step: "0.01" }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  <CiBadgeDollar className="text-3xl" />
-                </InputAdornment>
-              ),
-            }}
             className="w-full"
             error={!!errors.price}
             helperText={errors.price?.message}
-          />
+            slotProps={{
+              input: {
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <CiBadgeDollar className="text-3xl" />
+                  </InputAdornment>
+                ),
+              },
+
+              htmlInput: { step: "0.01" }
+            }} />
           <FormGroup>
             <FormControlLabel
               control={<Checkbox {...register("offline")} defaultChecked />}
@@ -127,7 +129,7 @@ const Form = () => {
           <Grid container spacing={2}>
             {images.length > 0 &&
               images.map((image) => (
-                <Grid item xs={4} key={image.name} className="p-2 relative">
+                <Grid size={4} key={image.name} className="p-2 relative">
                   <Image
                     src={URL.createObjectURL(image)}
                     alt={image.name}
@@ -135,7 +137,7 @@ const Form = () => {
                   />
                 </Grid>
               ))}
-            <Grid item xs={4} {...getRootProps()} className="p-2">
+            <Grid size={4} {...getRootProps()} className="p-2">
               <Card
                 className="border border-[secondary]"
                 sx={{
@@ -179,7 +181,7 @@ const Form = () => {
           </Button>
         )}
       </Box>
-    </Stack>
+    </Stack>)
   );
 };
 

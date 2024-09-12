@@ -1,5 +1,4 @@
 import {
-  Grid,
   Box,
   Stack,
   Typography,
@@ -11,6 +10,7 @@ import {
   MenuItem,
   Menu,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2"
 import { useState } from "react";
 import { IoPricetagsOutline } from "react-icons/io5";
 import { deleteCourse, removeEnrollment } from "./actions";
@@ -43,7 +43,7 @@ const EnrolledCourseCard = ({ course }: { course: Course }) => {
 
   return (
     <>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <Box className="justify-between flex items-center border-gray-400 border-solid border-2 m-2 p-4">
           <Stack spacing={2}>
             <Typography variant="h5" className="font-bold text-blue-500">

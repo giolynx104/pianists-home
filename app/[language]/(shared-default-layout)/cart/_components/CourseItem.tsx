@@ -3,10 +3,10 @@ import {
   Button,
   Card,
   CardContent,
-  Grid,
   Stack,
   Typography,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2"
 import Link from "next/link";
 import { useCart } from "react-use-cart";
 
@@ -20,7 +20,7 @@ const CourseItem = ({
     <Card>
       <CardContent>
         <Grid container>
-          <Grid item xs={10}>
+          <Grid size={10}>
             <Stack spacing={1}>
               <Link href={`/course/${course.id}`}>
                 <Typography className="font-bold hover:underline" variant="h5">
@@ -34,7 +34,7 @@ const CourseItem = ({
               <Typography variant="body2">${course.price}</Typography>
             </Stack>
           </Grid>
-          <Grid item xs={2} className="flex justify-end">
+          <Grid size={2} className="flex justify-end">
             <Button
               onClick={() => {
                 removeItem(course.id);

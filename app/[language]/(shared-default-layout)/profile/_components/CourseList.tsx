@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import CourseCard from "./CourseCard";
 import NoTeachingCourseBox from "./NoTeachingCourseBox";
 import { Course, Teacher } from "@prisma/client";

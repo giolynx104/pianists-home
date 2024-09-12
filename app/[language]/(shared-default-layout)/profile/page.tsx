@@ -1,4 +1,5 @@
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2"
 import Link from "next/link";
 import Image from "next/image";
 import prisma from "@/lib/db";
@@ -28,7 +29,7 @@ const Page = async () => {
 
   return (
     <Grid container spacing={2} className="pt-10">
-      <Grid item xs={3} className="flex justify-center items-start">
+      <Grid size={3} className="flex justify-center items-start">
         <Stack spacing={2} className="flex justify-center items-center">
           <Box className="w-[260px] h-[260px] rounded-full overflow-hidden mb-5 flex justify-center items-center">
             <Image
@@ -54,7 +55,7 @@ const Page = async () => {
           {teacher ? <CreateCourseButton /> : <CreateTeacherAccountButton />}
         </Stack>
       </Grid>
-      <Grid item xs={9}>
+      <Grid size={9}>
         <BasicTabs enrollments={enrollments} teacher={teacher} />
       </Grid>
     </Grid>
