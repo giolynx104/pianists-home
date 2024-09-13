@@ -61,7 +61,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
               </Box>
               <Link href={`/teacher/${teacher.id}`}>
                 <Typography className="text-center hover:underline">
-                  Intructor: {teacher.user.name}
+                  Instructor: {teacher.user.name}
                 </Typography>
               </Link>
             </Stack>

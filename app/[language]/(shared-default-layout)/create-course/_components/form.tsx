@@ -112,7 +112,7 @@ const Form = () => {
       <Stack
         spacing={2}
         direction="row"
-        className="border border-[primary] flex justify-center items-center"
+        className="border border-[primary] flex justify-center items-center bg-gray-400 rounded-lg p-2"
       >
         <CloudUploadIcon />
         <Typography variant="subtitle2">Upload images</Typography>

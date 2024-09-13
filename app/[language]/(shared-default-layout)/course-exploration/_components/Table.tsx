@@ -39,13 +39,13 @@ export const Table = ({
   };
 
   return (
-    <Stack spacing={4} className="flex flex-col justify-center items-center">
+    <Stack spacing={4}>
       <Grid container spacing={2}>
         {courses.map((course) => (
           <CourseCard key={course.id} course={course} />
         ))}
       </Grid>
-      <Pagination page={page} count={totalPages} onChange={handlePageChange} />
+      <Pagination page={page} count={totalPages} onChange={handlePageChange} className="flex justify-center"/>
     </Stack>
   );
 };

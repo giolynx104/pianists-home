@@ -4,12 +4,10 @@ import Grid from "@mui/material/Grid2"
 import Link from "next/link";
 import Image from "next/image";
 
-//TODO: Haven't understood why h-full is not working with Box in
-
 const CourseCard = ({ course }: { course: CourseWithUser }) => {
   return (
     <Grid key={course.id} size={4}>
-      <Card className="w-full h-full">
+      <Card>
         <CardContent>
           <Stack spacing={1}>
             <Box className="w-full h-52 relative">
