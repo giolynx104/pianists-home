@@ -1,13 +1,5 @@
-import {
-  Button,
-  Container,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
 import prisma from "@/lib/db";
-
-//TODO: Implement edit course function
+import { EditCourseForm } from "./_components/EditCourseForm";
 
 const Page = async ({ params }: { params: { id: string } }) => {
   const course = await prisma.course.findUnique({
@@ -15,36 +7,12 @@ const Page = async ({ params }: { params: { id: string } }) => {
       id: params.id,
     },
   });
-  return (course && (<Container className="mt-10">
-    <Stack spacing={2}>
-      <Typography variant="h4">Edit course</Typography>
-      <TextField
-        label="Name"
-        variant="outlined"
-        defaultValue={course.name}
-      />
-      <TextField
-        multiline
-        label="Description"
-        variant="outlined"
-        defaultValue={course.description}
-      />
-      <TextField
-        label="Price"
-        variant="outlined"
-        defaultValue={course.price}
-        slotProps={{
-          input: {
-            startAdornment: "$",
-          }
-        }}
-      />
-      <Stack direction="row" spacing={2}>
-        <Button variant="contained">Save changes</Button>
-        <Button variant="outlined">Cancel</Button>
-      </Stack>
-    </Stack>
-  </Container>));
+
+  if (!course) {
+    throw new Error("Course not found");
+  }
+
+  return <EditCourseForm course={course} />;
 };
 
 export default Page;

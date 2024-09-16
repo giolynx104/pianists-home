@@ -20,9 +20,8 @@ import { IoPricetagsOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import OfflineStatus from "./offline-status";
 import OnlineStatus from "./online-status";
-import Grid from "@mui/material/Grid2"
-
-//TODO: Improving card design
+import Grid from "@mui/material/Grid2";
+import Link from "next/link";
 
 const CourseCard = ({ course }: { course: Course }) => {
   const router = useRouter();
@@ -31,11 +30,14 @@ const CourseCard = ({ course }: { course: Course }) => {
   return (
     <>
       <Grid size={12}>
-        <Box className="justify-between flex items-center border-gray-400 border-solid border-2 m-2 p-4">
+        <Box className="justify-between flex items-center rounded-2xl border-gray-400 border-solid m-2 p-4">
           <Stack spacing={2}>
-            <Typography variant="h5" className="font-bold text-blue-500">
-              {course.name}
-            </Typography>
+            <Link
+              href={`/course/${course.id}`}
+              className="hover:underline no-underline visited:color-[inherit]"
+            >
+              <Typography variant="h5">{course.name}</Typography>
+            </Link>
             {course.offline ? <OfflineStatus /> : <OnlineStatus />}
             <Typography variant="body1" className="text-[#8d96a0]">
               {course.description}

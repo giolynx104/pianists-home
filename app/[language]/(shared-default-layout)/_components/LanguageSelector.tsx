@@ -15,7 +15,6 @@ export const LanguageSelector = () => {
       onChange={(e) => {
         router.push(pathname.replace(`${language}`, e.target.value));
       }}
-      className="text-white"
     >
       <MenuItem value="en">English</MenuItem>
       <MenuItem value="vi">Tiếng Việt</MenuItem>
