@@ -8,9 +8,6 @@ const PUBLIC_FILE = /\.(.*)$/;
 
 export function middleware(request: NextRequest) {
   const session = request.cookies.get("authjs.session-token");
-  if (request.nextUrl.pathname === "/") {
-    return NextResponse.redirect(new URL("/home", request.url));
-  }
   if (request.nextUrl.pathname === "/signin" && session) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }

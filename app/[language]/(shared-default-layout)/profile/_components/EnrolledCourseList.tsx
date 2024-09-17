@@ -23,7 +23,7 @@ const EnrolledCourseList = ({
   ) : (
     <Stack
       spacing={2}
-      className="flex justify-center items-center p-10 border-2 border-dashed border-gray-400"
+      className="flex justify-center items-center p-10 border-2 border-solid border-gray-400 rounded-2xl"
     >
       <PiCalendarBlank />
       <Typography>You haven&apos;t enrolled any courses yet</Typography>

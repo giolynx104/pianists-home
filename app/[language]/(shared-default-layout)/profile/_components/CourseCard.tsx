@@ -32,13 +32,15 @@ const CourseCard = ({ course }: { course: Course }) => {
       <Grid size={12}>
         <Box className="justify-between flex items-center rounded-2xl border-gray-400 border-solid m-2 p-4">
           <Stack spacing={2}>
-            <Link
-              href={`/course/${course.id}`}
-              className="hover:underline no-underline visited:color-[inherit]"
-            >
-              <Typography variant="h5">{course.name}</Typography>
-            </Link>
-            {course.offline ? <OfflineStatus /> : <OnlineStatus />}
+            <Stack direction={"row"} spacing={2} className="flex items-center">
+              <Link
+                href={`/course/${course.id}`}
+                className="hover:underline no-underline visited:text-[inherit]"
+              >
+                <Typography variant="h5">{course.name}</Typography>
+              </Link>
+              {course.offline ? <OfflineStatus /> : <OnlineStatus />}
+            </Stack>
             <Typography variant="body1" className="text-[#8d96a0]">
               {course.description}
             </Typography>

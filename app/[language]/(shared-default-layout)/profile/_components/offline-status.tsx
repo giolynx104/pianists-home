@@ -4,7 +4,7 @@ const OfflineStatus = () => {
   return (
     <Typography
       variant="subtitle2"
-      className="w-fit bg-blue-500 text-white rounded-2xl px-3"
+      className="w-fit h-fit bg-blue-500 text-white rounded-2xl px-3"
     >
       Offline
     </Typography>
