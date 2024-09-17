@@ -26,7 +26,7 @@ const Header = async ({
             link="/course-exploration"
           />
         </Stack>
-        <Stack direction={"row"} spacing={2}>
+        <Stack direction={"row"} spacing={2} className="flex items-center">
           <LanguageSelector />
           {session ? (
             <UserAvatar userAvatar={session.user!.image!} />

@@ -1,10 +1,4 @@
-import {
-  Box,
-  Container,
-  Stack,
-  Typography,
-  Button,
-} from "@mui/material";
+import { Box, Container, Stack, Typography, Button } from "@mui/material";
 import { Header } from "./Header";
 import { IdentityButtonGroup } from "./IdentityButtonsGroup";
 import { Footer } from "./Footer";
@@ -26,10 +20,19 @@ export const LandingPage = () => {
           <IdentityButtonGroup />
           <StudentFunctionsCard />
           <TeacherFunctionsCard />
-          <Typography variant="h3" className="text-center">Start Your Musical Journey Today</Typography>
-          <Typography variant="h5" className="text-center">Join our community of piano enthusiasts</Typography>
+          <Typography variant="h3" className="text-center">
+            Start Your Musical Journey Today
+          </Typography>
+          <Typography variant="h5" className="text-center">
+            Join our community of piano enthusiasts
+          </Typography>
           <Box className="flex justify-center">
-            <Button variant="contained" className="w-fit normal-case text-white bg-black">Get Started</Button>
+            <Button
+              variant="contained"
+              className="w-fit normal-case text-white bg-black"
+            >
+              Get Started
+            </Button>
           </Box>
         </Stack>
       </Container>
