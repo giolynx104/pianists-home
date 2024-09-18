@@ -49,3 +49,12 @@ export const getTeacherByUserId = async (userId: string) => {
     },
   });
 };
+
+export const verifySessionToken = async (token: string) => {
+  const session = await prisma.session.findUnique({
+    where: {
+      sessionToken: token,
+    },
+  });
+  return session != null;
+};

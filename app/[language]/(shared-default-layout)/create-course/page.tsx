@@ -15,7 +15,7 @@ const Page = async () => {
     );
   }
   return (
-    <Box className="w-full flex justify-center items-center pt-10">
+    <Box className="flex justify-center pt-10">
       <Card className="flex flex-col items-center rounded-3xl w-3/4 p-10">
         <CardHeader
           title="Create Course"

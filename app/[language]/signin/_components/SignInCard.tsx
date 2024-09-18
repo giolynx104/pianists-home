@@ -25,7 +25,6 @@ export default function SignInCard() {
             {t("sign-in")}
           </Typography>
 
-          {/* Google OAuth Button */}
           <Button
             variant="outlined"
             startIcon={<GoogleIcon />}
@@ -38,7 +37,6 @@ export default function SignInCard() {
             {t("sign-in-with-google")}
           </Button>
 
-          {/* GitHub OAuth Button */}
           <Button
             variant="outlined"
             startIcon={<GitHubIcon />}
