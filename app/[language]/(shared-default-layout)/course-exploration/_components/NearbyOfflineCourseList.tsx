@@ -1,5 +1,5 @@
-import Map from "./Map";
+import { Typography } from "@mui/material";
 
 export const NearbyOfflineCourseList = () => {
-  return <Map />;
+  return <Typography>Nearby Offline Course List</Typography>;
 };

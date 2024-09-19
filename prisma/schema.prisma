@@ -15,22 +15,24 @@ datasource db {
 }
 
 model Course {
-  id              String        @id @default(cuid())
+  id              String        @id @default(uuid())
   name            String
   courseImages    CourseImage[]
   Enrollment      Enrollment[]
-  description     String?
+  description     String
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
   price           Float
   teacher         Teacher       @relation(fields: [teacherId], references: [id])
   teacherId       String
   offline         Boolean
+  address         String
   skillLevel      String
-  location        String
   startDate       DateTime
   durationInWeeks Int
   maxStudents     Int
+  latitude        Decimal
+  longitude       Decimal
 }
 
 model Enrollment {

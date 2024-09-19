@@ -7,7 +7,7 @@ import { TeacherFunctionsCard } from "./TeacherFunctionsCard";
 
 export const LandingPage = () => {
   return (
-    <Box className="bg-blue-200">
+    <Box>
       <Container className="flex justify-center">
         <Stack className="flex justify-center" spacing={3}>
           <Header />

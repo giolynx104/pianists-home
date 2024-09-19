@@ -51,3 +51,14 @@ export const removeEnrollment = async (course: Course) => {
 
   revalidatePath("/profile");
 };
+
+export const getTeacherWithCoursesByUserId = async (userId: string) => {
+  return await prisma.teacher.findUnique({
+    where: {
+      userId: userId,
+    },
+    include: {
+      courses: true,
+    },
+  });
+};

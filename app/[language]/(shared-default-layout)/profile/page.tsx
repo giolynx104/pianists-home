@@ -2,9 +2,10 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Link from "next/link";
 import Image from "next/image";
-import prisma from "@/lib/db";
-import { getUserBySessionAndRedirectIfNoSessionExist } from "@/lib/actions";
-import { getEnrollmentByUserId } from "./_components/actions";
+import {
+  getUserBySessionAndRedirectIfNoSessionExist,
+} from "@/lib/actions";
+import { getEnrollmentByUserId, getTeacherWithCoursesByUserId } from "./_components/actions";
 import {
   CreateTeacherAccountButton,
   BasicTabs,
@@ -20,14 +21,7 @@ const Page = async () => {
 
   const enrollments = await getEnrollmentByUserId(user.id);
 
-  const teacher = await prisma.teacher.findUnique({
-    where: {
-      userId: user.id,
-    },
-    include: {
-      courses: true,
-    },
-  });
+  const teacher = await getTeacherWithCoursesByUserId(user.id);
 
   return (
     <Container>

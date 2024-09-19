@@ -11,8 +11,6 @@ export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === "/signin" && session) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
-  // if (request.nextUrl.pathname.includes("/api/auth/signin")) {
-  //   return NextResponse.redirect(new URL("/"))
   let language: string | undefined | null;
   if (request.cookies.has(cookieName))
     language = acceptLanguage.get(request.cookies.get(cookieName)?.value);

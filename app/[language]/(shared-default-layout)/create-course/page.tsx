@@ -1,10 +1,10 @@
-import Form from "@/app/[language]/(shared-default-layout)/create-course/_components/form";
 import {
   getTeacherByUserId,
   getUserBySessionAndRedirectIfNoSessionExist,
 } from "@/lib/actions";
 import { Box, Card, CardContent, CardHeader } from "@mui/material";
 import { GiGrandPiano } from "react-icons/gi";
+import Form from "./_components/Form";
 
 const Page = async () => {
   const user = await getUserBySessionAndRedirectIfNoSessionExist();

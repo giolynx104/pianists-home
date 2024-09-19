@@ -10,13 +10,17 @@ import {
   Card,
   CardContent,
   Typography,
-  Checkbox,
   FormGroup,
   FormControlLabel,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Switch,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2"
+import Grid from "@mui/material/Grid2";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { courseFormSchema, CourseFormSchema } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoadingButton } from "@mui/lab";
@@ -29,19 +33,30 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { getSignedUrlConfigured } from "@/app/[language]/(shared-default-layout)/create-teacher/_components/actions";
 import { createCourse } from "./actions";
+import { LatLng } from "leaflet";
+import Map from "@/components/Map";
+
+//TODO: Implement reset position button
 
 const Form = () => {
   const router = useRouter();
   const {
     handleSubmit,
     register,
+    control,
+    setValue,
     formState: { errors, isValid, isSubmitting, isSubmitted },
   } = useForm<CourseFormSchema>({ resolver: zodResolver(courseFormSchema) });
 
   const [images, setImages] = useState<File[]>([]);
 
+  const handlePositionChange = (newPosition: LatLng) => {
+    setValue("latitude", newPosition.lat);
+    setValue("longitude", newPosition.lng);
+  };
+
   return (
-    (<Stack spacing={2}>
+    <Stack spacing={2}>
       <form
         id="create-course-form"
         onSubmit={handleSubmit(async (data) => {
@@ -98,15 +113,103 @@ const Form = () => {
                   </InputAdornment>
                 ),
               },
-
-              htmlInput: { step: "0.01" }
-            }} />
+              htmlInput: { step: "0.01" },
+            }}
+          />
           <FormGroup>
             <FormControlLabel
-              control={<Checkbox {...register("offline")} defaultChecked />}
+              control={<Switch {...register("offline")} defaultChecked />}
               label="Offline"
             />
           </FormGroup>
+          <Controller
+            name="skillLevel"
+            control={control}
+            render={({ field }) => (
+              <FormControl
+                variant="filled"
+                error={!!errors.skillLevel}
+                className="w-full"
+              >
+                <InputLabel>Skill Level</InputLabel>
+                <Select {...field} label="Skill Level">
+                  <MenuItem value="Beginner">Beginner</MenuItem>
+                  <MenuItem value="Intermediate">Intermediate</MenuItem>
+                  <MenuItem value="Advanced">Advanced</MenuItem>
+                </Select>
+              </FormControl>
+            )}
+          />
+          <TextField
+            {...register("address")}
+            label="Address"
+            variant="filled"
+            className="w-full"
+            error={!!errors.address}
+            helperText={errors.address?.message}
+          />
+          <TextField
+            {...register("startDate")}
+            label="Start Date"
+            type="date"
+            variant="filled"
+            className="w-full"
+            slotProps={{
+              inputLabel: { shrink: true },
+            }}
+            error={!!errors.startDate}
+            helperText={errors.startDate?.message}
+          />
+          <TextField
+            {...register("durationInWeeks")}
+            label="Duration (in weeks)"
+            type="number"
+            variant="filled"
+            className="w-full"
+            error={!!errors.durationInWeeks}
+            helperText={errors.durationInWeeks?.message}
+          />
+          <TextField
+            {...register("maxStudents")}
+            label="Maximum Students"
+            type="number"
+            variant="filled"
+            className="w-full"
+            error={!!errors.maxStudents}
+            helperText={errors.maxStudents?.message}
+          />
+          <FormLabel>Location</FormLabel>
+          <Map onPositionChange={handlePositionChange} />
+          <TextField
+            {...register("longitude")}
+            label="Longitude"
+            type="number"
+            variant="filled"
+            className="w-full"
+            error={!!errors.longitude}
+            helperText={errors.longitude?.message}
+            slotProps={{
+              inputLabel: { shrink: true },
+              input: {
+                readOnly: true,
+              },
+            }}
+          />
+          <TextField
+            {...register("latitude")}
+            label="Latitude"
+            type="number"
+            variant="filled"
+            className="w-full"
+            error={!!errors.latitude}
+            helperText={errors.latitude?.message}
+            slotProps={{
+              inputLabel: { shrink: true },
+              input: {
+                readOnly: true,
+              },
+            }}
+          />
         </Stack>
       </form>
       <Stack
@@ -181,7 +284,7 @@ const Form = () => {
           </Button>
         )}
       </Box>
-    </Stack>)
+    </Stack>
   );
 };
 
