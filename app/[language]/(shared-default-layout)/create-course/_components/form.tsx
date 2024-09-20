@@ -194,7 +194,6 @@ const Form = ({ teacherId }: { teacherId: string }) => {
         </Stack>
       </form>
 
-      {/* Display All Form Errors for Debugging */}
       {Object.keys(errors).length > 0 && (
         <Box sx={{ mt: 2 }}>
           <Typography variant="h6" color="error">
