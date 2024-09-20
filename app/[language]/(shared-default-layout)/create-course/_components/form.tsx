@@ -36,7 +36,7 @@ import { createCourse } from "./actions";
 import { LatLng } from "leaflet";
 import Map from "@/components/Map";
 
-const Form = ({ teacherId }: { teacherId: string }) => {
+export const Form = ({ teacherId }: { teacherId: string }) => {
   const router = useRouter();
   const {
     handleSubmit,
@@ -283,5 +283,3 @@ const Form = ({ teacherId }: { teacherId: string }) => {
     </Stack>
   );
 };
-
-export default Form;

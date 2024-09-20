@@ -4,7 +4,7 @@ import {
 } from "@/lib/actions";
 import { Box, Card, CardContent, CardHeader } from "@mui/material";
 import { GiGrandPiano } from "react-icons/gi";
-import Form from "./_components/Form";
+import { Form } from "./_components";
 
 const Page = async () => {
   const user = await getUserBySessionAndRedirectIfNoSessionExist();
