@@ -58,3 +58,26 @@ export const verifySessionToken = async (token: string) => {
   });
   return session != null;
 };
+
+export const getCoursesByUserId = async (userId: string) => {
+  return await prisma.course.findMany({
+    where: {
+      Enrollment: {
+        some: {
+          userId: userId,
+        },
+      },
+    },
+  });
+};
+
+export const getEnrollmentsWithCoursesByUserId = async (userId: string) => {
+  return await prisma.enrollment.findMany({
+    where: {
+      userId: userId,
+    },
+    include: {
+      course: true,
+    },
+  });
+};

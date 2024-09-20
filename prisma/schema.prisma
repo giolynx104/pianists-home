@@ -36,11 +36,12 @@ model Course {
 }
 
 model Enrollment {
-  id       String @id @default(cuid())
-  user     User   @relation(fields: [userId], references: [id])
-  course   Course @relation(fields: [courseId], references: [id])
-  userId   String
-  courseId String
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  course    Course   @relation(fields: [courseId], references: [id])
+  userId    String
+  courseId  String
+  startDate DateTime @default(now())
 }
 
 model Teacher {
