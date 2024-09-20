@@ -31,8 +31,8 @@ model Course {
   startDate       DateTime
   durationInWeeks Int
   maxStudents     Int
-  latitude        Decimal
-  longitude       Decimal
+  latitude        Float
+  longitude       Float
 }
 
 model Enrollment {

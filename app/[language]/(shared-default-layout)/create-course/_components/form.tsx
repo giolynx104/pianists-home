@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, FieldErrors } from "react-hook-form";
 import { courseFormSchema, CourseFormSchema } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoadingButton } from "@mui/lab";
@@ -28,7 +28,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { CiBadgeDollar } from "react-icons/ci";
 import Dropzone from "react-dropzone";
 import { CiCirclePlus } from "react-icons/ci";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { getSignedUrlConfigured } from "@/app/[language]/(shared-default-layout)/create-teacher/_components/actions";
@@ -36,9 +36,7 @@ import { createCourse } from "./actions";
 import { LatLng } from "leaflet";
 import Map from "@/components/Map";
 
-//TODO: Implement reset position button
-
-const Form = () => {
+const Form = ({ teacherId }: { teacherId: string }) => {
   const router = useRouter();
   const {
     handleSubmit,
@@ -50,39 +48,51 @@ const Form = () => {
 
   const [images, setImages] = useState<File[]>([]);
 
+  useEffect(() => {
+    setValue("teacherId", teacherId);
+  }, [teacherId, setValue]);
+
   const handlePositionChange = (newPosition: LatLng) => {
     setValue("latitude", newPosition.lat);
     setValue("longitude", newPosition.lng);
   };
 
+  const onSubmit = async (data: CourseFormSchema) => {
+    const remoteUrls: string[] = [];
+    try {
+      for (const image of images) {
+        const signedUrlResult = await getSignedUrlConfigured(image.type);
+        const remoteUrl = signedUrlResult.success!.url;
+        remoteUrls.push(remoteUrl);
+        await fetch(remoteUrl, {
+          method: "PUT",
+          body: image,
+          headers: {
+            "Content-Type": image.type,
+          },
+        });
+      }
+      await createCourse(data, remoteUrls);
+      router.push("/profile");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
+
+  const onError = (formErrors: FieldErrors<CourseFormSchema>) => {
+    console.log("Form Errors:", formErrors);
+  };
+
   return (
     <Stack spacing={2}>
-      <form
-        id="create-course-form"
-        onSubmit={handleSubmit(async (data) => {
-          let remoteUrls: string[] = [];
-          for (const image of images) {
-            const signedUrlResult = await getSignedUrlConfigured(image.type);
-            const remoteUrl = signedUrlResult.success!.url;
-            remoteUrls = [...remoteUrls, remoteUrl];
-            await fetch(remoteUrl, {
-              method: "PUT",
-              body: image,
-              headers: {
-                "Content-Type": image.type,
-              },
-            });
-          }
-          await createCourse(data, remoteUrls);
-          router.push("/profile");
-        })}
-      >
+      <form id="create-course-form" onSubmit={handleSubmit(onSubmit, onError)}>
         <Stack spacing={2}>
           <FormLabel>Course Information</FormLabel>
+
           <TextField
             variant="filled"
             {...register("name")}
-            label="Course name"
+            label="Name"
             className="w-full"
             error={!!errors.name}
             helperText={errors.name?.message}
@@ -98,7 +108,7 @@ const Form = () => {
             helperText={errors.description?.message}
           />
           <TextField
-            {...register("price")}
+            {...register("price", { valueAsNumber: true })}
             label="Price"
             variant="filled"
             type="number"
@@ -125,6 +135,7 @@ const Form = () => {
           <Controller
             name="skillLevel"
             control={control}
+            defaultValue="Beginner"
             render={({ field }) => (
               <FormControl
                 variant="filled"
@@ -149,7 +160,7 @@ const Form = () => {
             helperText={errors.address?.message}
           />
           <TextField
-            {...register("startDate")}
+            {...register("startDate", { valueAsDate: true })}
             label="Start Date"
             type="date"
             variant="filled"
@@ -161,7 +172,7 @@ const Form = () => {
             helperText={errors.startDate?.message}
           />
           <TextField
-            {...register("durationInWeeks")}
+            {...register("durationInWeeks", { valueAsNumber: true })}
             label="Duration (in weeks)"
             type="number"
             variant="filled"
@@ -170,7 +181,7 @@ const Form = () => {
             helperText={errors.durationInWeeks?.message}
           />
           <TextField
-            {...register("maxStudents")}
+            {...register("maxStudents", { valueAsNumber: true })}
             label="Maximum Students"
             type="number"
             variant="filled"
@@ -180,38 +191,27 @@ const Form = () => {
           />
           <FormLabel>Location</FormLabel>
           <Map onPositionChange={handlePositionChange} />
-          <TextField
-            {...register("longitude")}
-            label="Longitude"
-            type="number"
-            variant="filled"
-            className="w-full"
-            error={!!errors.longitude}
-            helperText={errors.longitude?.message}
-            slotProps={{
-              inputLabel: { shrink: true },
-              input: {
-                readOnly: true,
-              },
-            }}
-          />
-          <TextField
-            {...register("latitude")}
-            label="Latitude"
-            type="number"
-            variant="filled"
-            className="w-full"
-            error={!!errors.latitude}
-            helperText={errors.latitude?.message}
-            slotProps={{
-              inputLabel: { shrink: true },
-              input: {
-                readOnly: true,
-              },
-            }}
-          />
         </Stack>
       </form>
+
+      {/* Display All Form Errors for Debugging */}
+      {Object.keys(errors).length > 0 && (
+        <Box sx={{ mt: 2 }}>
+          <Typography variant="h6" color="error">
+            Please fix the following errors:
+          </Typography>
+          <ul>
+            {Object.entries(errors).map(([field, error]) => (
+              <li key={field}>
+                <Typography variant="body2" color="error">
+                  {field}: {error.message as string}
+                </Typography>
+              </li>
+            ))}
+          </ul>
+        </Box>
+      )}
+
       <Stack
         spacing={2}
         direction="row"
@@ -237,6 +237,7 @@ const Form = () => {
                     src={URL.createObjectURL(image)}
                     alt={image.name}
                     fill
+                    style={{ objectFit: "cover" }}
                   />
                 </Grid>
               ))}
@@ -244,17 +245,13 @@ const Form = () => {
               <Card
                 className="border border-[secondary]"
                 sx={{
-                  "&.MuiPaper-root": {
-                    minHeight: "20rem",
-                  },
+                  minHeight: "20rem",
                 }}
               >
                 <CardContent
                   className="flex justify-center items-center hover:bg-gray-700"
                   sx={{
-                    "&.MuiCardContent-root": {
-                      minHeight: "20rem",
-                    },
+                    minHeight: "20rem",
                   }}
                 >
                   <CiCirclePlus className="text-3xl" />
@@ -272,7 +269,7 @@ const Form = () => {
             loading={isSubmitting || isSubmitted}
             loadingPosition="end"
             variant="contained"
-          ></LoadingButton>
+          />
         ) : (
           <Button
             className="normal-case"

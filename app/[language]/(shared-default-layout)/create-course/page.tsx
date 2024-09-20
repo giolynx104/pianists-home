@@ -8,7 +8,7 @@ import Form from "./_components/Form";
 
 const Page = async () => {
   const user = await getUserBySessionAndRedirectIfNoSessionExist();
-  const teacher = getTeacherByUserId(user.id);
+  const teacher = await getTeacherByUserId(user.id);
   if (!teacher) {
     throw new Error(
       "You ain't a teacher, please register yourself as teacher first"
@@ -18,7 +18,7 @@ const Page = async () => {
     <Box className="flex justify-center pt-10">
       <Card className="flex flex-col items-center rounded-3xl w-3/4 p-10">
         <CardHeader
-          title="Create Course"
+          title="Create a New Course"
           avatar={<GiGrandPiano />}
           sx={{
             fontSize: "2.5rem",
@@ -28,7 +28,7 @@ const Page = async () => {
           }}
         />
         <CardContent className="w-full">
-          <Form />
+          <Form teacherId={teacher.id} />
         </CardContent>
       </Card>
     </Box>

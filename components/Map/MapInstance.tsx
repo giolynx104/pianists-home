@@ -25,7 +25,7 @@ export const MapInstance: React.FC<MapInstanceProps> = ({
           );
           setPosition(initialPosition);
           onPositionChange(initialPosition);
-          map.setView(initialPosition);
+          map.setView(initialPosition, 13);
         },
         (error) => {
           console.error("Error getting location:", error);
