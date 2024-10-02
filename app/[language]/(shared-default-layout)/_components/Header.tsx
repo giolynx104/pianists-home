@@ -23,7 +23,7 @@ const Header = async ({
           <NavigatingButton text={t("dashboard-button")} link="/dashboard" />
           <NavigatingButton
             text={t("courses-button")}
-            link="/course-exploration"
+            link="/course-discovery"
           />
         </Stack>
         <Stack direction={"row"} spacing={2} className="flex items-center">
@@ -31,7 +31,7 @@ const Header = async ({
           {session ? (
             <UserAvatar userAvatar={session.user!.image!} />
           ) : (
-            <SignInButton language={language}/>
+            <SignInButton language={language} />
           )}
         </Stack>
       </Toolbar>

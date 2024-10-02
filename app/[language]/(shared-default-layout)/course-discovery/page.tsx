@@ -27,6 +27,9 @@ import Grid from "@mui/material/Grid2";
 import { courses } from "./_components/mock-data";
 import { calculateDistance } from "@/lib/geoUtils";
 import { Course } from "@prisma/client";
+import "leaflet/dist/leaflet.css";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
+import "leaflet-defaulticon-compatibility";
 
 const CourseCard = ({ course }: { course: Course }) => {
   return (
@@ -99,6 +102,8 @@ const Page = () => {
   const [userLocation, setUserLocation] = useState<LatLngExpression | null>(
     null
   );
+  const [page, setPage] = useState(1);
+  const coursesPerPage = 6;
 
   useEffect(() => {
     if (showNearbyOnly) {
@@ -137,6 +142,19 @@ const Page = () => {
             course.longitude
           ) <= maxDistance))
   );
+
+  const pageCount = Math.ceil(filteredCourses.length / coursesPerPage);
+  const paginatedCourses = filteredCourses.slice(
+    (page - 1) * coursesPerPage,
+    page * coursesPerPage
+  );
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setPage(value);
+  };
 
   return (
     <Box sx={{ p: 4 }}>
@@ -241,8 +259,9 @@ const Page = () => {
         <Box sx={{ height: "400px", mb: 4 }}>
           <MapContainer
             center={userLocation}
-            zoom={10}
+            zoom={12}
             style={{ height: "100%", width: "100%" }}
+            scrollWheelZoom={false}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -270,7 +289,7 @@ const Page = () => {
       )}
 
       <Grid container spacing={3}>
-        {filteredCourses.map((course) => (
+        {paginatedCourses.map((course) => (
           <Grid key={course.id} size={{ xs: 12, sm: 6, md: 4 }}>
             <CourseCard course={course} />
           </Grid>
@@ -278,7 +297,12 @@ const Page = () => {
       </Grid>
 
       <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
-        <Pagination count={10} color="primary" />
+        <Pagination
+          count={pageCount}
+          color="primary"
+          page={page}
+          onChange={handlePageChange}
+        />
       </Box>
     </Box>
   );
