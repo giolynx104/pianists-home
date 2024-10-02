@@ -1,57 +1,57 @@
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+// Start of Selection
+import { Box, Container, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import Link from "next/link";
 import Image from "next/image";
+import { getUserBySessionAndRedirectIfNoSessionExist } from "@/lib/actions";
 import {
-  getUserBySessionAndRedirectIfNoSessionExist,
-} from "@/lib/actions";
-import { getEnrollmentByUserId, getTeacherWithCoursesByUserId } from "./_components/actions";
+  getEnrollmentByUserId,
+  getTeacherWithCoursesByUserId,
+} from "./_components/actions";
 import {
   CreateTeacherAccountButton,
   BasicTabs,
   CreateCourseButton,
+  EditProfileButton,
 } from "./_components";
-
-//TODO: Fix profile image having low quality from Google
-//TODO: Keeping the same tab opened when going back and forth
-//TODO: Find course
 
 const Page = async () => {
   const user = await getUserBySessionAndRedirectIfNoSessionExist();
 
-  const enrollments = await getEnrollmentByUserId(user.id);
-
-  const teacher = await getTeacherWithCoursesByUserId(user.id);
+  const [enrollments, teacher] = await Promise.all([
+    getEnrollmentByUserId(user.id),
+    getTeacherWithCoursesByUserId(user.id),
+  ]);
 
   return (
     <Container>
-      <Grid container spacing={2} className="pt-10">
+      <Grid container spacing={4} className="pt-10">
+        {/* Profile Sidebar */}
         <Grid size={3} className="flex justify-center items-start">
-          <Stack spacing={2} className="flex justify-center items-center">
-            <Box className="w-[260px] h-[260px] rounded-full overflow-hidden mb-5 flex justify-center items-center">
+          <Stack spacing={3} className="w-full items-center">
+            <Box className="w-64 h-64 rounded-full overflow-hidden flex justify-center items-center">
               <Image
-                src={user.image!}
-                alt="User Avatar"
-                width={260}
-                height={260}
+                src={user.image || "/default-avatar.png"}
+                alt={`${user.name}'s Avatar`}
+                width={256}
+                height={256}
+                className="object-cover"
+                priority
               />
             </Box>
-            <Box>
+            <Box className="text-center">
               <Typography variant="h5" className="font-bold">
                 {user.name}
               </Typography>
-              <Typography variant="h5" className="text-[#8d96a0]">
+              <Typography variant="body1" color="text.secondary">
                 {user.email}
               </Typography>
             </Box>
-            <Link className="w-full" href="/profile/edit">
-              <Button variant="outlined" className="normal-case w-full">
-                Edit profile
-              </Button>
-            </Link>
+            <EditProfileButton />
             {teacher ? <CreateCourseButton /> : <CreateTeacherAccountButton />}
           </Stack>
         </Grid>
+
+        {/* Main Content */}
         <Grid size={9}>
           <BasicTabs enrollments={enrollments} teacher={teacher} />
         </Grid>

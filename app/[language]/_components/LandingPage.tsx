@@ -1,11 +1,20 @@
+"use client";
+
 import { Box, Container, Stack, Typography, Button } from "@mui/material";
 import { Header } from "./Header";
 import { IdentityButtonGroup } from "./IdentityButtonsGroup";
 import { Footer } from "./Footer";
 import { StudentFunctionsCard } from "./StudentFunctionsCard";
 import { TeacherFunctionsCard } from "./TeacherFunctionsCard";
+import { useRouter } from 'next/navigation';
 
 export const LandingPage = () => {
+  const router = useRouter();
+
+  const handleGetStarted = () => {
+    router.push('/signin');
+  };
+
   return (
     <Box>
       <Container className="flex justify-center">
@@ -30,6 +39,7 @@ export const LandingPage = () => {
             <Button
               variant="contained"
               className="w-fit normal-case text-white bg-black"
+              onClick={handleGetStarted}
             >
               Get Started
             </Button>

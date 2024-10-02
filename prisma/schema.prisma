@@ -15,17 +15,17 @@ datasource db {
 }
 
 model Course {
-  id              String        @id @default(uuid())
-  name            String
-  courseImages    CourseImage[]
-  Enrollment      Enrollment[]
+  id              String        @id @default(cuid())
+  title           String
   description     String
+  price           Float
+  courseImages    CourseImage[]
+  enrollments     Enrollment[]
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
-  price           Float
   teacher         Teacher       @relation(fields: [teacherId], references: [id])
   teacherId       String
-  offline         Boolean
+  courseType      CourseType
   address         String
   skillLevel      String
   startDate       DateTime
@@ -33,15 +33,28 @@ model Course {
   maxStudents     Int
   latitude        Float
   longitude       Float
+  Message         Message[]
+}
+
+enum CourseType {
+  online
+  offline
 }
 
 model Enrollment {
-  id        String   @id @default(cuid())
-  user      User     @relation(fields: [userId], references: [id])
-  course    Course   @relation(fields: [courseId], references: [id])
+  id        String           @id @default(cuid())
+  user      User             @relation(fields: [userId], references: [id])
+  course    Course           @relation(fields: [courseId], references: [id])
   userId    String
   courseId  String
-  startDate DateTime @default(now())
+  status    EnrollmentStatus
+  startDate DateTime         @default(now())
+}
+
+enum EnrollmentStatus {
+  pending
+  completed
+  cancelled
 }
 
 model Teacher {
@@ -102,23 +115,60 @@ model Session {
 }
 
 model User {
-  id                 String       @id @default(cuid())
-  name               String?
-  email              String?      @unique
-  password           String?
-  emailVerified      DateTime?    @map("email_verified")
-  image              String?
-  accounts           Account[]
-  sessions           Session[]
-  enrollments        Enrollment[]
-  teacher            Teacher?
-  location           String?
-  facebookLink       String?
-  xLink              String?
-  instagramLink      String?
-  youtubeChannelLink String?
+  id               String       @id @default(cuid())
+  name             String?
+  email            String?      @unique
+  password         String?
+  emailVerified    DateTime?    @map("email_verified")
+  image            String?
+  accounts         Account[]
+  sessions         Session[]
+  enrollments      Enrollment[]
+  userType         UserType
+  location         String?
+  createdAt        DateTime     @default(now())
+  profile          Profile?
+  sentMessages     Message[]    @relation("SentMessages")
+  receivedMessages Message[]    @relation("ReceivedMessages")
+  Teacher          Teacher?
 
   @@map("users")
+}
+
+enum UserType {
+  student
+  teacher
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  messageContent String
+  sentAt         DateTime @default(now())
+  senderId       String
+  receiverId     String
+  courseId       String?
+  sender         User     @relation("SentMessages", fields: [senderId], references: [id])
+  receiver       User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  course         Course?  @relation(fields: [courseId], references: [id])
+}
+
+model Profile {
+  id         String     @id @default(cuid())
+  bio        String?
+  avatarUrl  String?
+  location   String?
+  experience String?
+  skillLevel SkillLevel
+  userId     String     @unique
+  user       User       @relation(fields: [userId], references: [id])
+  longitude  Float?
+  latitude   Float?
+}
+
+enum SkillLevel {
+  beginner
+  intermediate
+  advanced
 }
 
 model VerificationToken {

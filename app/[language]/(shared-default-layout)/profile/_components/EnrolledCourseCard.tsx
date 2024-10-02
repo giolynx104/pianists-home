@@ -10,100 +10,124 @@ import {
   MenuItem,
   Menu,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2"
+import Grid from "@mui/material/Grid2";
 import { useState } from "react";
 import { IoPricetagsOutline } from "react-icons/io5";
-import { deleteCourse, removeEnrollment } from "./actions";
+import { removeEnrollment } from "./actions";
 import { Course } from "@prisma/client";
 import { TiThMenu } from "react-icons/ti";
+import { styled } from "@mui/material/styles";
 
-//TODO: change deleteCourse to removeEnrollment
+const StyledBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  border: `2px solid ${theme.palette.grey[400]}`,
+  borderRadius: theme.shape.borderRadius,
+  margin: theme.spacing(1),
+  padding: theme.spacing(2),
+  backgroundColor: theme.palette.background.paper,
+}));
 
 const EnrolledCourseCard = ({ course }: { course: Course }) => {
-  const [open, setOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const openMenu = Boolean(anchorEl);
+  const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const isMenuOpen = Boolean(menuAnchorEl);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setMenuAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleMenuClose = () => {
+    setMenuAnchorEl(null);
   };
 
-  const handleClickToUnenroll = () => {
-    const justAFunction = async () => {
-      await removeEnrollment(course);
-      handleClose();
-    };
+  const handleUnenrollClick = () => {
+    setDialogOpen(true);
+    handleMenuClose();
+  };
 
-    justAFunction();
+  const handleUnenrollConfirm = async () => {
+    await removeEnrollment(course);
+    setDialogOpen(false);
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
   };
 
   return (
     <>
       <Grid size={12}>
-        <Box className="justify-between flex items-center border-gray-400 border-solid border-2 m-2 p-4">
-          <Stack spacing={2}>
-            <Typography variant="h5" className="font-bold text-blue-500">
+        <StyledBox>
+          <Stack spacing={1}>
+            <Typography variant="h6" color="primary">
               {course.name}
             </Typography>
-            <Typography variant="body1" className="text-[#8d96a0]">
+            <Typography variant="body2" color="text.secondary">
               {course.description}
             </Typography>
-            <Stack direction="row" spacing={1} className="flex items-center">
-              <IoPricetagsOutline />
-              <Typography variant="body1">{course.price}$</Typography>
+            <Stack direction="row" spacing={0.5} alignItems="center">
+              <IoPricetagsOutline color="#1976d2" />
+              <Typography variant="body2" color="text.primary">
+                {course.price}$
+              </Typography>
             </Stack>
           </Stack>
           <IconButton
-            id="basic-button"
-            aria-controls={open ? "basic-menu" : undefined}
+            aria-label="course options"
+            aria-controls={isMenuOpen ? "course-menu" : undefined}
             aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={(event) => {
-              handleClick(event);
-            }}
+            aria-expanded={isMenuOpen ? "true" : undefined}
+            onClick={handleMenuOpen}
           >
             <TiThMenu />
           </IconButton>
           <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={openMenu}
-            onClose={handleClose}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
+            id="course-menu"
+            anchorEl={menuAnchorEl}
+            open={isMenuOpen}
+            onClose={handleMenuClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
             }}
           >
-            <MenuItem onClick={handleClickToUnenroll}>Unenroll</MenuItem>
-            <MenuItem onClick={handleClose}>Rate</MenuItem>
-            <MenuItem onClick={handleClose}>Share</MenuItem>
+            <MenuItem onClick={handleUnenrollClick}>Unenroll</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Rate</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Share</MenuItem>
           </Menu>
-        </Box>
+        </StyledBox>
       </Grid>
-      <Dialog className="rounded-3xl" open={open}>
-        <DialogTitle className="text-center">Unenroll</DialogTitle>
-        <DialogContent className="flex justify-center">
-          <Stack spacing={2}>
+      <Dialog
+        open={dialogOpen}
+        onClose={handleDialogClose}
+        aria-labelledby="unenroll-dialog-title"
+        classes={{ paper: "rounded-3xl" }}
+      >
+        <DialogTitle id="unenroll-dialog-title" className="text-center">
+          Unenroll
+        </DialogTitle>
+        <DialogContent dividers>
+          <Stack spacing={2} alignItems="center">
             <Typography variant="body1">
-              Are you sure you want to unenroll this course?
+              Are you sure you want to unenroll from this course?
             </Typography>
-            <Stack direction="row" className="flex justify-center" spacing={2}>
+            <Stack direction="row" spacing={2}>
               <Button
-                onClick={() => {
-                  deleteCourse(course.id);
-                }}
+                onClick={handleUnenrollConfirm}
                 variant="outlined"
-                className="text-red-500 border-red-500 normal-case hover:border-red-800 hover:bg-red-800 rounded-xl"
+                color="error"
+                className="normal-case rounded-xl"
               >
                 Yes
               </Button>
               <Button
-                onClick={() => {
-                  setOpen(false);
-                }}
+                onClick={handleDialogClose}
                 variant="contained"
                 className="normal-case rounded-xl"
               >
