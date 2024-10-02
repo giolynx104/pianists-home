@@ -25,7 +25,8 @@ export function middleware(request: NextRequest) {
       request.nextUrl.pathname.startsWith(`/${locale}`)
     ) &&
     !request.nextUrl.pathname.startsWith("/_next") &&
-    !PUBLIC_FILE.test(request.nextUrl.pathname)
+    !PUBLIC_FILE.test(request.nextUrl.pathname) &&
+    !request.nextUrl.pathname.startsWith("/api/auth")
   ) {
     return NextResponse.redirect(
       new URL(`/${language}${request.nextUrl.pathname}`, request.url)

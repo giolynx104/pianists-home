@@ -6,7 +6,7 @@ import Logo from "./Logo";
 import { Session } from "next-auth";
 import NavigatingButton from "./NavigatingButton";
 import { useTranslation } from "@/app/i18n";
-import { LanguageSelector } from "./LanguageSelector";
+import { LanguageSelector } from "@/components/LanguageSelector";
 const Header = async ({
   session,
   language,

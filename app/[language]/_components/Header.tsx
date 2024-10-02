@@ -7,7 +7,7 @@ export const Header = () => {
   const router = useRouter();
 
   const handleLogin = () => {
-    router.push("/signin");
+    router.push("/auth");
   };
 
   return (
