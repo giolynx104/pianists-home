@@ -19,7 +19,7 @@ export type CourseWithUser = Prisma.CourseGetPayload<typeof courseWithUser>;
 export const getCoursesContainQuery = async (query: string) => {
   const courses = await prisma.course.findMany({
     where: {
-      name: {
+      title: {
         contains: query,
       },
     },

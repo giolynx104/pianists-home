@@ -20,7 +20,7 @@ const CourseCard = ({ course }: { course: CourseWithUser }) => {
             </Box>
             <Link href={`/course/${course.id}`}>
               <Typography className="font-bold hover:underline" variant="h5">
-                {course.name}
+                {course.title}
               </Typography>
             </Link>
             <Typography variant="subtitle2">

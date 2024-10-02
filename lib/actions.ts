@@ -62,7 +62,7 @@ export const verifySessionToken = async (token: string) => {
 export const getCoursesByUserId = async (userId: string) => {
   return await prisma.course.findMany({
     where: {
-      Enrollment: {
+      enrollments: {
         some: {
           userId: userId,
         },

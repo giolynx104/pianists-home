@@ -1,7 +1,6 @@
 "use client";
 
 import { Box, Container, Stack, Typography, Button } from "@mui/material";
-import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { StudentFunctionsCard } from "./StudentFunctionsCard";
 import { TeacherFunctionsCard } from "./TeacherFunctionsCard";
@@ -16,9 +15,11 @@ export const LandingPage = () => {
 
   return (
     <Box>
-      <Container className="flex justify-center">
+      <Container className="flex justify-center pt-8">
         <Stack className="flex justify-center" spacing={3}>
-          <Header />
+          <Typography variant="h4" className="text-blue-600 font-bold text-center">
+            Home of Pianists
+          </Typography>
           <Typography variant="h3" className="text-center">
             Connecting Piano Teachers and Students
           </Typography>

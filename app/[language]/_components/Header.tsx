@@ -12,10 +12,12 @@ export const Header = () => {
 
   return (
     <Box className="flex justify-between py-10">
-      <Typography variant="h4" className="text-blue-600 font-bold">Home of Pianists</Typography>
+      <Typography variant="h4" className="text-blue-600 font-bold">
+        Home of Pianists
+      </Typography>
       <Stack direction="row" spacing={2}>
-        <Button 
-          variant="contained" 
+        <Button
+          variant="contained"
           className="normal-case text-black bg-white"
           onClick={handleLogin}
         >
