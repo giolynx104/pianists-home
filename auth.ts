@@ -9,7 +9,7 @@ import { signInSchema } from "./lib/types";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: {
-    signIn: "/signin",
+    signIn: "/auth",
   },
   adapter: PrismaAdapter(prisma),
   providers: [
