@@ -17,13 +17,19 @@ export const courseFormSchema = z.object({
   price: z.coerce.number().nonnegative().finite(),
   offline: z.boolean(),
   address: z.string().min(1, "Address can't be empty"),
-  skillLevel: z.enum(['Beginner', 'Intermediate', 'Advanced']),
-  startDate: z.date().min(new Date(), 'Start date must be in the future'),
+  skillLevel: z.enum(["Beginner", "Intermediate", "Advanced"]),
+  startDate: z.date().min(new Date(), "Start date must be in the future"),
   durationInWeeks: z.coerce.number().positive().int(),
   maxStudents: z.coerce.number().positive().int(),
   teacherId: z.string().min(1, "Teacher ID can't be empty"),
-  longitude: z.coerce.number().min(-180).max(180, "Longitude must be between -180 and 180"),
-  latitude: z.coerce.number().min(-90).max(90, "Latitude must be between -90 and 90"),
+  longitude: z.coerce
+    .number()
+    .min(-180)
+    .max(180, "Longitude must be between -180 and 180"),
+  latitude: z.coerce
+    .number()
+    .min(-90)
+    .max(90, "Latitude must be between -90 and 90"),
 });
 
 export type CourseFormSchema = z.infer<typeof courseFormSchema>;
@@ -111,12 +117,25 @@ export type CourseIncludeTeacherIncludeUser = Prisma.CourseGetPayload<
   typeof courseIncludeTeacherIncludeUser
 >;
 
-export const enrollmentIncludeCourse = Prisma.validator<Prisma.EnrollmentDefaultArgs>()({
-  include: {
-    course: true,
-  },
-});
+export const enrollmentIncludeCourse =
+  Prisma.validator<Prisma.EnrollmentDefaultArgs>()({
+    include: {
+      course: true,
+    },
+  });
 
 export type EnrollmentIncludeCourse = Prisma.EnrollmentGetPayload<
   typeof enrollmentIncludeCourse
 >;
+
+export const signInSchema = z.object({
+  email: z
+    .string({ required_error: "Email is required" })
+    .min(1, "Email is required")
+    .email("Invalid email"),
+  password: z
+    .string({ required_error: "Password is required" })
+    .min(1, "Password is required")
+    .min(8, "Password must be more than 8 characters")
+    .max(32, "Password must be less than 32 characters"),
+});
