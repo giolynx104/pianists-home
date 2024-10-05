@@ -27,7 +27,7 @@ export const AuthPage = () => {
 
   return (
     <Box className="min-h-screen bg-gradient-to-b from-blue-100 to-white flex items-center justify-center p-4">
-      <Card className="w-full max-w-md shadow-lg">
+      <Card className="w-full max-w-md shadow-lg rounded-3xl">
         <CardContent className="p-8">
           <Box className="flex justify-end mb-4">
             <LanguageSelector />
