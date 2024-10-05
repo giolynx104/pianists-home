@@ -7,6 +7,8 @@ import {
   FormControlLabel,
   Radio,
   Typography,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -20,6 +22,18 @@ interface SignUpTabProps {
 export const SignUpTab: React.FC<SignUpTabProps> = ({ language }) => {
   const [userType, setUserType] = useState("student");
   const { t } = useTranslation(language, "auth-page");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleCredentialSignUp = () => {
+    setOpenSnackbar(true);
+  };
+
+  const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
 
   return (
     <Box className="space-y-4">
@@ -60,7 +74,7 @@ export const SignUpTab: React.FC<SignUpTabProps> = ({ language }) => {
           variant="outlined"
         />
       )}
-      <Button fullWidth variant="contained" color="primary">
+      <Button fullWidth variant="contained" color="primary" onClick={handleCredentialSignUp}>
         {t("sign-up")}
       </Button>
       <Typography variant="body2" align="center" className="my-2">
@@ -84,6 +98,11 @@ export const SignUpTab: React.FC<SignUpTabProps> = ({ language }) => {
           {t("github")}
         </Button>
       </Box>
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+        <Alert onClose={handleCloseSnackbar} severity="info" sx={{ width: '100%' }}>
+          {t("credential-auth-not-supported")}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

@@ -1,12 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   TextField,
   Button,
   Divider,
   Typography,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -19,6 +21,18 @@ interface SignInTabProps {
 
 export const SignInTab: React.FC<SignInTabProps> = ({ language }) => {
   const { t } = useTranslation(language, "auth-page");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleCredentialSignIn = () => {
+    setOpenSnackbar(true);
+  };
+
+  const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
 
   return (
     <Box className="space-y-4">
@@ -34,7 +48,7 @@ export const SignInTab: React.FC<SignInTabProps> = ({ language }) => {
         type="password"
         variant="outlined"
       />
-      <Button fullWidth variant="contained" color="primary">
+      <Button fullWidth variant="contained" color="primary" onClick={handleCredentialSignIn}>
         {t("sign-in")}
       </Button>
       <Divider className="my-4">
@@ -60,6 +74,11 @@ export const SignInTab: React.FC<SignInTabProps> = ({ language }) => {
           {t("github")}
         </Button>
       </Box>
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+        <Alert onClose={handleCloseSnackbar} severity="info" sx={{ width: '100%' }}>
+          {t("credential-auth-not-supported")}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

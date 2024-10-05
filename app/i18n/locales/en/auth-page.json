@@ -11,5 +11,6 @@
   "full-name": "Full Name",
   "years-of-experience": "Years of Experience",
   "google": "Google",
-  "github": "GitHub"
+  "github": "GitHub",
+  "credential-auth-not-supported": "Credential authentication is not supported. Please use Google or GitHub sign-in instead."
 }

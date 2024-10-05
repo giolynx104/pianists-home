@@ -1,5 +1,5 @@
 {
-  "home-of-pianists": "Ngôi nhà của những Nhạc Công",
+  "home-of-pianists": "Ngôi nhà của những Nhạc công",
   "connecting-teachers-students": "Kết nối Giáo viên và Học viên Piano",
   "sign-in": "Đăng nhập",
   "sign-up": "Đăng ký",
@@ -11,5 +11,6 @@
   "full-name": "Họ và tên",
   "years-of-experience": "Số năm kinh nghiệm",
   "google": "Google",
-  "github": "GitHub"
+  "github": "GitHub",
+  "credential-auth-not-supported": "Xác thực bằng thông tin đăng nhập không được hỗ trợ. Vui lòng sử dụng đăng nhập bằng Google hoặc GitHub."
 }
