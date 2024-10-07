@@ -5,7 +5,7 @@ CREATE TYPE "CourseType" AS ENUM ('online', 'offline');
 CREATE TYPE "EnrollmentStatus" AS ENUM ('pending', 'completed', 'cancelled');
 
 -- CreateEnum
-CREATE TYPE "UserType" AS ENUM ('student', 'teacher');
+CREATE TYPE "UserType" AS ENUM ('STUDENT', 'TEACHER');
 
 -- CreateEnum
 CREATE TYPE "SkillLevel" AS ENUM ('beginner', 'intermediate', 'advanced');
@@ -111,7 +111,7 @@ CREATE TABLE "User" (
     "password" TEXT,
     "email_verified" TIMESTAMP(3),
     "image" TEXT,
-    "userType" "UserType" NOT NULL,
+    "userType" "UserType" NOT NULL DEFAULT 'STUDENT',
     "location" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 

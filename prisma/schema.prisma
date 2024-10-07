@@ -127,7 +127,7 @@ model User {
   accounts         Account[]
   sessions         Session[]
   enrollments      Enrollment[]
-  userType         UserType?
+  userType         UserType     @default(STUDENT)
   location         String?
   createdAt        DateTime     @default(now())
   profile          Profile?
@@ -138,8 +138,8 @@ model User {
 }
 
 enum UserType {
-  student
-  teacher
+  STUDENT
+  TEACHER
 }
 
 model Message {
