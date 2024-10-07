@@ -1,19 +1,15 @@
 "use client";
 
 import { Button } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { handleGetStarted } from "./actions";
 
 export const GetStartedButton = () => {
-  const router = useRouter();
-
   return (
     <Button
       size="large"
       variant="contained"
       className="w-fit normal-case text-white bg-black"
-      onClick={() => {
-        router.push("/home");
-      }}
+      onClick={() => handleGetStarted()}
     >
       Get Started
     </Button>
