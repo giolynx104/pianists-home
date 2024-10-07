@@ -139,3 +139,20 @@ export const signInSchema = z.object({
     .min(8, "Password must be more than 8 characters")
     .max(32, "Password must be less than 32 characters"),
 });
+
+export const teacherWithCoursesAndReviews = Prisma.validator<Prisma.TeacherDefaultArgs>()({
+  include: {
+    courses: true,
+    reviews: {
+      include: {
+        author: true,
+      },
+    },
+    user: true,
+    teacherImages: true,
+  },
+});
+
+export type TeacherWithCoursesAndReviews = Prisma.TeacherGetPayload<
+  typeof teacherWithCoursesAndReviews
+>;

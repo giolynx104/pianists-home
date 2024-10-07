@@ -2,6 +2,11 @@
 
 import { signIn } from "@/auth";
 
-export const handleSignIn = async (provider: string) => {
-  await signIn(provider, {redirectTo: "/dashboard"});
-}
+export const handleOAuthSignIn = async (provider: string) => {
+  try {
+    await signIn(provider, { redirectTo: "/dashboard" });
+  } catch (error) {
+    console.error("OAuth sign-in error:", error);
+    throw error;
+  }
+};

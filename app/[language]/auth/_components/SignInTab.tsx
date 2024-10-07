@@ -1,56 +1,112 @@
 "use client";
 
-import React, { useState } from "react";
-import {
-  Box,
-  TextField,
-  Button,
-  Divider,
-  Typography,
-  Snackbar,
-  Alert,
-} from "@mui/material";
+import React from "react";
+import { Box, TextField, Button, Divider, Typography } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { handleSignIn } from "./actions";
+import { handleOAuthSignIn } from "./actions";
 import { useTranslation } from "@/app/i18n/client";
+import { signIn } from "@/auth";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signInSchema } from "@/lib/types";
 
 interface SignInTabProps {
   language: string;
 }
 
+type FormData = {
+  email: string;
+  password: string;
+};
+
 export const SignInTab: React.FC<SignInTabProps> = ({ language }) => {
   const { t } = useTranslation(language, "auth-page");
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm<FormData>({
+    resolver: zodResolver(signInSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-  const handleCredentialSignIn = () => {
-    setOpenSnackbar(true);
-  };
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    try {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email: data.email,
+        password: data.password,
+      });
 
-  const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
+      if (result?.error) {
+        setError("root", {
+          type: "manual",
+          message: t("invalid-credentials"),
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      setError("root", {
+        type: "manual",
+        message: t("sign-in-error"),
+      });
     }
-    setOpenSnackbar(false);
   };
 
   return (
     <Box className="space-y-4">
-      <TextField
-        fullWidth
-        label={t("email")}
-        type="email"
-        variant="outlined"
-      />
-      <TextField
-        fullWidth
-        label={t("password")}
-        type="password"
-        variant="outlined"
-      />
-      <Button fullWidth variant="contained" color="primary" onClick={handleCredentialSignIn}>
-        {t("sign-in")}
-      </Button>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          name="email"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              fullWidth
+              label={t("email")}
+              type="email"
+              variant="outlined"
+              error={!!errors.email}
+              helperText={errors.email?.message}
+              className="mb-4"
+            />
+          )}
+        />
+        <Controller
+          name="password"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              fullWidth
+              label={t("password")}
+              type="password"
+              variant="outlined"
+              error={!!errors.password}
+              helperText={errors.password?.message}
+              className="mb-4"
+            />
+          )}
+        />
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          type="submit"
+        >
+          {t("sign-in")}
+        </Button>
+      </form>
+      {errors.root && (
+        <Typography color="error" variant="body2">
+          {errors.root.message}
+        </Typography>
+      )}
       <Divider className="my-4">
         <Typography variant="body2" color="text.secondary">
           {t("or-continue-with")}
@@ -61,7 +117,7 @@ export const SignInTab: React.FC<SignInTabProps> = ({ language }) => {
           variant="outlined"
           startIcon={<GoogleIcon />}
           fullWidth
-          onClick={() => handleSignIn("google")}
+          onClick={() => handleOAuthSignIn("google")}
         >
           {t("google")}
         </Button>
@@ -69,16 +125,11 @@ export const SignInTab: React.FC<SignInTabProps> = ({ language }) => {
           variant="outlined"
           startIcon={<GitHubIcon />}
           fullWidth
-          onClick={() => handleSignIn("github")}
+          onClick={() => handleOAuthSignIn("github")}
         >
           {t("github")}
         </Button>
       </Box>
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-        <Alert onClose={handleCloseSnackbar} severity="info" sx={{ width: '100%' }}>
-          {t("credential-auth-not-supported")}
-        </Alert>
-      </Snackbar>
     </Box>
   );
 };

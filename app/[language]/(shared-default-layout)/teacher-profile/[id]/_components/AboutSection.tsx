@@ -19,4 +19,4 @@ const About = ({ description }: { description: string }) => {
   );
 };
 
-export default About;
+export { About };

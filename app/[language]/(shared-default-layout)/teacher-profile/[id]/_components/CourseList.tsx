@@ -15,7 +15,7 @@ import Link from "next/link";
 
 const CourseList = ({ courses }: { courses: Course[] }) => {
   return (
-    (<Box>
+    <Box>
       <Typography variant="h5" className="p-10 text-center bg-slate-400">
         Course List
       </Typography>
@@ -30,7 +30,7 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
                     <FilterAltIcon />
                   </InputAdornment>
                 ),
-              }
+              },
             }}
           />
         </Grid>
@@ -45,7 +45,7 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
                         variant="h6"
                         className="font-bold hover:underline"
                       >
-                        {course.name}
+                        {course.title}
                       </Typography>
                     </Link>
                     <Typography variant="subtitle1" className="text-slate-500">
@@ -65,8 +65,8 @@ const CourseList = ({ courses }: { courses: Course[] }) => {
           </Stack>
         </Grid>
       </Grid>
-    </Box>)
+    </Box>
   );
 };
 
-export default CourseList;
+export { CourseList };

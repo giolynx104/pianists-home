@@ -8,7 +8,10 @@ const PUBLIC_FILE = /\.(.*)$/;
 
 export function middleware(request: NextRequest) {
   const session = request.cookies.get("authjs.session-token");
-  if (request.nextUrl.pathname === "/signin" && session) {
+  if (request.nextUrl.pathname.startsWith("/api/auth")) {
+    return NextResponse.next();
+  }
+  if (request.nextUrl.pathname === "/auth" && session) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
   let language: string | undefined | null;
@@ -17,9 +20,10 @@ export function middleware(request: NextRequest) {
   if (!language) {
     language = acceptLanguage.get(request.headers.get("Accept-Language"));
   }
-  if (!language) language = fallbackLanguage;
+  if (!language) {
+    language = fallbackLanguage;
+  }
 
-  // Redirect if lng in path is not supported
   if (
     !languages.some((locale) =>
       request.nextUrl.pathname.startsWith(`/${locale}`)

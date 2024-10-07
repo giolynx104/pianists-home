@@ -20,4 +20,4 @@ const FeaturedVideos = ({ url }: { url: string }) => {
   );
 };
 
-export default FeaturedVideos;
+export { FeaturedVideos };

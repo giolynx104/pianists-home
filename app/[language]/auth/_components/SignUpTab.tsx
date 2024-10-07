@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { handleSignIn } from "./actions";
+import { handleOAuthSignIn } from "./actions";
 import { useTranslation } from "@/app/i18n/client";
 
 interface SignUpTabProps {
@@ -28,8 +28,11 @@ export const SignUpTab: React.FC<SignUpTabProps> = ({ language }) => {
     setOpenSnackbar(true);
   };
 
-  const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
+  const handleCloseSnackbar = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
       return;
     }
     setOpenSnackbar(false);
@@ -54,12 +57,7 @@ export const SignUpTab: React.FC<SignUpTabProps> = ({ language }) => {
         />
       </RadioGroup>
       <TextField fullWidth label={t("full-name")} variant="outlined" />
-      <TextField
-        fullWidth
-        label={t("email")}
-        type="email"
-        variant="outlined"
-      />
+      <TextField fullWidth label={t("email")} type="email" variant="outlined" />
       <TextField
         fullWidth
         label={t("password")}
@@ -74,7 +72,12 @@ export const SignUpTab: React.FC<SignUpTabProps> = ({ language }) => {
           variant="outlined"
         />
       )}
-      <Button fullWidth variant="contained" color="primary" onClick={handleCredentialSignUp}>
+      <Button
+        fullWidth
+        variant="contained"
+        color="primary"
+        onClick={handleCredentialSignUp}
+      >
         {t("sign-up")}
       </Button>
       <Typography variant="body2" align="center" className="my-2">
@@ -85,7 +88,7 @@ export const SignUpTab: React.FC<SignUpTabProps> = ({ language }) => {
           variant="outlined"
           startIcon={<GoogleIcon />}
           fullWidth
-          onClick={() => handleSignIn("google")}
+          onClick={() => handleOAuthSignIn("google")}
         >
           {t("google")}
         </Button>
@@ -93,13 +96,21 @@ export const SignUpTab: React.FC<SignUpTabProps> = ({ language }) => {
           variant="outlined"
           startIcon={<GitHubIcon />}
           fullWidth
-          onClick={() => handleSignIn("github")}
+          onClick={() => handleOAuthSignIn("github")}
         >
           {t("github")}
         </Button>
       </Box>
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-        <Alert onClose={handleCloseSnackbar} severity="info" sx={{ width: '100%' }}>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="info"
+          sx={{ width: "100%" }}
+        >
           {t("credential-auth-not-supported")}
         </Alert>
       </Snackbar>
